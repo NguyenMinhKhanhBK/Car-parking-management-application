@@ -1,0 +1,1725 @@
+﻿<Window x:Class="QuanLyBaiXe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:QuanLyBaiXe"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+        xmlns:MyResource="clr-namespace:QuanLyBaiXe.Resource.Grid_Booked"
+        xmlns:MyResource1="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
+        xmlns:MyResource2="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
+        xmlns:grid_maintenance="clr-namespace:QuanLyBaiXe.Resource.Grid_Maintenance"
+        mc:Ignorable="d"
+        Title="Phần mềm quản lý bãi xe" 
+        Width="1920"
+    Height="1081"
+        Icon="Image/icon.png"
+        x:Name="mainwindow"
+        WindowStartupLocation="CenterScreen" Background="#FFF0F0F0">
+
+    <Window.Effect>
+        <DropShadowEffect
+            Color="#FFD6D6D6"
+            BlurRadius="20"
+            RenderingBias="Quality" />
+    </Window.Effect>
+
+    <Window.Resources>
+        <Style x:Key="itemHeaderStyle" TargetType="Grid">
+            <Setter Property="Width" Value="180" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Margin" Value="5 0 0 0" />
+        </Style>
+    </Window.Resources>
+
+    <!--Bắt đầu giao diện-->
+    <Grid>
+        <TabControl
+            Margin="0"
+            BorderThickness="1,0,1,1"
+            Padding="1" Foreground="White" Background="#FF7A00E0">
+
+            <!--TabControl Style-->
+            <TabControl.Resources>
+                <Style x:Name="textblock" TargetType="TextBlock" x:Key="mainTabControlTextBlock">
+                    <Setter Property="Foreground" Value="#FFAE00FF"></Setter>
+                    <Setter Property="FontSize" Value="20"></Setter>
+                    <Setter Property="Margin" Value="15 0 0 0"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected,
+                        RelativeSource={RelativeSource AncestorType=TabItem}}" 
+                            Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style TargetType="materialDesign:PackIcon" x:Key="mainTabControlPackIcon">
+                    <Setter Property="Height" Value="20"></Setter>
+                    <Setter Property="Width" Value="18"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="Foreground" Value="#FFAE00FF"></Setter>
+                    <Setter Property="Margin" Value="-5 0 0 0"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected,
+                        RelativeSource={RelativeSource AncestorType=TabItem}}" 
+                            Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                
+
+                <Style TargetType="TabItem" x:Key="TabControlStyle">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <Border x:Name="Border1" BorderBrush="#FFBDBDBD" Margin="0,0,0,-1" BorderThickness="0" CornerRadius="8 8 0 0">
+                                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+
+                                    </Border>
+                                    <Grid.Height>60</Grid.Height>
+                                    <Grid.Width>200</Grid.Width>
+
+
+                                </Grid>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border1" Property="Background" Value="#FF7A00E0" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabControl.BorderBrush>
+                <ImageBrush/>
+            </TabControl.BorderBrush>
+
+            <!--MAN HINH CHINH-->
+            <TabItem x:Name="TabControl" Style="{StaticResource TabControlStyle}" BorderBrush="Black" Margin="0" IsSelected="True" UseLayoutRounding="False">
+                <!--Declare header name-->
+                <TabItem.Header>
+                    <Grid VerticalAlignment="Center">
+
+                        <materialDesign:PackIcon
+                            Style="{StaticResource mainTabControlPackIcon}"
+                            Kind="HomeOutline"   />
+                        <TextBlock
+                            Style="{StaticResource mainTabControlTextBlock}"
+                            Text="Màn hình chính">
+                        </TextBlock>
+                    </Grid>
+                </TabItem.Header>
+                <!--Main grid in MAN HINH CHINH-->
+                <Grid>
+                    <!--Divide the grid into 2 cols and 2 rows-->
+                    <!--First col for the parking lot diagram-->
+                    <!--The other col for the list of current customer, car counter and alarms-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.5*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <!--PARKING LOT DIAGRAM-->
+                    <Border
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Margin="10,5,10,10"
+                        Background="White"
+                        BorderBrush="White"
+                        BorderThickness="0"
+                        CornerRadius="8">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                Color="#FFC1C1C1"
+                                BlurRadius="20"
+                                RenderingBias="Quality"
+                                ShadowDepth="5" />
+                        </Border.Effect>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <!--Name: So do bai xe-->
+                            <TextBlock
+                                Margin="40,10"
+                                FontSize="40"
+                                Foreground="#FF5D00FF"
+                                Text="Sơ đồ bãi xe">
+                                <!--<TextBlock.Effect>
+                                    <DropShadowEffect Color="#FFC5C5C5" RenderingBias="Quality" BlurRadius="30" ShadowDepth="2"/>
+                                </TextBlock.Effect>-->
+                            </TextBlock>
+                            <!--Divide the grid into 12 parts for each station-->
+                            <Grid Margin="0,60,0,10" >
+                                <Grid.Effect>
+                                    <DropShadowEffect
+                                        Color="#FFB9B9B9"
+                                        BlurRadius="20"
+                                        RenderingBias="Quality" />
+                                </Grid.Effect>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <!--Row 0 - Col 0 slot-->
+                                <Grid 
+                                    Name="pos1"
+                                    Grid.Row="0" 
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos1gridBooked" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos1gridAvailable" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos1gridOcupied" Visibility="Collapsed"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos1gridMaintenance" Visibility="Visible"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="1" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+
+                                </Grid>
+                                <!--Row 0 - Col 1 slot-->
+                                <Grid
+                                    Name="pos2"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos2gridBooked" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos2gridAvailable" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos2gridOcupied"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos2gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="2" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 1 - Col 0 slot-->
+                                <Grid
+                                    
+                                    Name="pos3"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos3gridBooked" Visibility="Visible"/>
+                                    <MyResource1:gridAvailable x:Name="pos3gridAvailable" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos3gridOcupied" Visibility="Collapsed"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos3gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="3" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 1 - Col 1 slot-->
+                                <Grid
+                                    Name="pos4"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos4gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos4gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos4gridAvailable"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos4gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="4" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 2 - Col 0 slot-->
+                                <Grid
+                                    Name="pos5"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos5gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos5gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos5gridAvailable"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos5gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="5" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 2 - Col 1 slot-->
+                                <Grid
+                                    Name="pos6"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos6gridBooked" Visibility="Visible"/>
+                                    <MyResource2:gridOccupied x:Name="pos6gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos6gridAvailable" Visibility="Collapsed"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos6gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="6" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 3 - Col 0 slot-->
+                                <Grid
+                                    Name="pos7"
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos7gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos7gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos7gridAvailable"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos7gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="7" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 3 - Col 1 slot-->
+                                <Grid
+                                    Name="pos8"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos8gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos8gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos8gridAvailable"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos8gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="8" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 4 - Col 0 slot-->
+                                <Grid
+                                    Name="pos9"
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos9gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos9gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos9gridAvailable"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos9gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="9" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 4 - Col 1 slot-->
+                                <Grid
+                                    Name="pos10"
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos10gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos10gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos10gridAvailable"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos10gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="10" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 5 - Col 0 slot-->
+                                <Grid
+                                    Name="pos11"
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos11gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos11gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos11gridAvailable" Visibility="Collapsed"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos11gridMaintenance" Visibility="Visible"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="11" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                                <!--Row 5 - Col 1 slot-->
+                                <Grid
+                                    Name="pos12"
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <MyResource:gridBooked x:Name="pos12gridBooked" Visibility="Collapsed"/>
+                                    <MyResource2:gridOccupied x:Name="pos12gridOcupied" Visibility="Collapsed"/>
+                                    <MyResource1:gridAvailable x:Name="pos12gridAvailable"/>
+                                    <grid_maintenance:gridMaintenance x:Name="pos12gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="12" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <!--CAR COUNTER-->
+                    <Grid Grid.Row="0" Grid.Column="1" DataContext="{StaticResource PositionVM}">
+                        <Border
+                            Margin="0 5 5 5"
+                            Background="White"
+                            BorderBrush="White"
+                            BorderThickness="0"
+                            CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    Color="#FFC1C1C1"
+                                    BlurRadius="20"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="5" />
+                            </Border.Effect>
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top"
+                                    Margin="40 10 0 0"
+                                    FontSize="40"
+                                    Foreground="#FF5D00FF"
+                                    Text="Thống kê hiện tại">
+                                    <!--<TextBlock.Effect>
+                                        <DropShadowEffect Color="#FFC5C5C5" RenderingBias="Quality" BlurRadius="30" ShadowDepth="2"/>
+                                    </TextBlock.Effect>-->
+                                </TextBlock>
+                                <Grid  Margin="10" DataContext="{StaticResource PositionVM}">
+
+                                    <!--<lvc:PieChart InnerRadius="70" LegendLocation="Right"  Hoverable="False" FontSize="14">
+                                        <lvc:PieChart.Series>
+                                            <lvc:PieSeries Title="Còn trống" Values="{Binding currentAvailable}" DataLabels="True" FontSize="14">
+                                                <lvc:PieSeries.Fill>
+                                                    <SolidColorBrush Color="#FF007E00" Opacity="1"/>
+                                                </lvc:PieSeries.Fill>
+                                            </lvc:PieSeries>
+                                            <lvc:PieSeries Title="Đang có xe" Values="{Binding currentOccupied}" DataLabels="True" FontSize="14">
+                                                <lvc:PieSeries.Fill>
+                                                    <SolidColorBrush Color="#FFFF1200" Opacity="1"/>
+                                                </lvc:PieSeries.Fill>
+                                            </lvc:PieSeries>
+                                            <lvc:PieSeries Title="Đã đặt" Values="{Binding currentBooked}" DataLabels="True" FontSize="14">
+                                                <lvc:PieSeries.Fill>
+                                                    <SolidColorBrush Color="#FFFFBF00" Opacity="1"/>
+                                                </lvc:PieSeries.Fill>
+                                            </lvc:PieSeries>
+                                            <lvc:PieSeries Title="Đang bảo trì" Values="{Binding currentMaintenance}" DataLabels="True" FontSize="14">
+                                                <lvc:PieSeries.Fill>
+                                                    <SolidColorBrush Color="#FF474747" Opacity="1"/>
+                                                </lvc:PieSeries.Fill>
+                                            </lvc:PieSeries>
+                                        </lvc:PieChart.Series>
+                                        <lvc:PieChart.ChartLegend>
+                                            <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
+                                        </lvc:PieChart.ChartLegend>
+                                        <lvc:PieChart.DataTooltip>
+                                            <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                                        </lvc:PieChart.DataTooltip>
+                                    </lvc:PieChart>-->
+
+
+                                </Grid>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                    <!--ALARM-->
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <Border
+                            Margin="5 5 10 5"
+                            Background="White"
+                            BorderBrush="White"
+                            BorderThickness="0"
+                            CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    Color="#FFC1C1C1"
+                                    BlurRadius="20"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="5" />
+                            </Border.Effect>
+                            <Grid>
+                                <!--Title: Trang thai haot dong-->
+                                <TextBlock
+                                    Margin="40,10"
+                                    FontSize="40"
+                                    Foreground="#FF7400FF"
+                                    Text="Trạng thái hoạt động" />
+                                <UniformGrid
+                                    Margin="10,80,10,20"
+                                    Columns="3"
+                                    Rows="1">
+                                    <!--Motor status-->
+                                    <Grid>
+                                        <Image
+                                            Height="70"
+                                            Margin="0,60,0,0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            Source="Image/motorGreen.png" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            FontSize="60"
+                                            Foreground="#FF01AB01"
+                                            Text="Tốt" />
+                                    </Grid>
+                                    <!--Sensor status-->
+                                    <Grid>
+                                        <Image
+                                            Height="80"
+                                            Margin="0,60,0,0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            Source="Image/carSensorGreen.png" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            FontSize="60"
+                                            Foreground="#FF01AB01"
+                                            Text="Tốt" />
+                                    </Grid>
+                                    <!--Detector status-->
+                                    <Grid>
+                                        <Image
+                                            Height="70"
+                                            Margin="0,60,0,0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            Source="Image/detectorGreen.png" />
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            FontSize="35"
+                                            Foreground="#FF01AB01"
+                                            Text="Không có vật cản"
+                                            TextWrapping="Wrap" />
+                                    </Grid>
+                                </UniformGrid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <!--CURRENT CUSTOMERS LIST-->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2">
+                        <Border
+                            Margin="0 5 10 10"
+                            Background="White"
+                            BorderBrush="White"
+                            BorderThickness="0"
+                            CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    Color="#FFC1C1C1"
+                                    BlurRadius="20"
+                                    RenderingBias="Quality"
+                                    ShadowDepth="5" />
+                            </Border.Effect>
+                            <StackPanel>
+                                <StackPanel Margin="40 10 0 0" Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="40"
+                                        Foreground="#FF5D00FF"
+                                        Text="Danh sách khách hàng" />
+                                    <!--<materialDesign:ColorZone
+                                        Width="770"
+                                        Margin="40 10 0 0"
+                                        FontSize="20"
+                                        Mode="PrimaryMid"
+                                        Padding="5">
+                                        <DockPanel>
+                                            <StackPanel materialDesign:RippleAssist.IsCentered="True" Orientation="Horizontal">
+                                                <materialDesign:ColorZone
+                                                    Margin="5 0 0 0"
+                                                    Panel.ZIndex="1"
+                                                    CornerRadius="2"
+                                                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                                    Mode="Standard"
+                                                    Padding="8 4 8 4">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                                            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                                        </Button>
+                                                        <TextBox
+                                                            Grid.Column="1"
+                                                            MinWidth="360"
+                                                            Margin="8 0 0 0"
+                                                            VerticalAlignment="Center"
+                                                            BorderThickness="0"
+                                                            materialDesign:HintAssist.Hint="Nhập nội dung tìm kiếm"
+                                                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden" />
+                                                    </Grid>
+                                                </materialDesign:ColorZone>
+                                                <ComboBox
+                                                    Width="Auto"
+                                                    MinWidth="150"
+                                                    Margin="40,0,0,0"
+                                                    VerticalAlignment="Center"
+                                                    materialDesign:HintAssist.Hint="Tìm theo">
+                                                    <ComboBoxItem>ID</ComboBoxItem>
+                                                    <ComboBoxItem>Tên khách hàng</ComboBoxItem>
+                                                    <ComboBoxItem>Biển số xe</ComboBoxItem>
+                                                    <ComboBoxItem>Số điện thoại</ComboBoxItem>
+                                                    <ComboBoxItem>Email</ComboBoxItem>
+                                                    <ComboBoxItem>Trạng thái</ComboBoxItem>
+                                                </ComboBox>
+                                                <Button
+                                                    Width="60"
+                                                    Height="40"
+                                                    Margin="30 0 0 0"
+                                                    Panel.ZIndex="0"
+                                                    Style="{DynamicResource MaterialDesignToolForegroundButton}">
+                                                    <materialDesign:PackIcon
+                                                        Width="40"
+                                                        Height="35"
+                                                        Foreground="White"
+                                                        Kind="Send" />
+                                                </Button>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </materialDesign:ColorZone>-->
+                                </StackPanel>
+                                <Grid
+                                    Margin="5"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+                                    <!--<ListView Width="1252" Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" FontSize="18"  DataContext="{StaticResource CustomerVM}" ItemsSource="{Binding currentCustomerList}">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding STT}" Header="STT" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding DisplayName}" Header="Tên khách hàng" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding LicensePlate}" Header="Biển số xe" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Status}" Header="Trạng thái" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding PhoneNumber}" Header="Số điện thoại" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding ReservedTime}" Header="Thời gian đặt" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding ArrivalTime}" Header="Thời gian vào" />
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>-->
+                                    <DataGrid
+                                        Height="400"
+                                        Margin="5 8 5 0"
+                                        CanUserAddRows="False"
+                                        CanUserSortColumns="True"
+                                        DataContext="{StaticResource CustomerVM}"
+                                        ItemsSource="{Binding currentCustomerList}"
+                                        IsReadOnly="True"
+                                        SelectionMode="Extended"
+                                        SelectionUnit="FullRow"
+                                        FontSize="16"
+                                        AutoGenerateColumns="False"
+                                        ScrollViewer.VerticalScrollBarVisibility="Auto" Background="White" Foreground="#DD000000" MinColumnWidth="30" GridLinesVisibility="Horizontal" VerticalGridLinesBrush="Gainsboro" HorizontalGridLinesBrush="#FF959595">
+
+
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="STT" Binding="{Binding STT}" FontSize="16"  ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding DisplayName}" FontSize="16" Width="180"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Vị trí" Binding="{Binding PosID}" FontSize="16" Width="100"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Biển số xe" Binding="{Binding LicensePlate}" FontSize="16" Width="150"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" FontSize="16" Width="150" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding PhoneNumber}" FontSize="16" Width="150" ></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Thời gian đặt" Binding="{Binding ReservedTime}" FontSize="16" Width="250"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Thời gian vào" Binding="{Binding ArrivalTime}" FontSize="16"  ></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                                <!--NEXT ITEM WILL BE HERE-->
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <!-- ************************************************************************************************-->
+            <!--THIET LAP-->
+            <TabItem Style="{StaticResource TabControlStyle}">
+                <TabItem.Header>
+                    <Grid VerticalAlignment="Center">
+                        <materialDesign:PackIcon
+                            Style="{StaticResource mainTabControlPackIcon}"
+                            Kind="SettingsOutline" />
+                        <TextBlock
+                            Style="{StaticResource mainTabControlTextBlock}"
+                            Text="Thiết lập" />
+                    </Grid>
+                </TabItem.Header>
+                <TabControl
+                    Margin="0 5 5 5"
+                    Background="White"
+                    TabStripPlacement="Left">
+                    <TabControl.BorderBrush>
+                        <ImageBrush />
+                    </TabControl.BorderBrush>
+                    
+                    <!--Gia ve ngay thuong-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource ResourceKey=itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Giá vé ngày thường" />
+                            </Grid>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" Background="{x:Null}">
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                                    Thêm giá vé
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                                    Chỉnh sửa
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                                    Xoá
+                                </Button>
+                            </StackPanel>
+                            <!--Bang gia ve-->
+                            <Grid Grid.Column="0">
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <!--Thu 2-->
+                                        <StackPanel Margin="10 20 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Thứ 2" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Thu 3-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Thứ 3" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Thu 4-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Thứ 4" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Thu 5-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Thứ 5" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Thu 6-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Thứ 6" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Thu 7-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Thứ 7" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Chu nhat-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Chủ nhật" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <!--Gia ve ngay le-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Giá vé ngày lễ" />
+                            </Grid>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" Background="{x:Null}">
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Thêm giá vé
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Chỉnh sửa
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Xoá
+                                </Button>
+                            </StackPanel>
+                            <!--Bang gia ve-->
+                            <Grid Grid.Column="0">
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <!--Buoi Sang-->
+                                        <StackPanel Margin="10 20 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Buổi sáng" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Buoi Chieu-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Buổi Chiều" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Buoi Toi-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Buổi tối" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <!--Giá vé sự kiện-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Giá vé sự kiện" />
+                            </Grid>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" Background="{x:Null}">
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Thêm giá vé
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Chỉnh sửa
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Xoá
+                                </Button>
+                            </StackPanel>
+                            <!--Bang gia ve-->
+                            <Grid Grid.Column="0">
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <!--Buoi Sang-->
+                                        <StackPanel Margin="10 20 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Buổi sáng" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Buoi Chieu-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Buổi Chiều" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Buoi Toi-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Buổi tối" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Giá vé dài hạn" />
+                            </Grid>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" Background="{x:Null}">
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Thêm giá vé
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Chỉnh sửa
+                                </Button>
+                                <Button
+                                    Width="150"
+                                    Margin="10"
+                                    FontSize="18"
+                                    materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Xoá
+                                </Button>
+                            </StackPanel>
+                            <!--Bang gia ve-->
+                            <Grid Grid.Column="0">
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <!--Ve tuan-->
+                                        <StackPanel Margin="10 20 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Vé theo tuần" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Vé tháng-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Vé theo tháng" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Vé quý-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Vé theo quý" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                        <!--Vé năm-->
+                                        <StackPanel Margin="10 0 0 20">
+                                            <TextBlock
+                                                Margin="10 0 0 -5"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                Foreground="Blue"
+                                                Text="Vé theo năm" />
+                                            <ListView ItemsSource="{Binding Items1}">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                            <Separator />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <!-- ************************************************************************************************-->
+            <!--THONG KE-->
+            <TabItem Style="{StaticResource TabControlStyle}">
+                <TabItem.Header>
+                    <Grid VerticalAlignment="Center">
+                        <materialDesign:PackIcon
+                            Style="{StaticResource mainTabControlPackIcon}"
+                            Kind="ChartFinance" />
+                        <TextBlock
+                            Style="{StaticResource mainTabControlTextBlock}"
+                            Text="Thống kê" />
+                    </Grid>
+                </TabItem.Header>
+                <!--Content of THONG KE panel-->
+                <TabControl
+                    Margin="0 5 5 5"
+                    Background="WhiteSmoke"
+                    TabStripPlacement="Left">
+                    <TabControl.BorderBrush>
+                        <ImageBrush />
+                    </TabControl.BorderBrush>
+                    
+                    <!--Thống kê theo ngày-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource ResourceKey=itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Thống kê theo ngày" />
+                            </Grid>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="3*" />
+                                <RowDefinition Height="6*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" VerticalAlignment="Center">
+                                <!--<TextBlock Text="Thời gian" Foreground="Blue" FontSize="20" VerticalAlignment="Center" Margin="20"></TextBlock>-->
+                                <ToolBarTray>
+                                    <ToolBar
+                                        Height="70"
+                                        HorizontalAlignment="Right"
+                                        ClipToBounds="False"
+                                        FontSize="30"
+                                        Style="{DynamicResource MaterialDesignToolBar}">
+                                        <Label
+                                            VerticalAlignment="Center"
+                                            Content="Thời gian "
+                                            Foreground="Black" />
+                                        <DatePicker
+                                            Width="350"
+                                            VerticalAlignment="Center"
+                                            materialDesign:HintAssist.Hint="Chọn ngày"
+                                            Name="LocaleDatePicker" />
+                                        <Grid Width="1100" />
+                                        <Button ToolTip="Export to PDF">
+                                            <materialDesign:PackIcon Kind="Printer" />
+                                        </Button>
+                                    </ToolBar>
+                                </ToolBarTray>
+                            </Grid>
+                            <UniformGrid
+                                Grid.Row="1"
+                                Background="WhiteSmoke"
+                                Columns="3"
+                                Rows="1">
+                                <!--Tong luot xe vao-->
+                                <Grid Margin="50 15 50 15">
+                                    <Rectangle
+                                        Fill="White"
+                                        RadiusX="10"
+                                        RadiusY="10">
+                                        <Rectangle.Effect>
+                                            <DropShadowEffect
+                                                Color="#FFAAAAAA"
+                                                BlurRadius="20"
+                                                RenderingBias="Quality"
+                                                ShadowDepth="2" />
+                                        </Rectangle.Effect>
+                                    </Rectangle>
+                                    <TextBlock
+                                        Margin="30 10"
+                                        HorizontalAlignment="Right"
+                                        FontSize="30"
+                                        Foreground="#FF767676"
+                                        Text="Tổng lượt xe vào" />
+                                    <Border
+                                        Width="80"
+                                        Height="130"
+                                        Margin="50 0 0 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Background="Green"
+                                        CornerRadius="0 0 6 6">
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                                                Color="#FFB0B0B0"
+                                                BlurRadius="10"
+                                                RenderingBias="Quality"
+                                                ShadowDepth="2" />
+                                        </Border.Effect>
+                                        <materialDesign:PackIcon
+                                            Width="60"
+                                            Height="60"
+                                            Margin="0 0 0 10 "
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Foreground="White"
+                                            Kind="ArrowDownBoldCircleOutline" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="30 10"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        FontSize="80"
+                                        Foreground="#FF787878"
+                                        Text="120" />
+                                    <StackPanel
+                                        Height="60"
+                                        Margin="40 0"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Foreground="Green"
+                                            Kind="Pen" />
+                                        <TextBlock
+                                            Margin="5 0"
+                                            FontSize="20"
+                                            Foreground="#FF767676"
+                                            Text="Tính đến 24h cùng ngày" />
+                                    </StackPanel>
+                                </Grid>
+                                <!--Tong luot xe ra-->
+                                <Grid Margin="50 15 50 15">
+                                    <Rectangle
+                                        Fill="White"
+                                        RadiusX="10"
+                                        RadiusY="10">
+                                        <Rectangle.Effect>
+                                            <DropShadowEffect
+                                                Color="#FFAAAAAA"
+                                                BlurRadius="20"
+                                                RenderingBias="Quality"
+                                                ShadowDepth="2" />
+                                        </Rectangle.Effect>
+                                    </Rectangle>
+                                    <TextBlock
+                                        Margin="30 10"
+                                        HorizontalAlignment="Right"
+                                        FontSize="30"
+                                        Foreground="#FF767676"
+                                        Text="Tổng lượt xe ra" />
+                                    <Border
+                                        Width="80"
+                                        Height="130"
+                                        Margin="50 0 0 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Background="Red"
+                                        CornerRadius="0 0 6 6">
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                                                Color="#FFB0B0B0"
+                                                BlurRadius="10"
+                                                RenderingBias="Quality"
+                                                ShadowDepth="2" />
+                                        </Border.Effect>
+                                        <materialDesign:PackIcon
+                                            Width="60"
+                                            Height="60"
+                                            Margin="0 0 0 10 "
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Foreground="White"
+                                            Kind="ArrowUpBoldCircleOutline" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="30 10"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        FontSize="80"
+                                        Foreground="#FF787878"
+                                        Text="110" />
+                                    <StackPanel
+                                        Height="60"
+                                        Margin="40 0"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Foreground="Red"
+                                            Kind="Pen" />
+                                        <TextBlock
+                                            Margin="5 0"
+                                            FontSize="20"
+                                            Foreground="#FF767676"
+                                            Text="Tính đến 24h cùng ngày" />
+                                    </StackPanel>
+                                </Grid>
+                                <!--So cho con trong-->
+                                <Grid Margin="50 15 50 15">
+                                    <Rectangle
+                                        Fill="White"
+                                        RadiusX="10"
+                                        RadiusY="10">
+                                        <Rectangle.Effect>
+                                            <DropShadowEffect
+                                                Color="#FFAAAAAA"
+                                                BlurRadius="20"
+                                                RenderingBias="Quality"
+                                                ShadowDepth="2" />
+                                        </Rectangle.Effect>
+                                    </Rectangle>
+                                    <TextBlock
+                                        Margin="30 10"
+                                        HorizontalAlignment="Right"
+                                        FontSize="30"
+                                        Foreground="#FF767676"
+                                        Text="Số chỗ còn trống" />
+                                    <Border
+                                        Width="80"
+                                        Height="130"
+                                        Margin="50 0 0 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Background="#FF673AB7"
+                                        CornerRadius="0 0 6 6">
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                                                Color="#FFB0B0B0"
+                                                BlurRadius="10"
+                                                RenderingBias="Quality"
+                                                ShadowDepth="2" />
+                                        </Border.Effect>
+                                        <materialDesign:PackIcon
+                                            Width="60"
+                                            Height="60"
+                                            Margin="0 0 0 10 "
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Foreground="White"
+                                            Kind="Car" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="30 10"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        FontSize="80"
+                                        Foreground="#FF787878"
+                                        Text="5" />
+                                    <StackPanel
+                                        Height="60"
+                                        Margin="40 0"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+                                        <materialDesign:PackIcon
+                                            Width="25"
+                                            Height="25"
+                                            Foreground="#FF673AB7"
+                                            Kind="Pen" />
+                                        <TextBlock
+                                            Margin="5 0"
+                                            FontSize="20"
+                                            Foreground="#FF767676"
+                                            Text="Tính đến 24h cùng ngày" />
+                                    </StackPanel>
+                                </Grid>
+                            </UniformGrid>
+                            <!--Panel Tong Doanh Thu Va Tong Loi Nhuan-->
+                            <Grid Grid.Row="2" Background="#FFEAEAEA">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="4"
+                                    Margin="50 20 50 20"
+                                    Background="White"
+                                    CornerRadius="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            Color="#FF9B9B9B"
+                                            BlurRadius="20"
+                                            RenderingBias="Quality"
+                                            ShadowDepth="2" />
+                                    </Border.Effect>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock
+                                            Margin="40 10"
+                                            DockPanel.Dock="Top"
+                                            FontSize="50"
+                                            Foreground="#FF787878"
+                                            Text="Doanh thu" />
+                                        <!--<dxc:ChartControl
+                                            Margin="0 0 0 20"
+                                            BorderBrush="{x:Null}"
+                                            DockPanel.Dock="Bottom">
+                                            <dxc:ChartControl.Legends>
+                                                <dxc:Legend
+                                                    Width="82"
+                                                    Margin="0,0,0,12"
+                                                    Background="{x:Null}"
+                                                    BorderBrush="{x:Null}"
+                                                    FontSize="16"
+                                                    HorizontalPosition="Center"
+                                                    IndentFromDiagram="16"
+                                                    MarkerMode="Marker"
+                                                    VerticalPosition="Center">
+                                                    <dxc:Legend.Title>
+                                                        <dxc:LegendTitle
+                                                            Content="Tỉ lệ"
+                                                            FontSize="20"
+                                                            Foreground="#FF0A0A0A" />
+                                                    </dxc:Legend.Title>
+                                                </dxc:Legend>
+                                            </dxc:ChartControl.Legends>
+                                            <dxc:ChartControl.Titles>
+                                                <dxc:Title
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Content="Tổng doanh thu trong ngày"
+                                                    Dock="Bottom"
+                                                    FontSize="24" />
+                                            </dxc:ChartControl.Titles>
+                                            <dxc:SimpleDiagram2D>
+                                                <dxc:PieSeries2D DisplayName="Doanh thu" LabelsVisibility="True">
+                                                    <dxc:PieSeries2D.Label>
+                                                        <dxc:SeriesLabel
+                                                            ConnectorThickness="2"
+                                                            dxc:PieSeries.LabelPosition="TwoColumns"
+                                                            FontSize="25"
+                                                            Foreground="#9FFFFFFF"
+                                                            Indent="5"
+                                                            ResolveOverlappingMode="JustifyAllAroundPoint"
+                                                            TextOrientation="Horizontal"
+                                                            TextPattern="{}{A} : {V}" />
+                                                    </dxc:PieSeries2D.Label>
+                                                    <dxc:SeriesPoint
+                                                        Value="2000000"
+                                                        Argument="Lợi nhuận"
+                                                        Brush="#FF8B00FF" />
+                                                    <dxc:SeriesPoint
+                                                        Value="500000"
+                                                        Argument="Chi phí"
+                                                        Brush="DarkOrange" />
+                                                </dxc:PieSeries2D>
+                                            </dxc:SimpleDiagram2D>
+                                        </dxc:ChartControl>-->
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <!--Thống kê theo tháng-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Thống kê theo tuần" />
+                            </Grid>
+                        </TabItem.Header>
+                        <!--Thong ke theo tuan bat dau tu day-->
+                    </TabItem>
+                    <!--Thống kê theo tháng-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Thống kê theo tháng" />
+                            </Grid>
+                        </TabItem.Header>
+                        <!--Thong ke theo thang bat dau tu day-->
+                    </TabItem>
+                    <!--Thống kê theo quý-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Thống kê theo quý" />
+                            </Grid>
+                        </TabItem.Header>
+                        <!--Thong ke theo quy bat dau tu day-->
+                    </TabItem>
+                    <!--Thống kê theo năm-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Thống kê theo năm" />
+                            </Grid>
+                        </TabItem.Header>
+                        <!--Thong ke theo nam bat dau tu day-->
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <!-- ************************************************************************************************-->
+            <!--DANH SACH CHAN-->
+            <TabItem Style="{StaticResource TabControlStyle}">
+                <TabItem.Header>
+                    <Grid VerticalAlignment="Center">
+                        <materialDesign:PackIcon
+                            Style="{StaticResource mainTabControlPackIcon}"
+                            Height="15"
+                            Width="15"
+                            Kind="BlockHelper" />
+                        <TextBlock
+                            Style="{StaticResource mainTabControlTextBlock}"
+                            Text="Danh sách chặn" />
+                    </Grid>
+                </TabItem.Header>
+                <Grid Margin="5 5 5 5" Background="White">
+                    <Grid.Effect>
+                        <DropShadowEffect
+                            Color="#FF8D8D8D"
+                            BlurRadius="20"
+                            RenderingBias="Quality"
+                            ShadowDepth="2" />
+                    </Grid.Effect>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Background="{x:Null}">
+                        <Button
+                            Width="150"
+                            Margin="0 50 0 10"
+                            FontSize="18"
+                            materialDesign:RippleAssist.Feedback="#DD000000"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                            Thêm
+                        </Button>
+                        <Button
+                            Width="150"
+                            Margin="10"
+                            FontSize="18"
+                            materialDesign:RippleAssist.Feedback="#DD000000"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                            Chỉnh sửa
+                        </Button>
+                        <Button
+                            Width="150"
+                            Margin="10"
+                            FontSize="18"
+                            materialDesign:RippleAssist.Feedback="#DD000000"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                            Xoá
+                        </Button>
+                    </StackPanel>
+                    <!--Bang gia ve-->
+                    <Grid Grid.Column="0">
+                        <ScrollViewer>
+                            <!--Danh Sach Chan-->
+                            <StackPanel Margin="10 20 0 20">
+                                <TextBlock
+                                    Margin="10 0 0 10"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    Foreground="Blue"
+                                    Text="Danh sách chặn" />
+                                <ListView ItemsSource="{Binding Items1}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="ID" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Tên người dùng" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Biển số xe" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Số điện thoại" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="Email" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="Ghi chú" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Separator />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <!-- ************************************************************************************************-->
+            <!--CANH BAO-->
+            <TabItem Style="{StaticResource TabControlStyle}">
+                <TabItem.Header>
+                    <Grid VerticalAlignment="Center">
+                        <materialDesign:PackIcon
+                            Style="{StaticResource mainTabControlPackIcon}"
+                            Kind="WarningOutline" />
+                        <TextBlock
+                            Style="{StaticResource mainTabControlTextBlock}"
+                            Text="Cảnh báo" />
+                    </Grid>
+                </TabItem.Header>
+            </TabItem>
+            <!-- ************************************************************************************************-->
+        </TabControl>
+    </Grid>
+</Window>

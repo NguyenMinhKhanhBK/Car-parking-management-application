@@ -1,0 +1,100 @@
+﻿<Window x:Class="QuanLyBaiXe.Resource.Grid_Booked.BookedPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyBaiXe.Resource.Grid_Booked"
+        mc:Ignorable="d"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    Width="400"
+    Height="250"
+   
+   
+
+Background="Transparent"
+    Title="AvailablePanel"
+    
+    Name="bookedPanel" AllowsTransparency="True" WindowStyle="None">
+
+
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=bookedPanel}" ></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Border Background="#FFAAAAAA" CornerRadius="15">
+
+        <StackPanel Margin="10 10 10 5">
+            <DockPanel>
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    FontSize="25"
+                    Text="Vị trí" />
+                <TextBlock
+                    
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    FontSize="25"
+                    Text="{Binding Path=posID}" Foreground="#FF4B00FF" />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    FontSize="25"
+                    Text="Trạng thái" />
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    FontSize="25"
+                    Text="Đã đặt" Foreground="#FF4B00FF" />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    FontSize="25"
+                    Text="Khách hàng" />
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    FontSize="25"
+                    Text="{Binding customerPhoneNumber}" Foreground="#FF4B00FF" />
+            </DockPanel>
+            <DockPanel>
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    FontSize="25"
+                    Text="Biển số" />
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    FontSize="25"
+                    Text="{Binding plateNumber}" Foreground="#FF4B00FF" />
+            </DockPanel>
+            <Separator Margin="0 10 0 5" BorderBrush="White" />
+            <CheckBox Name="checkboxBaoTri" FontSize="25" Style="{StaticResource MaterialDesignCheckBox}" VerticalAlignment="Center">Huỷ đặt</CheckBox>
+            <UniformGrid Margin="0 7" Rows="1" Columns="2">
+                <Button HorizontalAlignment="Center"
+                        IsEnabled="{Binding ElementName=checkboxBaoTri, Path=IsChecked}"
+                    Width="100"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Command="{Binding AcceptCommand}"
+                        CommandParameter="{Binding ElementName=bookedPanel}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                    Đồng ý
+                </Button>
+                <Button HorizontalAlignment="Center"
+                    Width="100"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Command="{Binding CancelCommand}"
+                        CommandParameter="{Binding ElementName=bookedPanel}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Background="#FFFFA200" BorderBrush="#FFFFA200">
+                    Huỷ
+                </Button>
+
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+
+</Window>

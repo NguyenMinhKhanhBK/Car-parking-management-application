@@ -1,0 +1,44 @@
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Available\gridAvailable.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Booked\BookedPanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Booked\gridBooked.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Maintenance\gridMaintenance.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Maintenance\MaintenancePanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Occupied\gridOccupied.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Occupied\OccupiedPanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\App.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe_MarkupCompile.cache
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe_MarkupCompile.lref
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\MainWindow.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Available\AvailablePanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\QuanLyBaiXe.exe.config
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\QuanLyBaiXe.exe
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\QuanLyBaiXe.pdb
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\MaterialDesignColors.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\MaterialDesignColors.pdb
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\App.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\MainWindow.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Available\AvailablePanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Available\gridAvailable.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Booked\BookedPanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Booked\gridBooked.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Maintenance\gridMaintenance.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Maintenance\MaintenancePanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Occupied\gridOccupied.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\Grid Occupied\OccupiedPanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\MyResourceXAML.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.g.resources
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.Properties.Resources.resources
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.csproj.GenerateResource.cache
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.csproj.CoreCompileInputs.cache
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.csproj.CopyComplete
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.exe
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.pdb
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.csprojAssemblyReference.cache

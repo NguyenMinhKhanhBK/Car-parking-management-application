@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:grid_available="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
+    xmlns:local="clr-namespace:QuanLyBaiXe.Resource"
+    xmlns:viewmodel="clr-namespace:QuanLyBaiXe.ViewModel">
+
+    <viewmodel:MainViewModel x:Key="MainVM" />
+
+    <viewmodel:CurrentCustomerViewModel x:Key="CustomerVM" />
+
+    <viewmodel:CurrentPositionStatusViewModel x:Key="PositionVM" />
+
+    <grid_available:AvailablePanelViewModel x:Key="AvailPanelVM" />
+
+    <grid_available:gridAvailableViewModel x:Key="gridAvailableVM" />
+
+</ResourceDictionary>   
