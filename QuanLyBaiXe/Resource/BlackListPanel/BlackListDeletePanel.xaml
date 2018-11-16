@@ -1,0 +1,65 @@
+﻿<Window x:Class="QuanLyBaiXe.Resource.BlackListPanel.BlackListDeletePanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyBaiXe.Resource.BlackListPanel"
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+         Width="400"
+    Height="150"
+    
+    AllowsTransparency="True"
+    Background="Transparent"
+    Name="blacklistDeletePanel"
+    Title="AvailablePanel"
+    WindowStyle="None">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=blacklistDeletePanel}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Border Background="LightGray" CornerRadius="15">
+        <StackPanel Margin="10 10 10 5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <materialDesign:PackIcon DockPanel.Dock="Left" Margin="10 0" Kind="WarningCircle" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFFFA200"></materialDesign:PackIcon>
+                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20" FontSize="20" Text="Xoá người này ra khỏi danh sách chặn?"></TextBlock>
+
+            </StackPanel>
+           
+            
+            <UniformGrid
+                Margin="0 7"
+                Columns="2"
+                Rows="1">
+                <Button
+                    Width="130"
+                    HorizontalAlignment="Center"
+                    Command="{Binding AcceptCommand}"
+                    CommandParameter="{Binding ElementName=blacklistDeletePanel}"
+                    IsEnabled="{Binding ElementName=checkboxBaoTri, Path=IsChecked}"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                    Đồng ý
+                </Button>
+                <Button
+                    Width="130"
+                    HorizontalAlignment="Center"
+                    Background="#FFFFA200"
+                    BorderBrush="#FFFFA200"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=blacklistDeletePanel}"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                    Huỷ
+                </Button>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+
+</Window>
+
+            

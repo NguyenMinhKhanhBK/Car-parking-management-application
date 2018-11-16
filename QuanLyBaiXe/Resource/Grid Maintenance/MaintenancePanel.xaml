@@ -37,7 +37,7 @@ Background="Transparent"
                     HorizontalAlignment="Right"
                     DockPanel.Dock="Right"
                     FontSize="25"
-                    Text="{Binding Path=posID}" Foreground="#FF4B00FF" />
+                    Text="{Binding Path=posID}" Foreground="#FF4B00FF"/>
             </DockPanel>
             <DockPanel>
                 <TextBlock
@@ -50,7 +50,7 @@ Background="Transparent"
                     FontSize="25"
                     Text="Đang bảo trì" Foreground="#FF4B00FF" />
             </DockPanel>
-            <Separator Margin="0 10 0 5" BorderBrush="White" />
+            <Separator Margin="0 10 0 5" BorderBrush="White" Background="White" />
             <CheckBox Name="checkboxBaoTri" FontSize="25" Style="{StaticResource MaterialDesignCheckBox}" VerticalAlignment="Center">Đã bảo trì xong</CheckBox>
             <UniformGrid Margin="0 7" Rows="1" Columns="2">
                 <Button HorizontalAlignment="Center"

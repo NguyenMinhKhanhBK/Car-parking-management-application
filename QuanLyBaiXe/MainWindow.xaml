@@ -72,7 +72,7 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-                
+
 
                 <Style TargetType="TabItem" x:Key="TabControlStyle">
                     <Setter Property="Template">
@@ -644,7 +644,7 @@
                     <TabControl.BorderBrush>
                         <ImageBrush />
                     </TabControl.BorderBrush>
-                    
+
                     <!--Gia ve ngay thuong-->
                     <TabItem>
                         <TabItem.Header>
@@ -664,177 +664,37 @@
                             <StackPanel Grid.Column="1" Background="{x:Null}">
                                 <Button
                                     Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
-                                    Thêm giá vé
-                                </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
+                                    Margin="10 90"
                                     FontSize="18"
                                     materialDesign:RippleAssist.Feedback="#DD000000"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
                                     Chỉnh sửa
                                 </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
-                                    Xoá
-                                </Button>
                             </StackPanel>
                             <!--Bang gia ve-->
                             <Grid Grid.Column="0">
                                 <ScrollViewer>
-                                    <StackPanel>
-                                        <!--Thu 2-->
-                                        <StackPanel Margin="10 20 0 20">
-                                            <TextBlock
+                                    <!--Thu 2-->
+                                    <StackPanel Margin="10 20 0 20">
+                                        <TextBlock
                                                 Margin="10 0 0 -5"
                                                 VerticalAlignment="Center"
                                                 FontSize="14"
                                                 Foreground="Blue"
-                                                Text="Thứ 2" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Thu 3-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Thứ 3" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Thu 4-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Thứ 4" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Thu 5-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Thứ 5" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Thu 6-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Thứ 6" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Thu 7-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Thứ 7" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Chu nhat-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Chủ nhật" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
+                                                Text="BẢNG GIÁ VÉ NGÀY THƯỜNG" />
+                                        <ListView ItemsSource="{Binding Items1}">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <Separator />
                                     </StackPanel>
+
                                 </ScrollViewer>
                             </Grid>
                         </Grid>
@@ -858,97 +718,37 @@
                             <StackPanel Grid.Column="1" Background="{x:Null}">
                                 <Button
                                     Width="150"
-                                    Margin="10"
+                                    Margin="10 90"
                                     FontSize="18"
                                     materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
-                                    Thêm giá vé
-                                </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
                                     Chỉnh sửa
-                                </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
-                                    Xoá
                                 </Button>
                             </StackPanel>
                             <!--Bang gia ve-->
                             <Grid Grid.Column="0">
                                 <ScrollViewer>
-                                    <StackPanel>
-                                        <!--Buoi Sang-->
-                                        <StackPanel Margin="10 20 0 20">
-                                            <TextBlock
+                                    <!--Thu 2-->
+                                    <StackPanel Margin="10 20 0 20">
+                                        <TextBlock
                                                 Margin="10 0 0 -5"
                                                 VerticalAlignment="Center"
                                                 FontSize="14"
                                                 Foreground="Blue"
-                                                Text="Buổi sáng" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Buoi Chieu-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Buổi Chiều" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Buoi Toi-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Buổi tối" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
+                                                Text="BẢNG GIÁ VÉ NGÀY LỄ, TẾT" />
+                                        <ListView ItemsSource="{Binding Items1}">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <Separator />
                                     </StackPanel>
+
                                 </ScrollViewer>
                             </Grid>
                         </Grid>
@@ -972,230 +772,37 @@
                             <StackPanel Grid.Column="1" Background="{x:Null}">
                                 <Button
                                     Width="150"
-                                    Margin="10"
+                                    Margin="10 90"
                                     FontSize="18"
                                     materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
-                                    Thêm giá vé
-                                </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
                                     Chỉnh sửa
-                                </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
-                                    Xoá
                                 </Button>
                             </StackPanel>
                             <!--Bang gia ve-->
                             <Grid Grid.Column="0">
                                 <ScrollViewer>
-                                    <StackPanel>
-                                        <!--Buoi Sang-->
-                                        <StackPanel Margin="10 20 0 20">
-                                            <TextBlock
+                                    <!--Thu 2-->
+                                    <StackPanel Margin="10 20 0 20">
+                                        <TextBlock
                                                 Margin="10 0 0 -5"
                                                 VerticalAlignment="Center"
                                                 FontSize="14"
                                                 Foreground="Blue"
-                                                Text="Buổi sáng" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Buoi Chieu-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Buổi Chiều" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Buoi Toi-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Buổi tối" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
+                                                Text="BẢNG GIÁ VÉ SỰ KIỆN" />
+                                        <ListView ItemsSource="{Binding Items1}">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian" />
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <Separator />
                                     </StackPanel>
-                                </ScrollViewer>
-                            </Grid>
-                        </Grid>
-                    </TabItem>
-                    <TabItem>
-                        <TabItem.Header>
-                            <Grid Style="{StaticResource itemHeaderStyle}">
-                                <TextBlock
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontSize="14"
-                                    Text="Giá vé dài hạn" />
-                            </Grid>
-                        </TabItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="200" />
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" Background="{x:Null}">
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
-                                    Thêm giá vé
-                                </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
-                                    Chỉnh sửa
-                                </Button>
-                                <Button
-                                    Width="150"
-                                    Margin="10"
-                                    FontSize="18"
-                                    materialDesign:RippleAssist.Feedback="#DD000000"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
-                                    Xoá
-                                </Button>
-                            </StackPanel>
-                            <!--Bang gia ve-->
-                            <Grid Grid.Column="0">
-                                <ScrollViewer>
-                                    <StackPanel>
-                                        <!--Ve tuan-->
-                                        <StackPanel Margin="10 20 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Vé theo tuần" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Vé tháng-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Vé theo tháng" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Vé quý-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Vé theo quý" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                        <!--Vé năm-->
-                                        <StackPanel Margin="10 0 0 20">
-                                            <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="Vé theo năm" />
-                                            <ListView ItemsSource="{Binding Items1}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian bắt đầu" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Thời gian kết thúc" />
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                            <Separator />
-                                        </StackPanel>
-                                    </StackPanel>
+
                                 </ScrollViewer>
                             </Grid>
                         </Grid>
@@ -1223,7 +830,7 @@
                     <TabControl.BorderBrush>
                         <ImageBrush />
                     </TabControl.BorderBrush>
-                    
+
                     <!--Thống kê theo ngày-->
                     <TabItem>
                         <TabItem.Header>
@@ -1593,18 +1200,6 @@
                         <!--Thong ke theo thang bat dau tu day-->
                     </TabItem>
                     <!--Thống kê theo quý-->
-                    <TabItem>
-                        <TabItem.Header>
-                            <Grid Style="{StaticResource itemHeaderStyle}">
-                                <TextBlock
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontSize="14"
-                                    Text="Thống kê theo quý" />
-                            </Grid>
-                        </TabItem.Header>
-                        <!--Thong ke theo quy bat dau tu day-->
-                    </TabItem>
                     <!--Thống kê theo năm-->
                     <TabItem>
                         <TabItem.Header>
@@ -1614,6 +1209,19 @@
                                     VerticalAlignment="Center"
                                     FontSize="14"
                                     Text="Thống kê theo năm" />
+                            </Grid>
+                        </TabItem.Header>
+                        <!--Thong ke theo nam bat dau tu day-->
+                    </TabItem>
+                    
+                    <TabItem>
+                        <TabItem.Header>
+                            <Grid Style="{StaticResource itemHeaderStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Text="Thống kê tuỳ chỉnh" />
                             </Grid>
                         </TabItem.Header>
                         <!--Thong ke theo nam bat dau tu day-->
@@ -1647,8 +1255,11 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="300" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="1" Background="{x:Null}">
+                    <StackPanel Grid.Column="1" Background="{x:Null}" DataContext="{StaticResource BlacklistMainVM}">
                         <Button
+                            Name="btnAddBlackList"
+                            Command="{Binding AddBlackListCommand}"
+                            CommandParameter="{Binding ElementName=btnAddBlackList}"
                             Width="150"
                             Margin="0 50 0 10"
                             FontSize="18"
@@ -1658,6 +1269,9 @@
                             Thêm
                         </Button>
                         <Button
+                            Name="btnEditBlackList"
+                            Command="{Binding EditBlackListCommand}"
+                            CommandParameter="{Binding ElementName=btnEditBlackList}"
                             Width="150"
                             Margin="10"
                             FontSize="18"
@@ -1667,6 +1281,10 @@
                             Chỉnh sửa
                         </Button>
                         <Button
+                            
+                            Name="btnDeleteBlackList"
+                            Command="{Binding DeleteBlackListCommand}"
+                            CommandParameter="{Binding ElementName=btnDeleteBlackList}"
                             Width="150"
                             Margin="10"
                             FontSize="18"
@@ -1694,8 +1312,6 @@
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Tên người dùng" />
                                             <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Biển số xe" />
                                             <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Số điện thoại" />
-                                            <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="Email" />
-                                            <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="Ghi chú" />
                                         </GridView>
                                     </ListView.View>
                                 </ListView>

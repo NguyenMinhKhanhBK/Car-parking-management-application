@@ -42,3 +42,9 @@ C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debu
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.exe
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.pdb
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe.csprojAssemblyReference.cache
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlacklistPanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlacklistPanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlacklistEditPanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlacklistEditPanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlackListDeletePanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlackListDeletePanel.baml

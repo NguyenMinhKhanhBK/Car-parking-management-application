@@ -69,6 +69,18 @@
     </ApplicationDefinition>
     <Compile Include="Model\CurrentCustomer.cs" />
     <Compile Include="Model\CurrentPositionStatus.cs" />
+    <Compile Include="Resource\BlackListPanel\BlackListDeletePanel.xaml.cs">
+      <DependentUpon>BlackListDeletePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\BlackListPanel\BlackListDeletePanelViewModel.cs" />
+    <Compile Include="Resource\BlackListPanel\BlacklistEditPanel.xaml.cs">
+      <DependentUpon>BlacklistEditPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\BlackListPanel\BlackListEditPanelViewModel.cs" />
+    <Compile Include="Resource\BlackListPanel\BlacklistPanel.xaml.cs">
+      <DependentUpon>BlacklistPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\BlackListPanel\BlacklistPanelViewModel.cs" />
     <Compile Include="Resource\Grid Available\AvailablePanel.xaml.cs">
       <DependentUpon>AvailablePanel.xaml</DependentUpon>
     </Compile>
@@ -102,6 +114,7 @@
     </Compile>
     <Compile Include="Resource\Grid Occupied\OccupiedPanelViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BlacklistMainViewModel.cs" />
     <Compile Include="ViewModel\CarLayoutViewModel.cs" />
     <Compile Include="ViewModel\CurrentCustomerViewModel.cs" />
     <Compile Include="ViewModel\CurrentPositionStatusViewModel.cs" />
@@ -118,6 +131,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resource\BlackListPanel\BlackListDeletePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\BlackListPanel\BlacklistEditPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\BlackListPanel\BlacklistPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\Grid Available\AvailablePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

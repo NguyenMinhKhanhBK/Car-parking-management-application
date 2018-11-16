@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
         Width="400"
-    Height="225"
+    Height="250"
     mc:Ignorable="d"
     AllowsTransparency="True"
     Background="Transparent"
@@ -67,87 +67,31 @@
                     FontSize="25"
                     Text="{Binding plateNumber}" Foreground="#FF4B00FF" />
             </DockPanel>
-            <Separator Margin="0 10 0 5" BorderBrush="White" />
-
-            <Button HorizontalAlignment="Center"
-                    Margin="0 10 10 0"
-                    Width="150"
-                    Height="40"
-                    FontSize="20"
+            <Separator Margin="0 10 0 5" BorderBrush="White" Background="White" />
+            <CheckBox Name="checkboxBaoTri" FontSize="25" Style="{StaticResource MaterialDesignCheckBox}" VerticalAlignment="Center">Xe ra bãi</CheckBox>
+            <UniformGrid Margin="0 7" Rows="1" Columns="2">
+                <Button HorizontalAlignment="Center"
+                        IsEnabled="{Binding ElementName=checkboxBaoTri, Path=IsChecked}"
+                    Width="130"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Command="{Binding AcceptCommand}"
+                        CommandParameter="{Binding ElementName=occupiedPanel}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                    Đồng ý
+                </Button>
+                <Button HorizontalAlignment="Center"
+                    Width="130"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         Command="{Binding CancelCommand}"
                         CommandParameter="{Binding ElementName=occupiedPanel}"
-                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Background="Red" BorderBrush="Red">
-                Thoát
-            </Button>
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Background="#FFFFA200" BorderBrush="#FFFFA200">
+                    Huỷ
+                </Button>
 
-
+            </UniformGrid>
         </StackPanel>
-
-        <!--<StackPanel Margin="10 10 10 5">
-            
-
-            <DockPanel VerticalAlignment="Center">
-                <TextBlock
-                    DockPanel.Dock="Left"
-                    FontSize="25"
-                    Text="Vị trí" />
-                <TextBlock
-                    HorizontalAlignment="Right"
-                    DockPanel.Dock="Right"
-                    FontSize="25"
-                    Foreground="#FF4B00FF"
-                    Text="{Binding Path=posID}" />
-            </DockPanel>
-
-            <DockPanel  VerticalAlignment="Center">
-                <TextBlock
-                    DockPanel.Dock="Left"
-                    FontSize="25"
-                    Text="Trạng thái" />
-                <TextBlock
-                    HorizontalAlignment="Right"
-                    DockPanel.Dock="Right"
-                    FontSize="25"
-                    Foreground="#FF4B00FF"
-                    Text="Đang có xe" />
-            </DockPanel>
-            <DockPanel VerticalAlignment="Center">
-                <TextBlock
-                    DockPanel.Dock="Left"
-                    FontSize="25"
-                    Text="Khách hàng" />
-                <TextBlock
-                    HorizontalAlignment="Right"
-                    DockPanel.Dock="Right"
-                    FontSize="25"
-                    Foreground="#FF4B00FF"
-                    Text="Đang có xe" />
-            </DockPanel>
-            <DockPanel VerticalAlignment="Center">
-                <TextBlock
-                    DockPanel.Dock="Left"
-                    FontSize="25"
-                    Text="Biển số" />
-                <TextBlock
-                    HorizontalAlignment="Right"
-                    DockPanel.Dock="Right"
-                    FontSize="25"
-                    Foreground="#FF4B00FF"
-                    Text="Đang có xe" />
-            </DockPanel>
-            <Separator Margin="0,5,0,10" BorderBrush="White" Grid.Row="2" />
-            <Button  
-                Margin="0"
-                     FontSize="20"
-                    Width="150"
-                    Background="Red"
-                    BorderBrush="Red"
-                    Command="{Binding CancelCommand}"
-                    CommandParameter="{Binding ElementName=occupiedPanel}"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="Thoát"  Height="36"/>
-        </StackPanel>-->
     </Border>
 
 </Window>
+
+            

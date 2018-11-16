@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:grid_available="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
     xmlns:local="clr-namespace:QuanLyBaiXe.Resource"
+    xmlns:BlackList ="clr-namespace:QuanLyBaiXe.Resource.BlackListPanel"
     xmlns:viewmodel="clr-namespace:QuanLyBaiXe.ViewModel">
 
     <viewmodel:MainViewModel x:Key="MainVM" />
@@ -14,5 +15,5 @@
     <grid_available:AvailablePanelViewModel x:Key="AvailPanelVM" />
 
     <grid_available:gridAvailableViewModel x:Key="gridAvailableVM" />
-
+    <viewmodel:BlacklistMainViewModel x:Key="BlacklistMainVM"></viewmodel:BlacklistMainViewModel>
 </ResourceDictionary>   

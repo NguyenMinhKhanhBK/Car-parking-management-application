@@ -72,7 +72,7 @@ Background="Transparent"
                     FontSize="25"
                     Text="{Binding plateNumber}" Foreground="#FF4B00FF" />
             </DockPanel>
-            <Separator Margin="0 10 0 5" BorderBrush="White" />
+            <Separator Margin="0 10 0 5" BorderBrush="White" Background="White" />
             <CheckBox Name="checkboxBaoTri" FontSize="25" Style="{StaticResource MaterialDesignCheckBox}" VerticalAlignment="Center">Huỷ đặt</CheckBox>
             <UniformGrid Margin="0 7" Rows="1" Columns="2">
                 <Button HorizontalAlignment="Center"
