@@ -43,7 +43,7 @@
                     HorizontalAlignment="Right"
                     DockPanel.Dock="Right"
                     FontSize="25"
-                    Text="Đã đặt" Foreground="#FF4B00FF" />
+                    Text="Đang có xe" Foreground="#FF4B00FF" />
             </DockPanel>
             <DockPanel>
                 <TextBlock

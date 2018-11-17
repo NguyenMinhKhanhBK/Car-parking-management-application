@@ -16,4 +16,5 @@
 
     <grid_available:gridAvailableViewModel x:Key="gridAvailableVM" />
     <viewmodel:BlacklistMainViewModel x:Key="BlacklistMainVM"></viewmodel:BlacklistMainViewModel>
+    <viewmodel:FeeMainViewModel x:Key="FeeMainVM"></viewmodel:FeeMainViewModel>
 </ResourceDictionary>   

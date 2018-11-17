@@ -1,0 +1,95 @@
+﻿<Window
+    x:Class="QuanLyBaiXe.Resource.FeeEditPanel.FeeEditPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyBaiXe.Resource.FeeEditPanel"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="370"
+    Height="250"
+    mc:Ignorable="d"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Name="feeEditPanel"
+    Title="AvailablePanel"
+    WindowStyle="None">
+
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=feeEditPanel}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Border Background="LightGray" CornerRadius="15">
+        <StackPanel Margin="10 10 10 5">
+            <ComboBox Margin="0 10"
+                FontSize="20"
+  materialDesign:HintAssist.Hint="Thời gian">
+                <ComboBoxItem>
+                   Buổi sáng
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    Buổi chiều
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    Buổi tối
+                </ComboBoxItem>
+            </ComboBox>
+            <TextBox
+                Text="{Binding Fee}"
+                Name="tbxFee"
+                Margin="0 10"
+                FontSize="20"
+                materialDesign:HintAssist.Hint="Giá vé (VNĐ)"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+
+            </TextBox>
+            
+            <CheckBox
+                Margin="0 10"
+                VerticalAlignment="Center"
+                FontSize="20"
+                Name="checkboxBaoTri"
+                Style="{StaticResource MaterialDesignCheckBox}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction Command="{Binding CheckChangedCommand}" CommandParameter="{Binding ElementName=checkboxBaoTri}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                Lưu Thay đổi
+            </CheckBox>
+            <UniformGrid
+                Margin="0 7"
+                Columns="2"
+                Rows="1">
+                <Button
+                    Width="130"
+                    HorizontalAlignment="Center"
+                    Command="{Binding AcceptCommand}"
+                    CommandParameter="{Binding ElementName=feeEditPanel}"
+                    IsEnabled="{Binding ElementName=checkboxBaoTri, Path=IsChecked}"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                    Đồng ý
+                </Button>
+                <Button
+                    Width="130"
+                    HorizontalAlignment="Center"
+                    Background="#FFFFA200"
+                    BorderBrush="#FFFFA200"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=feeEditPanel}"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                    Huỷ
+                </Button>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+
+</Window>
+
+            

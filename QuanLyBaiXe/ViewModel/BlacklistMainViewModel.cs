@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace QuanLyBaiXe.ViewModel
 {
-    class BlacklistMainViewModel : BaseViewModel
+    public class BlacklistMainViewModel : BaseViewModel
     {
         #region COMMAND
         public ICommand AddBlackListCommand { get; set; }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\App.xaml
-13-597028153
+151550305039
 
-391446150643
-171667912148
-MainWindow.xaml;Resource\BlackListPanel\BlackListDeletePanel.xaml;Resource\BlackListPanel\BlacklistEditPanel.xaml;Resource\BlackListPanel\BlacklistPanel.xaml;Resource\Grid Available\AvailablePanel.xaml;Resource\Grid Available\gridAvailable.xaml;Resource\Grid Booked\BookedPanel.xaml;Resource\Grid Booked\gridBooked.xaml;Resource\Grid Maintenance\gridMaintenance.xaml;Resource\Grid Maintenance\MaintenancePanel.xaml;Resource\Grid Occupied\gridOccupied.xaml;Resource\Grid Occupied\OccupiedPanel.xaml;Resource\MyResourceXAML.xaml;
+441224121531
+19-737948648
+MainWindow.xaml;Resource\BlackListPanel\BlackListDeletePanel.xaml;Resource\BlackListPanel\BlacklistEditPanel.xaml;Resource\BlackListPanel\BlacklistPanel.xaml;Resource\FeeEditPanel\FeeEditPanel.xaml;Resource\FeeEditPanel\FeeMessageBox.xaml;Resource\Grid Available\AvailablePanel.xaml;Resource\Grid Available\gridAvailable.xaml;Resource\Grid Booked\BookedPanel.xaml;Resource\Grid Booked\gridBooked.xaml;Resource\Grid Maintenance\gridMaintenance.xaml;Resource\Grid Maintenance\MaintenancePanel.xaml;Resource\Grid Occupied\gridOccupied.xaml;Resource\Grid Occupied\OccupiedPanel.xaml;Resource\MyResourceXAML.xaml;
 
-True
+False
 

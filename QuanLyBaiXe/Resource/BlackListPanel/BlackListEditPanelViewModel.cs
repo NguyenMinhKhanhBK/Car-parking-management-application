@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace QuanLyBaiXe.Resource.BlackListPanel
 {
-    class BlackListEditPanelViewModel : BaseViewModel
+    public class BlackListEditPanelViewModel : BaseViewModel
     {
         #region COMMAND
         public ICommand MoveCommand { get; set; }

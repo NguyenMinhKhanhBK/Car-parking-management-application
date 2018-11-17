@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -81,6 +87,14 @@
       <DependentUpon>BlacklistPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resource\BlackListPanel\BlacklistPanelViewModel.cs" />
+    <Compile Include="Resource\FeeEditPanel\FeeEditPanel.xaml.cs">
+      <DependentUpon>FeeEditPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\FeeEditPanel\FeeEditPanelViewModel.cs" />
+    <Compile Include="Resource\FeeEditPanel\FeeMessageBox.xaml.cs">
+      <DependentUpon>FeeMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\FeeEditPanel\FeeMessageBoxViewModel.cs" />
     <Compile Include="Resource\Grid Available\AvailablePanel.xaml.cs">
       <DependentUpon>AvailablePanel.xaml</DependentUpon>
     </Compile>
@@ -118,6 +132,7 @@
     <Compile Include="ViewModel\CarLayoutViewModel.cs" />
     <Compile Include="ViewModel\CurrentCustomerViewModel.cs" />
     <Compile Include="ViewModel\CurrentPositionStatusViewModel.cs" />
+    <Compile Include="ViewModel\FeeMainViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +155,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\BlackListPanel\BlacklistPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\FeeEditPanel\FeeEditPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\FeeEditPanel\FeeMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

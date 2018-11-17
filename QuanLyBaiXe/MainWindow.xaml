@@ -1,23 +1,27 @@
-﻿<Window x:Class="QuanLyBaiXe.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:QuanLyBaiXe"
-        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+﻿<Window
+    x:Class="QuanLyBaiXe.MainWindow"
+    x:Name="mainwindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-        xmlns:MyResource="clr-namespace:QuanLyBaiXe.Resource.Grid_Booked"
-        xmlns:MyResource1="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
-        xmlns:MyResource2="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
-        xmlns:grid_maintenance="clr-namespace:QuanLyBaiXe.Resource.Grid_Maintenance"
-        mc:Ignorable="d"
-        Title="Phần mềm quản lý bãi xe" 
-        Width="1920"
+    xmlns:gauges="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:grid_maintenance="clr-namespace:QuanLyBaiXe.Resource.Grid_Maintenance"
+    xmlns:local="clr-namespace:QuanLyBaiXe"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:MyResource="clr-namespace:QuanLyBaiXe.Resource.Grid_Booked"
+    xmlns:MyResource1="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
+    xmlns:MyResource2="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
+    Width="1920"
     Height="1081"
-        Icon="Image/icon.png"
-        x:Name="mainwindow"
-        WindowStartupLocation="CenterScreen" Background="#FFF0F0F0">
+    mc:Ignorable="d"
+    Background="#FFF0F0F0"
+    Icon="Image/icon.png"
+    Title="Phần mềm quản lý bãi xe"
+    WindowStartupLocation="CenterScreen">
 
     <Window.Effect>
         <DropShadowEffect
@@ -35,64 +39,66 @@
     </Window.Resources>
 
     <!--Bắt đầu giao diện-->
+
     <Grid>
         <TabControl
             Margin="0"
+            Background="#FF7A00E0"
             BorderThickness="1,0,1,1"
-            Padding="1" Foreground="White" Background="#FF7A00E0">
-
+            Foreground="White"
+            Padding="1">
             <!--TabControl Style-->
             <TabControl.Resources>
-                <Style x:Name="textblock" TargetType="TextBlock" x:Key="mainTabControlTextBlock">
-                    <Setter Property="Foreground" Value="#FFAE00FF"></Setter>
-                    <Setter Property="FontSize" Value="20"></Setter>
-                    <Setter Property="Margin" Value="15 0 0 0"></Setter>
+                <Style
+                    x:Name="textblock"
+                    x:Key="mainTabControlTextBlock"
+                    TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#FFAE00FF" />
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="Margin" Value="15 0 0 0" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected,
-                        RelativeSource={RelativeSource AncestorType=TabItem}}" 
-                            Value="True">
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+                        <DataTrigger Value="True" Binding="{Binding IsSelected,
+                        RelativeSource={RelativeSource AncestorType=TabItem}}">
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-
-                <Style TargetType="materialDesign:PackIcon" x:Key="mainTabControlPackIcon">
-                    <Setter Property="Height" Value="20"></Setter>
-                    <Setter Property="Width" Value="18"></Setter>
-                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="Foreground" Value="#FFAE00FF"></Setter>
-                    <Setter Property="Margin" Value="-5 0 0 0"></Setter>
+                <Style x:Key="mainTabControlPackIcon" TargetType="materialDesign:PackIcon">
+                    <Setter Property="Height" Value="20" />
+                    <Setter Property="Width" Value="18" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Foreground" Value="#FFAE00FF" />
+                    <Setter Property="Margin" Value="-5 0 0 0" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected,
-                        RelativeSource={RelativeSource AncestorType=TabItem}}" 
-                            Value="True">
-                            <Setter Property="Foreground" Value="White"/>
+                        <DataTrigger Value="True" Binding="{Binding IsSelected,
+                        RelativeSource={RelativeSource AncestorType=TabItem}}">
+                            <Setter Property="Foreground" Value="White" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-
-
-                <Style TargetType="TabItem" x:Key="TabControlStyle">
+                <Style x:Key="TabControlStyle" TargetType="TabItem">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
                                 <Grid Name="Panel">
-                                    <Border x:Name="Border1" BorderBrush="#FFBDBDBD" Margin="0,0,0,-1" BorderThickness="0" CornerRadius="8 8 0 0">
-                                        <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="10,2"/>
-
+                                    <Border
+                                        x:Name="Border1"
+                                        Margin="0,0,0,-1"
+                                        BorderBrush="#FFBDBDBD"
+                                        BorderThickness="0"
+                                        CornerRadius="8 8 0 0">
+                                        <ContentPresenter
+                                            x:Name="ContentSite"
+                                            Margin="10,2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            ContentSource="Header" />
                                     </Border>
                                     <Grid.Height>60</Grid.Height>
                                     <Grid.Width>200</Grid.Width>
-
-
                                 </Grid>
-
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="Border1" Property="Background" Value="#FF7A00E0" />
@@ -107,22 +113,21 @@
                 </Style>
             </TabControl.Resources>
             <TabControl.BorderBrush>
-                <ImageBrush/>
+                <ImageBrush />
             </TabControl.BorderBrush>
-
             <!--MAN HINH CHINH-->
-            <TabItem x:Name="TabControl" Style="{StaticResource TabControlStyle}" BorderBrush="Black" Margin="0" IsSelected="True" UseLayoutRounding="False">
+            <TabItem
+                x:Name="TabControl"
+                Margin="0"
+                BorderBrush="Black"
+                IsSelected="True"
+                Style="{StaticResource TabControlStyle}"
+                UseLayoutRounding="False">
                 <!--Declare header name-->
                 <TabItem.Header>
                     <Grid VerticalAlignment="Center">
-
-                        <materialDesign:PackIcon
-                            Style="{StaticResource mainTabControlPackIcon}"
-                            Kind="HomeOutline"   />
-                        <TextBlock
-                            Style="{StaticResource mainTabControlTextBlock}"
-                            Text="Màn hình chính">
-                        </TextBlock>
+                        <materialDesign:PackIcon Kind="HomeOutline" Style="{StaticResource mainTabControlPackIcon}" />
+                        <TextBlock Style="{StaticResource mainTabControlTextBlock}" Text="Màn hình chính" />
                     </Grid>
                 </TabItem.Header>
                 <!--Main grid in MAN HINH CHINH-->
@@ -168,7 +173,7 @@
                                 </TextBlock.Effect>-->
                             </TextBlock>
                             <!--Divide the grid into 12 parts for each station-->
-                            <Grid Margin="0,60,0,10" >
+                            <Grid Margin="0,60,0,10">
                                 <Grid.Effect>
                                     <DropShadowEffect
                                         Color="#FFB9B9B9"
@@ -188,168 +193,241 @@
                                     <RowDefinition Height="1*" />
                                 </Grid.RowDefinitions>
                                 <!--Row 0 - Col 0 slot-->
-                                <Grid 
-                                    Name="pos1"
-                                    Grid.Row="0" 
+                                <Grid
+                                    Grid.Row="0"
                                     Grid.Column="0"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos1gridBooked" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos1gridAvailable" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos1gridOcupied" Visibility="Collapsed"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos1gridMaintenance" Visibility="Visible"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="1" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
-
+                                    VerticalAlignment="Center"
+                                    Name="pos1">
+                                    <MyResource:gridBooked x:Name="pos1gridBooked" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos1gridAvailable" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos1gridOcupied" Visibility="Collapsed" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos1gridMaintenance" Visibility="Visible" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="1" />
                                 </Grid>
                                 <!--Row 0 - Col 1 slot-->
                                 <Grid
-                                    Name="pos2"
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos2gridBooked" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos2gridAvailable" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos2gridOcupied"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos2gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="2" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos2">
+                                    <MyResource:gridBooked x:Name="pos2gridBooked" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos2gridAvailable" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos2gridOcupied" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos2gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="2" />
                                 </Grid>
                                 <!--Row 1 - Col 0 slot-->
                                 <Grid
-                                    
-                                    Name="pos3"
                                     Grid.Row="1"
                                     Grid.Column="0"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos3gridBooked" Visibility="Visible"/>
-                                    <MyResource1:gridAvailable x:Name="pos3gridAvailable" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos3gridOcupied" Visibility="Collapsed"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos3gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="3" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos3">
+                                    <MyResource:gridBooked x:Name="pos3gridBooked" Visibility="Visible" />
+                                    <MyResource1:gridAvailable x:Name="pos3gridAvailable" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos3gridOcupied" Visibility="Collapsed" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos3gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="3" />
                                 </Grid>
                                 <!--Row 1 - Col 1 slot-->
                                 <Grid
-                                    Name="pos4"
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos4gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos4gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos4gridAvailable"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos4gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="4" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos4">
+                                    <MyResource:gridBooked x:Name="pos4gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos4gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos4gridAvailable" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos4gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="4" />
                                 </Grid>
                                 <!--Row 2 - Col 0 slot-->
                                 <Grid
-                                    Name="pos5"
                                     Grid.Row="2"
                                     Grid.Column="0"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos5gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos5gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos5gridAvailable"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos5gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="5" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos5">
+                                    <MyResource:gridBooked x:Name="pos5gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos5gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos5gridAvailable" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos5gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="5" />
                                 </Grid>
                                 <!--Row 2 - Col 1 slot-->
                                 <Grid
-                                    Name="pos6"
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos6gridBooked" Visibility="Visible"/>
-                                    <MyResource2:gridOccupied x:Name="pos6gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos6gridAvailable" Visibility="Collapsed"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos6gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="6" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos6">
+                                    <MyResource:gridBooked x:Name="pos6gridBooked" Visibility="Visible" />
+                                    <MyResource2:gridOccupied x:Name="pos6gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos6gridAvailable" Visibility="Collapsed" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos6gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="6" />
                                 </Grid>
                                 <!--Row 3 - Col 0 slot-->
                                 <Grid
-                                    Name="pos7"
                                     Grid.Row="3"
                                     Grid.Column="0"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos7gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos7gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos7gridAvailable"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos7gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="7" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos7">
+                                    <MyResource:gridBooked x:Name="pos7gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos7gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos7gridAvailable" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos7gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="7" />
                                 </Grid>
                                 <!--Row 3 - Col 1 slot-->
                                 <Grid
-                                    Name="pos8"
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos8gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos8gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos8gridAvailable"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos8gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="8" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos8">
+                                    <MyResource:gridBooked x:Name="pos8gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos8gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos8gridAvailable" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos8gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="8" />
                                 </Grid>
                                 <!--Row 4 - Col 0 slot-->
                                 <Grid
-                                    Name="pos9"
                                     Grid.Row="4"
                                     Grid.Column="0"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos9gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos9gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos9gridAvailable"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos9gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="9" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos9">
+                                    <MyResource:gridBooked x:Name="pos9gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos9gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos9gridAvailable" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos9gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="9" />
                                 </Grid>
                                 <!--Row 4 - Col 1 slot-->
                                 <Grid
-                                    Name="pos10"
                                     Grid.Row="4"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos10gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos10gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos10gridAvailable"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos10gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="10" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos10">
+                                    <MyResource:gridBooked x:Name="pos10gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos10gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos10gridAvailable" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos10gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="10" />
                                 </Grid>
                                 <!--Row 5 - Col 0 slot-->
                                 <Grid
-                                    Name="pos11"
                                     Grid.Row="5"
                                     Grid.Column="0"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos11gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos11gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos11gridAvailable" Visibility="Collapsed"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos11gridMaintenance" Visibility="Visible"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="11" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos11">
+                                    <MyResource:gridBooked x:Name="pos11gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos11gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos11gridAvailable" Visibility="Collapsed" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos11gridMaintenance" Visibility="Visible" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="11" />
                                 </Grid>
                                 <!--Row 5 - Col 1 slot-->
                                 <Grid
-                                    Name="pos12"
                                     Grid.Row="5"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <MyResource:gridBooked x:Name="pos12gridBooked" Visibility="Collapsed"/>
-                                    <MyResource2:gridOccupied x:Name="pos12gridOcupied" Visibility="Collapsed"/>
-                                    <MyResource1:gridAvailable x:Name="pos12gridAvailable"/>
-                                    <grid_maintenance:gridMaintenance x:Name="pos12gridMaintenance" Visibility="Collapsed"></grid_maintenance:gridMaintenance>
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Text="12" Margin="10 0" FontSize="25" Foreground="White" ></TextBlock>
+                                    VerticalAlignment="Center"
+                                    Name="pos12">
+                                    <MyResource:gridBooked x:Name="pos12gridBooked" Visibility="Collapsed" />
+                                    <MyResource2:gridOccupied x:Name="pos12gridOcupied" Visibility="Collapsed" />
+                                    <MyResource1:gridAvailable x:Name="pos12gridAvailable" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos12gridMaintenance" Visibility="Collapsed" />
+                                    <TextBlock
+                                        Margin="10 0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="25"
+                                        Foreground="White"
+                                        Text="12" />
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Border>
                     <!--CAR COUNTER-->
-                    <Grid Grid.Row="0" Grid.Column="1" DataContext="{StaticResource PositionVM}">
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DataContext="{StaticResource PositionVM}">
                         <Border
                             Margin="0 5 5 5"
                             Background="White"
@@ -364,8 +442,9 @@
                                     ShadowDepth="5" />
                             </Border.Effect>
                             <DockPanel>
-                                <TextBlock DockPanel.Dock="Top"
+                                <TextBlock
                                     Margin="40 10 0 0"
+                                    DockPanel.Dock="Top"
                                     FontSize="40"
                                     Foreground="#FF5D00FF"
                                     Text="Thống kê hiện tại">
@@ -373,41 +452,109 @@
                                         <DropShadowEffect Color="#FFC5C5C5" RenderingBias="Quality" BlurRadius="30" ShadowDepth="2"/>
                                     </TextBlock.Effect>-->
                                 </TextBlock>
-                                <Grid  Margin="10" DataContext="{StaticResource PositionVM}">
-
-                                    <!--<lvc:PieChart InnerRadius="70" LegendLocation="Right"  Hoverable="False" FontSize="14">
-                                        <lvc:PieChart.Series>
-                                            <lvc:PieSeries Title="Còn trống" Values="{Binding currentAvailable}" DataLabels="True" FontSize="14">
-                                                <lvc:PieSeries.Fill>
-                                                    <SolidColorBrush Color="#FF007E00" Opacity="1"/>
-                                                </lvc:PieSeries.Fill>
-                                            </lvc:PieSeries>
-                                            <lvc:PieSeries Title="Đang có xe" Values="{Binding currentOccupied}" DataLabels="True" FontSize="14">
-                                                <lvc:PieSeries.Fill>
-                                                    <SolidColorBrush Color="#FFFF1200" Opacity="1"/>
-                                                </lvc:PieSeries.Fill>
-                                            </lvc:PieSeries>
-                                            <lvc:PieSeries Title="Đã đặt" Values="{Binding currentBooked}" DataLabels="True" FontSize="14">
-                                                <lvc:PieSeries.Fill>
-                                                    <SolidColorBrush Color="#FFFFBF00" Opacity="1"/>
-                                                </lvc:PieSeries.Fill>
-                                            </lvc:PieSeries>
-                                            <lvc:PieSeries Title="Đang bảo trì" Values="{Binding currentMaintenance}" DataLabels="True" FontSize="14">
-                                                <lvc:PieSeries.Fill>
-                                                    <SolidColorBrush Color="#FF474747" Opacity="1"/>
-                                                </lvc:PieSeries.Fill>
-                                            </lvc:PieSeries>
-                                        </lvc:PieChart.Series>
-                                        <lvc:PieChart.ChartLegend>
-                                            <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
-                                        </lvc:PieChart.ChartLegend>
-                                        <lvc:PieChart.DataTooltip>
-                                            <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
-                                        </lvc:PieChart.DataTooltip>
-                                    </lvc:PieChart>-->
-
-
-                                </Grid>
+                                <UniformGrid
+                                    Margin="10"
+                                    Columns="2"
+                                    DataContext="{StaticResource PositionVM}"
+                                    Rows="2">
+                                    <DockPanel Margin="5">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            DockPanel.Dock="Bottom"
+                                            FontSize="14"
+                                            Text="Còn trống" />
+                                        <lvc:Gauge
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Value="10"
+                                            From="0"
+                                            FromColor="#FF5DB854"
+                                            To="12"
+                                            ToColor="#FF0E6A00"
+                                            Uses360Mode="True">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90" />
+                                                    <ScaleTransform ScaleX="-1" />
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
+                                    </DockPanel>
+                                    <DockPanel Margin="5">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            DockPanel.Dock="Bottom"
+                                            FontSize="14"
+                                            Text="Đã đặt" />
+                                        <lvc:Gauge
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Value="2"
+                                            From="0"
+                                            FromColor="#FFFFB56C"
+                                            To="12"
+                                            ToColor="#FFE47200"
+                                            Uses360Mode="True">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90" />
+                                                    <ScaleTransform ScaleX="-1" />
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
+                                    </DockPanel>
+                                    <DockPanel Margin="5">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            DockPanel.Dock="Bottom"
+                                            FontSize="14"
+                                            Text="Đang có xe" />
+                                        <lvc:Gauge
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Value="2"
+                                            From="0"
+                                            FromColor="#FFFF7070"
+                                            To="12"
+                                            ToColor="Red"
+                                            Uses360Mode="True">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90" />
+                                                    <ScaleTransform ScaleX="-1" />
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
+                                    </DockPanel>
+                                    <DockPanel Margin="5">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            DockPanel.Dock="Bottom"
+                                            FontSize="14"
+                                            Text="Đang bảo trì" />
+                                        <lvc:Gauge
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Value="10"
+                                            FontSize="20"
+                                            From="0"
+                                            FromColor="#FF9E9E9E"
+                                            To="12"
+                                            ToColor="#FF5D5D5D"
+                                            Uses360Mode="True">
+                                            <lvc:Gauge.GaugeRenderTransform>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="90" />
+                                                    <ScaleTransform ScaleX="-1" />
+                                                </TransformGroup>
+                                            </lvc:Gauge.GaugeRenderTransform>
+                                        </lvc:Gauge>
+                                    </DockPanel>
+                                </UniformGrid>
                             </DockPanel>
                         </Border>
                     </Grid>
@@ -594,27 +741,61 @@
                                     <DataGrid
                                         Height="400"
                                         Margin="5 8 5 0"
+                                        AutoGenerateColumns="False"
+                                        Background="White"
                                         CanUserAddRows="False"
                                         CanUserSortColumns="True"
                                         DataContext="{StaticResource CustomerVM}"
-                                        ItemsSource="{Binding currentCustomerList}"
+                                        FontSize="16"
+                                        Foreground="#DD000000"
+                                        GridLinesVisibility="Horizontal"
+                                        HorizontalGridLinesBrush="#FF959595"
                                         IsReadOnly="True"
+                                        ItemsSource="{Binding currentCustomerList}"
+                                        MinColumnWidth="30"
+                                        ScrollViewer.VerticalScrollBarVisibility="Auto"
                                         SelectionMode="Extended"
                                         SelectionUnit="FullRow"
-                                        FontSize="16"
-                                        AutoGenerateColumns="False"
-                                        ScrollViewer.VerticalScrollBarVisibility="Auto" Background="White" Foreground="#DD000000" MinColumnWidth="30" GridLinesVisibility="Horizontal" VerticalGridLinesBrush="Gainsboro" HorizontalGridLinesBrush="#FF959595">
-
-
+                                        VerticalGridLinesBrush="Gainsboro">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="STT" Binding="{Binding STT}" FontSize="16"  ></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding DisplayName}" FontSize="16" Width="180"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Vị trí" Binding="{Binding PosID}" FontSize="16" Width="100"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Biển số xe" Binding="{Binding LicensePlate}" FontSize="16" Width="150"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" FontSize="16" Width="150" ></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding PhoneNumber}" FontSize="16" Width="150" ></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Thời gian đặt" Binding="{Binding ReservedTime}" FontSize="16" Width="250"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Thời gian vào" Binding="{Binding ArrivalTime}" FontSize="16"  ></DataGridTextColumn>
+                                            <DataGridTextColumn
+                                                Binding="{Binding STT}"
+                                                FontSize="16"
+                                                Header="STT" />
+                                            <DataGridTextColumn
+                                                Width="180"
+                                                Binding="{Binding DisplayName}"
+                                                FontSize="16"
+                                                Header="Tên khách hàng" />
+                                            <DataGridTextColumn
+                                                Width="100"
+                                                Binding="{Binding PosID}"
+                                                FontSize="16"
+                                                Header="Vị trí" />
+                                            <DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding LicensePlate}"
+                                                FontSize="16"
+                                                Header="Biển số xe" />
+                                            <DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding Status}"
+                                                FontSize="16"
+                                                Header="Trạng thái" />
+                                            <DataGridTextColumn
+                                                Width="150"
+                                                Binding="{Binding PhoneNumber}"
+                                                FontSize="16"
+                                                Header="Số điện thoại" />
+                                            <DataGridTextColumn
+                                                Width="250"
+                                                Binding="{Binding ReservedTime}"
+                                                FontSize="16"
+                                                Header="Thời gian đặt" />
+                                            <DataGridTextColumn
+                                                Binding="{Binding ArrivalTime}"
+                                                FontSize="16"
+                                                Header="Thời gian vào" />
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>
@@ -629,12 +810,8 @@
             <TabItem Style="{StaticResource TabControlStyle}">
                 <TabItem.Header>
                     <Grid VerticalAlignment="Center">
-                        <materialDesign:PackIcon
-                            Style="{StaticResource mainTabControlPackIcon}"
-                            Kind="SettingsOutline" />
-                        <TextBlock
-                            Style="{StaticResource mainTabControlTextBlock}"
-                            Text="Thiết lập" />
+                        <materialDesign:PackIcon Kind="SettingsOutline" Style="{StaticResource mainTabControlPackIcon}" />
+                        <TextBlock Style="{StaticResource mainTabControlTextBlock}" Text="Thiết lập" />
                     </Grid>
                 </TabItem.Header>
                 <TabControl
@@ -644,7 +821,6 @@
                     <TabControl.BorderBrush>
                         <ImageBrush />
                     </TabControl.BorderBrush>
-
                     <!--Gia ve ngay thuong-->
                     <TabItem>
                         <TabItem.Header>
@@ -661,14 +837,21 @@
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="200" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" Background="{x:Null}">
+                            <StackPanel
+                                Grid.Column="1"
+                                Background="{x:Null}"
+                                DataContext="{StaticResource FeeMainVM}">
                                 <Button
                                     Width="150"
                                     Margin="10 90"
+                                    Background="#FF7A00E0"
+                                    Command="{Binding EditFeeCommand}"
+                                    CommandParameter="{Binding ElementName=btnNormalFeeEdit}"
                                     FontSize="18"
                                     materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Name="btnNormalFeeEdit"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                                     Chỉnh sửa
                                 </Button>
                             </StackPanel>
@@ -678,11 +861,11 @@
                                     <!--Thu 2-->
                                     <StackPanel Margin="10 20 0 20">
                                         <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="BẢNG GIÁ VÉ NGÀY THƯỜNG" />
+                                            Margin="10 0 0 -5"
+                                            VerticalAlignment="Center"
+                                            FontSize="14"
+                                            Foreground="Blue"
+                                            Text="BẢNG GIÁ VÉ NGÀY THƯỜNG" />
                                         <ListView ItemsSource="{Binding Items1}">
                                             <ListView.View>
                                                 <GridView>
@@ -694,7 +877,6 @@
                                         </ListView>
                                         <Separator />
                                     </StackPanel>
-
                                 </ScrollViewer>
                             </Grid>
                         </Grid>
@@ -715,14 +897,21 @@
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="200" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" Background="{x:Null}">
+                            <StackPanel
+                                Grid.Column="1"
+                                Background="{x:Null}"
+                                DataContext="{StaticResource FeeMainVM}">
                                 <Button
                                     Width="150"
                                     Margin="10 90"
+                                    Background="#FF7A00E0"
+                                    Command="{Binding EditFeeCommand}"
+                                    CommandParameter="{Binding ElementName=btnFestivalFeeEdit}"
                                     FontSize="18"
                                     materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Name="btnFestivalFeeEdit"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                                     Chỉnh sửa
                                 </Button>
                             </StackPanel>
@@ -732,11 +921,11 @@
                                     <!--Thu 2-->
                                     <StackPanel Margin="10 20 0 20">
                                         <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="BẢNG GIÁ VÉ NGÀY LỄ, TẾT" />
+                                            Margin="10 0 0 -5"
+                                            VerticalAlignment="Center"
+                                            FontSize="14"
+                                            Foreground="Blue"
+                                            Text="BẢNG GIÁ VÉ NGÀY LỄ, TẾT" />
                                         <ListView ItemsSource="{Binding Items1}">
                                             <ListView.View>
                                                 <GridView>
@@ -748,7 +937,6 @@
                                         </ListView>
                                         <Separator />
                                     </StackPanel>
-
                                 </ScrollViewer>
                             </Grid>
                         </Grid>
@@ -769,14 +957,21 @@
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="200" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" Background="{x:Null}">
+                            <StackPanel
+                                Grid.Column="1"
+                                Background="{x:Null}"
+                                DataContext="{StaticResource FeeMainVM}">
                                 <Button
                                     Width="150"
                                     Margin="10 90"
+                                    Background="#FF7A00E0"
+                                    Command="{Binding EditFeeCommand}"
+                                    CommandParameter="{Binding ElementName=btnEventFeeEdit}"
                                     FontSize="18"
                                     materialDesign:RippleAssist.Feedback="#DD000000"
+                                    Name="btnEventFeeEdit"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                                     Chỉnh sửa
                                 </Button>
                             </StackPanel>
@@ -786,11 +981,11 @@
                                     <!--Thu 2-->
                                     <StackPanel Margin="10 20 0 20">
                                         <TextBlock
-                                                Margin="10 0 0 -5"
-                                                VerticalAlignment="Center"
-                                                FontSize="14"
-                                                Foreground="Blue"
-                                                Text="BẢNG GIÁ VÉ SỰ KIỆN" />
+                                            Margin="10 0 0 -5"
+                                            VerticalAlignment="Center"
+                                            FontSize="14"
+                                            Foreground="Blue"
+                                            Text="BẢNG GIÁ VÉ SỰ KIỆN" />
                                         <ListView ItemsSource="{Binding Items1}">
                                             <ListView.View>
                                                 <GridView>
@@ -802,7 +997,6 @@
                                         </ListView>
                                         <Separator />
                                     </StackPanel>
-
                                 </ScrollViewer>
                             </Grid>
                         </Grid>
@@ -814,12 +1008,8 @@
             <TabItem Style="{StaticResource TabControlStyle}">
                 <TabItem.Header>
                     <Grid VerticalAlignment="Center">
-                        <materialDesign:PackIcon
-                            Style="{StaticResource mainTabControlPackIcon}"
-                            Kind="ChartFinance" />
-                        <TextBlock
-                            Style="{StaticResource mainTabControlTextBlock}"
-                            Text="Thống kê" />
+                        <materialDesign:PackIcon Kind="ChartFinance" Style="{StaticResource mainTabControlPackIcon}" />
+                        <TextBlock Style="{StaticResource mainTabControlTextBlock}" Text="Thống kê" />
                     </Grid>
                 </TabItem.Header>
                 <!--Content of THONG KE panel-->
@@ -830,7 +1020,6 @@
                     <TabControl.BorderBrush>
                         <ImageBrush />
                     </TabControl.BorderBrush>
-
                     <!--Thống kê theo ngày-->
                     <TabItem>
                         <TabItem.Header>
@@ -1174,31 +1363,7 @@
                         </Grid>
                     </TabItem>
                     <!--Thống kê theo tháng-->
-                    <TabItem>
-                        <TabItem.Header>
-                            <Grid Style="{StaticResource itemHeaderStyle}">
-                                <TextBlock
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontSize="14"
-                                    Text="Thống kê theo tuần" />
-                            </Grid>
-                        </TabItem.Header>
-                        <!--Thong ke theo tuan bat dau tu day-->
-                    </TabItem>
                     <!--Thống kê theo tháng-->
-                    <TabItem>
-                        <TabItem.Header>
-                            <Grid Style="{StaticResource itemHeaderStyle}">
-                                <TextBlock
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontSize="14"
-                                    Text="Thống kê theo tháng" />
-                            </Grid>
-                        </TabItem.Header>
-                        <!--Thong ke theo thang bat dau tu day-->
-                    </TabItem>
                     <!--Thống kê theo quý-->
                     <!--Thống kê theo năm-->
                     <TabItem>
@@ -1208,23 +1373,268 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     FontSize="14"
-                                    Text="Thống kê theo năm" />
+                                    Text="Thống kê dài hạn" />
                             </Grid>
                         </TabItem.Header>
                         <!--Thong ke theo nam bat dau tu day-->
-                    </TabItem>
-                    
-                    <TabItem>
-                        <TabItem.Header>
-                            <Grid Style="{StaticResource itemHeaderStyle}">
-                                <TextBlock
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontSize="14"
-                                    Text="Thống kê tuỳ chỉnh" />
+                        <DockPanel>
+                            <ToolBarTray DockPanel.Dock="Top">
+                                <ToolBar
+                                    Width="1700"
+                                    Height="70"
+                                    HorizontalAlignment="Right"
+                                    ClipToBounds="False"
+                                    FontSize="20"
+                                    Style="{DynamicResource MaterialDesignToolBar}">
+                                    <Label
+                                        Margin="0 0 10 0"
+                                        VerticalAlignment="Center"
+                                        Content="Băt đầu"
+                                        Foreground="Black" />
+                                    <DatePicker
+                                        Width="350"
+                                        VerticalAlignment="Center"
+                                        materialDesign:HintAssist.Hint="Chọn ngày"
+                                        Name="BeginCustomPicker" />
+                                    <Label
+                                        Margin="50 0 10 0"
+                                        VerticalAlignment="Center"
+                                        Content="Kết thúc"
+                                        Foreground="Black" />
+                                    <DatePicker
+                                        Width="350"
+                                        VerticalAlignment="Center"
+                                        materialDesign:HintAssist.Hint="Chọn ngày"
+                                        Name="EndCustomPicker" />
+                                    <ComboBox Margin="40 0" materialDesign:HintAssist.Hint="Tuỳ chọn hiển thị">
+                                        <ComboBoxItem>Theo ngày</ComboBoxItem>
+                                        <ComboBoxItem>Theo tháng</ComboBoxItem>
+                                    </ComboBox>
+                                    <Button
+                                        Width="150"
+                                        Margin="30 0"
+                                        Background="#FF7A00E0"
+                                        FontSize="20"
+                                        materialDesign:RippleAssist.Feedback="#DD000000"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                        Lọc
+                                    </Button>
+                                    <Button Margin="220 0 0 0" ToolTip="Export to PDF">
+                                        <materialDesign:PackIcon Kind="Printer" />
+                                    </Button>
+                                </ToolBar>
+                            </ToolBarTray>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*" />
+                                    <ColumnDefinition Width="2.5 *" />
+                                </Grid.ColumnDefinitions>
+                                <!--Cột 0-->
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1.3*" />
+                                        <RowDefinition Height="2*" />
+                                    </Grid.RowDefinitions>
+                                    <!--Doanh thu-->
+                                    <Grid Margin="5">
+                                        <Rectangle
+                                            Fill="White"
+                                            RadiusX="10"
+                                            RadiusY="10">
+                                            <Rectangle.Effect>
+                                                <DropShadowEffect
+                                                    Color="#FFAAAAAA"
+                                                    BlurRadius="20"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                            </Rectangle.Effect>
+                                        </Rectangle>
+                                        <TextBlock
+                                            Margin="100 10"
+                                            HorizontalAlignment="Left"
+                                            FontSize="30"
+                                            Foreground="Black"
+                                            Text="Doanh thu" />
+                                        <Border
+                                            Width="50"
+                                            Height="80"
+                                            Margin="30 0 0 0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Background="Green"
+                                            CornerRadius="0 0 6 6">
+                                            <Border.Effect>
+                                                <DropShadowEffect
+                                                    Color="#FFB0B0B0"
+                                                    BlurRadius="10"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                            </Border.Effect>
+                                            <Image
+                                                Width="30"
+                                                Height="30"
+                                                Source="Image/dollarCircle.png" />
+                                        </Border>
+                                        <TextBlock
+                                            Margin="30 10"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="120"
+                                            Foreground="#FF0080FF"
+                                            Text="16.98 M" />
+                                        <StackPanel
+                                            Height="60"
+                                            Margin="40 0"
+                                            VerticalAlignment="Bottom"
+                                            Orientation="Horizontal">
+                                            <materialDesign:PackIcon
+                                                Width="40"
+                                                Height="40"
+                                                Foreground="Green"
+                                                Kind="Pen" />
+                                            <TextBlock
+                                                Margin="5 0"
+                                                FontSize="30"
+                                                Foreground="#FF767676"
+                                                Text="Đơn vị VNĐ" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <!--Tổng số xe-->
+                                    <Grid Grid.Row="1" Margin="5">
+                                        <Rectangle
+                                            Fill="White"
+                                            RadiusX="10"
+                                            RadiusY="10">
+                                            <Rectangle.Effect>
+                                                <DropShadowEffect
+                                                    Color="#FFAAAAAA"
+                                                    BlurRadius="20"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                            </Rectangle.Effect>
+                                        </Rectangle>
+                                        <TextBlock
+                                            Margin="100 10"
+                                            HorizontalAlignment="Left"
+                                            FontSize="30"
+                                            Foreground="Black"
+                                            Text="Tổng số xe" />
+                                        <Border
+                                            Width="50"
+                                            Height="80"
+                                            Margin="30 0 0 0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Background="#FF7A00E0"
+                                            CornerRadius="0 0 6 6">
+                                            <Border.Effect>
+                                                <DropShadowEffect
+                                                    Color="#FFB0B0B0"
+                                                    BlurRadius="10"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                            </Border.Effect>
+                                            <materialDesign:PackIcon
+                                                Width="35"
+                                                Height="35"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="White"
+                                                Kind="Car" />
+                                        </Border>
+                                        <TextBlock
+                                            Margin="30 40 30 0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            FontSize="90"
+                                            Foreground="#FF0080FF"
+                                            Text="1250" />
+                                        <lvc:PieChart
+                                            FontSize="20"
+                                            Margin="0 160 0 30"
+                                            DisableAnimations="True"
+                                            DataTooltip="{x:Null}"
+                                            Hoverable="False"
+                                            LegendLocation="Bottom">
+                                            <lvc:PieChart.Series>
+                                                <lvc:PieSeries
+                                                    DataLabels="True"
+                                                    Title="Buổi sáng"
+                                                    Values="3" />
+                                                <lvc:PieSeries
+                                                    DataLabels="True"
+                                                    Title="Buổi chiều"
+                                                    Values="4" />
+                                                <lvc:PieSeries
+                                                    DataLabels="True"
+                                                    Title="Buổi tối"
+                                                    Values="6" />
+                                            </lvc:PieChart.Series>
+                                        </lvc:PieChart>
+                                    </Grid>
+                                </Grid>
+                                
+                                <!--Cột 1-->
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"></RowDefinition>
+                                        <RowDefinition Height="1*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Margin="5" Grid.Row="0">
+                                        <Rectangle
+                                            Fill="White"
+                                            RadiusX="10"
+                                            RadiusY="10">
+                                            <Rectangle.Effect>
+                                                <DropShadowEffect
+                                                    Color="#FFAAAAAA"
+                                                    BlurRadius="20"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                            </Rectangle.Effect>
+                                        </Rectangle>
+
+                                        <lvc:CartesianChart  LegendLocation="Left">
+                                            <lvc:CartesianChart.AxisX>
+                                                <lvc:Axis Title="Salesman" ></lvc:Axis>
+                                            </lvc:CartesianChart.AxisX>
+                                            <lvc:CartesianChart.AxisY>
+                                                <lvc:Axis Title="Sold Apps" ></lvc:Axis>
+                                            </lvc:CartesianChart.AxisY>
+                                        </lvc:CartesianChart>
+                                    </Grid>
+
+                                    <Grid Margin="5" Grid.Row="1">
+                                        <Rectangle
+                                            Fill="White"
+                                            RadiusX="10"
+                                            RadiusY="10">
+                                            <Rectangle.Effect>
+                                                <DropShadowEffect
+                                                    Color="#FFAAAAAA"
+                                                    BlurRadius="20"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                            </Rectangle.Effect>
+                                        </Rectangle>
+
+                                        <lvc:CartesianChart  LegendLocation="Left">
+                                            <lvc:CartesianChart.AxisX>
+                                                <lvc:Axis Title="Salesman" ></lvc:Axis>
+                                            </lvc:CartesianChart.AxisX>
+                                            <lvc:CartesianChart.AxisY>
+                                                <lvc:Axis Title="Sold Apps" ></lvc:Axis>
+                                            </lvc:CartesianChart.AxisY>
+                                        </lvc:CartesianChart>
+                                    </Grid>
+
+                                </Grid>
+
+                                
                             </Grid>
-                        </TabItem.Header>
-                        <!--Thong ke theo nam bat dau tu day-->
+                        </DockPanel>
                     </TabItem>
                 </TabControl>
             </TabItem>
@@ -1234,13 +1644,11 @@
                 <TabItem.Header>
                     <Grid VerticalAlignment="Center">
                         <materialDesign:PackIcon
-                            Style="{StaticResource mainTabControlPackIcon}"
-                            Height="15"
                             Width="15"
-                            Kind="BlockHelper" />
-                        <TextBlock
-                            Style="{StaticResource mainTabControlTextBlock}"
-                            Text="Danh sách chặn" />
+                            Height="15"
+                            Kind="BlockHelper"
+                            Style="{StaticResource mainTabControlPackIcon}" />
+                        <TextBlock Style="{StaticResource mainTabControlTextBlock}" Text="Danh sách chặn" />
                     </Grid>
                 </TabItem.Header>
                 <Grid Margin="5 5 5 5" Background="White">
@@ -1255,42 +1663,47 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="300" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="1" Background="{x:Null}" DataContext="{StaticResource BlacklistMainVM}">
+                    <StackPanel
+                        Grid.Column="1"
+                        Background="{x:Null}"
+                        DataContext="{StaticResource BlacklistMainVM}">
                         <Button
-                            Name="btnAddBlackList"
-                            Command="{Binding AddBlackListCommand}"
-                            CommandParameter="{Binding ElementName=btnAddBlackList}"
                             Width="150"
                             Margin="0 50 0 10"
+                            Background="#FF7A00E0"
+                            Command="{Binding AddBlackListCommand}"
+                            CommandParameter="{Binding ElementName=btnAddBlackList}"
                             FontSize="18"
                             materialDesign:RippleAssist.Feedback="#DD000000"
+                            Name="btnAddBlackList"
                             Style="{StaticResource MaterialDesignRaisedButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                            ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                             Thêm
                         </Button>
                         <Button
-                            Name="btnEditBlackList"
-                            Command="{Binding EditBlackListCommand}"
-                            CommandParameter="{Binding ElementName=btnEditBlackList}"
                             Width="150"
                             Margin="10"
+                            Background="#FF7A00E0"
+                            Command="{Binding EditBlackListCommand}"
+                            CommandParameter="{Binding ElementName=btnEditBlackList}"
                             FontSize="18"
                             materialDesign:RippleAssist.Feedback="#DD000000"
+                            Name="btnEditBlackList"
                             Style="{StaticResource MaterialDesignRaisedButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                            ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                             Chỉnh sửa
                         </Button>
                         <Button
-                            
-                            Name="btnDeleteBlackList"
-                            Command="{Binding DeleteBlackListCommand}"
-                            CommandParameter="{Binding ElementName=btnDeleteBlackList}"
                             Width="150"
                             Margin="10"
+                            Background="#FF7A00E0"
+                            Command="{Binding DeleteBlackListCommand}"
+                            CommandParameter="{Binding ElementName=btnDeleteBlackList}"
                             FontSize="18"
                             materialDesign:RippleAssist.Feedback="#DD000000"
+                            Name="btnDeleteBlackList"
                             Style="{StaticResource MaterialDesignRaisedButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedAccentButton" Background="#FF7A00E0">
+                            ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                             Xoá
                         </Button>
                     </StackPanel>
@@ -1326,16 +1739,13 @@
             <TabItem Style="{StaticResource TabControlStyle}">
                 <TabItem.Header>
                     <Grid VerticalAlignment="Center">
-                        <materialDesign:PackIcon
-                            Style="{StaticResource mainTabControlPackIcon}"
-                            Kind="WarningOutline" />
-                        <TextBlock
-                            Style="{StaticResource mainTabControlTextBlock}"
-                            Text="Cảnh báo" />
+                        <materialDesign:PackIcon Kind="WarningOutline" Style="{StaticResource mainTabControlPackIcon}" />
+                        <TextBlock Style="{StaticResource mainTabControlTextBlock}" Text="Cảnh báo" />
                     </Grid>
                 </TabItem.Header>
             </TabItem>
             <!-- ************************************************************************************************-->
         </TabControl>
     </Grid>
+
 </Window>

@@ -48,3 +48,13 @@ C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debu
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlacklistEditPanel.baml
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlackListDeletePanel.g.cs
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BlackListPanel\BlackListDeletePanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\FeeEditPanel\FeeEditPanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\FeeEditPanel\FeeEditPanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\FeeEditPanel\FeeMessageBox.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\FeeEditPanel\FeeMessageBox.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.pdb
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.Wpf.xml

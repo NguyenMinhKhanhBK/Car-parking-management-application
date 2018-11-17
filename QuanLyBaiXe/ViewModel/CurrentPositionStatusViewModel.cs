@@ -28,17 +28,17 @@ namespace QuanLyBaiXe.ViewModel
 
         public CurrentPositionStatusViewModel()
         {
-                //_Available = _preAvailable = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 1).ToList().Count;
-                //currentAvailable = new ChartValues<ObservableValue> { new ObservableValue(_Available) };
+                    //_Available = _preAvailable = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 1).ToList().Count;
+                    //currentAvailable = new ChartValues<ObservableValue> { new ObservableValue(_Available) };
 
-                //_Booked = _preBooked = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 2).ToList().Count;
-                //currentBooked = new ChartValues<ObservableValue> { new ObservableValue(_Booked) };
+                    //_Booked = _preBooked = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 2).ToList().Count;
+                    //currentBooked = new ChartValues<ObservableValue> { new ObservableValue(_Booked) };
 
-                //_Occupied = _preOccupied = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 3).ToList().Count;
-                //currentOccupied = new ChartValues<ObservableValue> { new ObservableValue(_Occupied) };
+                    //_Occupied = _preOccupied = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 3).ToList().Count;
+                    //currentOccupied = new ChartValues<ObservableValue> { new ObservableValue(_Occupied) };
 
-                //_Maintenance = _preMaintenance = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 4).ToList().Count;
-                //currentMaintenance = new ChartValues<ObservableValue> { new ObservableValue(_Maintenance) };
+                    //_Maintenance = _preMaintenance = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 4).ToList().Count;
+                    //currentMaintenance = new ChartValues<ObservableValue> { new ObservableValue(_Maintenance) };
 
             timerPos.Interval = new TimeSpan(0, 0, 3);
             timerPos.Tick += UpdateData;
