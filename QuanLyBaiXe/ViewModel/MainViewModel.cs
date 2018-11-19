@@ -22,6 +22,8 @@ namespace QuanLyBaiXe.ViewModel
         //Timer to update data periodly
         DispatcherTimer Timer = new DispatcherTimer();
 
+        //Register event to detect car status changed by administrator
+        
 
         public MainViewModel()
         {
@@ -32,7 +34,7 @@ namespace QuanLyBaiXe.ViewModel
             CustomerList.CurrentPossionInfoList =  GetDataFromSQL();
             PositionStatus = GetCurrentPositionStatus(CustomerList.CurrentPossionInfoList);
             parkingLayout = GetParkingLayout(CustomerList.CurrentPossionInfoList);
-            
+            EventSystem.Subscribe<ShareMemory>(ShowNews);
             
             //Setup timer to expire each two seconds
             Timer.Interval = new TimeSpan(0, 0, 2);
@@ -161,6 +163,58 @@ namespace QuanLyBaiXe.ViewModel
             return temp;
         }
 
+        public void ShowNews(ShareMemory msg)
+        {
+           if(msg.AvailableToMaintenancePosition>=1 && msg.AvailableToMaintenancePosition<=12)
+            {
+                using (CarParkingLotEntities data = new CarParkingLotEntities())
+                {
+                    parkingLayout[msg.AvailableToMaintenancePosition - 1] = new ParkingLayout() { IsAvailable = false, IsBooked = false, IsMaintenance = true, IsOccupied = false };
+                    OnPropertyChanged("parkingLayout");
+                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.AvailableToMaintenancePosition).FirstOrDefault();
+                    if (temp.StatusID == 1) temp.StatusID = 4;
+                    data.SaveChanges();
+                }
+            }
+
+            else if (msg.CancelBookedPosition >= 1 && msg.CancelBookedPosition <= 12)
+            {
+                using (CarParkingLotEntities data = new CarParkingLotEntities())
+                {
+                    parkingLayout[msg.CancelBookedPosition - 1] = new ParkingLayout() { IsAvailable = true, IsBooked = false, IsMaintenance = false, IsOccupied = false };
+                    OnPropertyChanged("parkingLayout");
+                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.CancelBookedPosition).FirstOrDefault();
+                    if (temp.StatusID == 2) temp.StatusID = 1;
+                    data.SaveChanges();
+                }
+            }
+
+            else if (msg.FinishMaintenancePosition >= 1 && msg.FinishMaintenancePosition <= 12)
+            {
+                using (CarParkingLotEntities data = new CarParkingLotEntities())
+                {
+                    parkingLayout[msg.FinishMaintenancePosition - 1] = new ParkingLayout() { IsAvailable = true, IsBooked = false, IsMaintenance = false, IsOccupied = false };
+                    OnPropertyChanged("parkingLayout");
+                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.FinishMaintenancePosition).FirstOrDefault();
+                    if (temp.StatusID == 4) temp.StatusID = 1;
+                    data.SaveChanges();
+                    
+                }
+            }
+
+            else if (msg.OccupiedToAvailablePosition >= 1 && msg.OccupiedToAvailablePosition <= 12)
+            {
+                using (CarParkingLotEntities data = new CarParkingLotEntities())
+                {
+                    parkingLayout[msg.OccupiedToAvailablePosition - 1] = new ParkingLayout() { IsAvailable = true, IsBooked = false, IsMaintenance = false, IsOccupied = false };
+                    OnPropertyChanged("parkingLayout");
+                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.OccupiedToAvailablePosition).FirstOrDefault();
+                    if (temp.StatusID == 3) temp.StatusID = 1;
+                    data.SaveChanges();
+
+                }
+            }
+        }
 
 
     }

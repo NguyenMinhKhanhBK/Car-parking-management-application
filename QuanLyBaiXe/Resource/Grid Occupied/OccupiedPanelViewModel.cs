@@ -1,4 +1,5 @@
-﻿using QuanLyBaiXe.ViewModel;
+﻿using QuanLyBaiXe.Model;
+using QuanLyBaiXe.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,15 @@ namespace QuanLyBaiXe.Resource.Grid_Occupied
 
         void Accept(Window a)
         {
-            int posid = int.Parse(posID);
-            //var b = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.BlockID == MainViewModel.currentBlockID && p.BuildingID == MainViewModel.currentBuildingID && p.ID == posid).FirstOrDefault();
-            //b.StatusID = 4;
-            //DataProvider.Ins.Data.SaveChanges();
+            try
+            {
+                int posid = int.Parse(posID);
+                EventSystem.Publish<ShareMemory>(new ShareMemory { OccupiedToAvailablePosition = posid });
+            }
+            catch
+            {
+                MessageBox.Show("Có lỗi xảy ra");
+            }
             a.Close();
         }
     }
