@@ -107,6 +107,7 @@
     <Compile Include="Model\CarParkingLayout.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ChangedFee.cs" />
     <Compile Include="Model\CurrentBlockPosition.cs" />
     <Compile Include="Model\CurrentPositionInfo.cs" />
     <Compile Include="Model\CurrentStatus.cs" />
@@ -137,10 +138,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\FeeModel.cs" />
     <Compile Include="Model\ParkingLayout.cs" />
     <Compile Include="Model\PositionStatu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SelectedItemEventTrigger.cs" />
     <Compile Include="Model\ShareMemory.cs" />
     <Compile Include="Model\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>

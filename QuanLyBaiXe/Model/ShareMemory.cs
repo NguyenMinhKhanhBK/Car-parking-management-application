@@ -13,5 +13,6 @@ namespace QuanLyBaiXe.Model
         public int FinishMaintenancePosition { get; set; }
         public int OccupiedToAvailablePosition { get; set; }
 
+        
     }
 }

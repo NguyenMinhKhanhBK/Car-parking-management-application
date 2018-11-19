@@ -15,6 +15,7 @@
     xmlns:MyResource="clr-namespace:QuanLyBaiXe.Resource.Grid_Booked"
     xmlns:MyResource1="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
     xmlns:MyResource2="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     Width="1920"
     Height="1081"
     DataContext="{StaticResource MainVM}"
@@ -48,6 +49,7 @@
     <Grid>
         <TabControl
             Margin="0"
+            Name="mainTabControl"
             Background="#FF7A00E0"
             BorderThickness="1,0,1,1"
             Foreground="White"
@@ -120,6 +122,12 @@
             <TabControl.BorderBrush>
                 <ImageBrush />
             </TabControl.BorderBrush>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding MainTabControlSelectionChanged}" CommandParameter="{Binding ElementName=mainTabControl}" ></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
             <!--MAN HINH CHINH-->
             <TabItem
                 x:Name="TabControl"
@@ -820,13 +828,19 @@
                         <TextBlock Style="{StaticResource mainTabControlTextBlock}" Text="Thiết lập" />
                     </Grid>
                 </TabItem.Header>
-                <TabControl
+
+                
+
+                <TabControl DataContext="{StaticResource FeeMainVM}"
                     Margin="0 5 5 5"
                     Background="White"
+                    Name="FeeChildTabControl"
                     TabStripPlacement="Left">
                     <TabControl.BorderBrush>
                         <ImageBrush />
                     </TabControl.BorderBrush>
+
+                    
                     <!--Gia ve ngay thuong-->
                     <TabItem>
                         <TabItem.Header>
@@ -862,7 +876,7 @@
                                 </Button>
                             </StackPanel>
                             <!--Bang gia ve-->
-                            <Grid Grid.Column="0">
+                            <Grid Grid.Column="0" >
                                 <ScrollViewer>
                                     <!--Thu 2-->
                                     <StackPanel Margin="10 20 0 20">
@@ -872,14 +886,15 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ NGÀY THƯỜNG" />
-                                        <ListView ItemsSource="{Binding Items1}">
+                                        <ListView Name="listviewNormalFee" ItemsSource="{Binding NormalFeeCollection}" DataContext="{StaticResource FeeMainVM}">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian" />
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding STT}" Header="STT" />
+                                                    <GridViewColumn Width="100"  DisplayMemberBinding="{Binding Time}" Header="Thời gian" />
+                                                    <GridViewColumn Width="200"  DisplayMemberBinding="{Binding Price}" Header="Giá vé (VNĐ)" />
                                                 </GridView>
                                             </ListView.View>
+
                                         </ListView>
                                         <Separator />
                                     </StackPanel>
@@ -932,12 +947,12 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ NGÀY LỄ, TẾT" />
-                                        <ListView ItemsSource="{Binding Items1}">
+                                        <ListView ItemsSource="{Binding FestivalFeeCollection}" DataContext="{StaticResource FeeMainVM}">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian" />
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding STT}" Header="STT" />
+                                                    <GridViewColumn Width="100"  DisplayMemberBinding="{Binding Time}" Header="Thời gian" />
+                                                    <GridViewColumn Width="200"  DisplayMemberBinding="{Binding Price}" Header="Giá vé (VNĐ)" />
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
@@ -992,14 +1007,15 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ SỰ KIỆN" />
-                                        <ListView ItemsSource="{Binding Items1}">
+                                        <ListView ItemsSource="{Binding EventFeeCollection}" DataContext="{StaticResource FeeMainVM}">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="STT" />
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Thời gian" />
-                                                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Giá vé (VNĐ)" />
+                                                    <GridViewColumn Width="50"  DisplayMemberBinding="{Binding STT}" Header="STT" />
+                                                    <GridViewColumn Width="100"  DisplayMemberBinding="{Binding Time}" Header="Thời gian" />
+                                                    <GridViewColumn Width="200"  DisplayMemberBinding="{Binding Price}" Header="Giá vé (VNĐ)" />
                                                 </GridView>
                                             </ListView.View>
+                                            
                                         </ListView>
                                         <Separator />
                                     </StackPanel>

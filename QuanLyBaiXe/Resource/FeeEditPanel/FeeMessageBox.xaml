@@ -40,7 +40,7 @@
                     VerticalAlignment="Center"
                     DockPanel.Dock="Left"
                     FontSize="20"
-                    Text="Giá vé không hợp lệ. Xin kiểm tra lại" />
+                    Text="Giá trị không hợp lệ. Xin kiểm tra lại" />
             </StackPanel>
             
                 

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace QuanLyBaiXe.ViewModel
@@ -22,8 +24,10 @@ namespace QuanLyBaiXe.ViewModel
         //Timer to update data periodly
         DispatcherTimer Timer = new DispatcherTimer();
 
-        //Register event to detect car status changed by administrator
-        
+        #region COMMAND
+        public ICommand MainTabControlSelectionChanged { get; set; }
+        #endregion COMMAND
+
 
         public MainViewModel()
         {
@@ -35,7 +39,9 @@ namespace QuanLyBaiXe.ViewModel
             PositionStatus = GetCurrentPositionStatus(CustomerList.CurrentPossionInfoList);
             parkingLayout = GetParkingLayout(CustomerList.CurrentPossionInfoList);
             EventSystem.Subscribe<ShareMemory>(ShowNews);
-            
+
+            MainTabControlSelectionChanged = new RelayCommand<object>((p) => { return true; }, (p) => { TabControl a = p as TabControl; TabControlSelectionChanged(a); });
+
             //Setup timer to expire each two seconds
             Timer.Interval = new TimeSpan(0, 0, 2);
             Timer.Tick += TimerISR;
@@ -216,6 +222,10 @@ namespace QuanLyBaiXe.ViewModel
             }
         }
 
-
+        void TabControlSelectionChanged(TabControl x)
+        {
+            if (x.SelectedIndex != 0)  Timer.Stop();
+            else Timer.Start();
+        }
     }
 }

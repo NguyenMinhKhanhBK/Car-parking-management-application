@@ -19,10 +19,13 @@ namespace QuanLyBaiXe.Resource.FeeEditPanel
     /// </summary>
     public partial class FeeEditPanel : Window
     {
-        public FeeEditPanel()
+        public FeeEditPanel(int _FeeType)
         {
             InitializeComponent();
-            this.DataContext = new FeeEditPanelViewModel();
+            var editVM = new FeeEditPanelViewModel();
+            this.DataContext = editVM;
+            editVM.feeType = _FeeType;
+
         }
     }
 }
