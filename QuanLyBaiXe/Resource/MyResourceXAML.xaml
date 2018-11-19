@@ -8,9 +8,9 @@
 
     <viewmodel:MainViewModel x:Key="MainVM" />
 
-    <viewmodel:CurrentCustomerViewModel x:Key="CustomerVM" />
+    <!--<viewmodel:CurrentCustomerViewModel x:Key="CustomerVM" />
 
-    <viewmodel:CurrentPositionStatusViewModel x:Key="PositionVM" />
+    <viewmodel:CurrentPositionStatusViewModel x:Key="PositionVM" />-->
 
     <grid_available:AvailablePanelViewModel x:Key="AvailPanelVM" />
 

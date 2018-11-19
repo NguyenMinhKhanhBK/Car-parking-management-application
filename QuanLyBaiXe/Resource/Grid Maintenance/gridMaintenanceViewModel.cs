@@ -35,7 +35,7 @@ namespace QuanLyBaiXe.Resource.Grid_Maintenance
                 MaintenancePanel panel = new MaintenancePanel(positionID);
                 var point = p.PointToScreen(Mouse.GetPosition(p));
                 panel.Left = point.X;
-                panel.Top = point.Y;
+                panel.Top = point.Y - panel.Height;
                 panel.ShowDialog();
                 p.Opacity = 1;
             }

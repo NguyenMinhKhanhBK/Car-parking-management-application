@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyBaiXe.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,15 @@ namespace QuanLyBaiXe.ViewModel
 {
     public class CurrentPositionStatusViewModel : BaseViewModel
     {
-        DispatcherTimer timerPos = new DispatcherTimer();
-        private int _Available, _Booked, _Occupied, _Maintenance;
-        private int _preAvailable, _preBooked, _preOccupied, _preMaintenance;
+        private System.Collections.ObjectModel.ObservableCollection<CurrentStatus> _currentStatusList;
+
+        public System.Collections.ObjectModel.ObservableCollection<CurrentStatus> CurrentStatusList { get=> _currentStatusList; set { _currentStatusList = value;OnPropertyChanged(); } }
+
+
+
+        // DispatcherTimer timerPos = new DispatcherTimer();
+        //private int _Available, _Booked, _Occupied, _Maintenance;
+        //private int _preAvailable, _preBooked, _preOccupied, _preMaintenance;
 
         //private ChartValues<ObservableValue> _currentAvailable;
         //public ChartValues<ObservableValue> currentAvailable { get => _currentAvailable; set { _currentAvailable = value; OnPropertyChanged("available"); } }
@@ -40,12 +47,13 @@ namespace QuanLyBaiXe.ViewModel
                     //_Maintenance = _preMaintenance = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.StatusID == 4).ToList().Count;
                     //currentMaintenance = new ChartValues<ObservableValue> { new ObservableValue(_Maintenance) };
 
-            timerPos.Interval = new TimeSpan(0, 0, 3);
-            timerPos.Tick += UpdateData;
-            timerPos.Start();
+            //timerPos.Interval = new TimeSpan(0, 0, 3);
+            //timerPos.Tick += UpdateData;
+            //timerPos.Start();
 
         }
 
+        
         private void UpdateData(object sender, EventArgs e)
         {
             

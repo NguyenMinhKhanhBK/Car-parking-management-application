@@ -58,3 +58,8 @@ C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debu
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.xml
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\EntityFramework.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\EntityFramework.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\QuanLyBaiXe_Content.g.cs

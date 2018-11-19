@@ -17,6 +17,7 @@
     xmlns:MyResource2="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
     Width="1920"
     Height="1081"
+    DataContext="{StaticResource MainVM}"
     mc:Ignorable="d"
     Background="#FFF0F0F0"
     Icon="Image/icon.png"
@@ -31,6 +32,10 @@
     </Window.Effect>
 
     <Window.Resources>
+      
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+     
+
         <Style x:Key="itemHeaderStyle" TargetType="Grid">
             <Setter Property="Width" Value="180" />
             <Setter Property="Height" Value="35" />
@@ -161,7 +166,7 @@
                                 RenderingBias="Quality"
                                 ShadowDepth="5" />
                         </Border.Effect>
-                        <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid  Grid.Row="0" Grid.Column="0">
                             <!--Name: So do bai xe-->
                             <TextBlock
                                 Margin="40,10"
@@ -199,10 +204,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos1">
-                                    <MyResource:gridBooked x:Name="pos1gridBooked" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos1gridAvailable" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos1gridOcupied" Visibility="Collapsed" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos1gridMaintenance" Visibility="Visible" />
+                                    <MyResource:gridBooked x:Name="pos1gridBooked" Visibility="{Binding Path=parkingLayout[0].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos1gridAvailable" Visibility="{Binding  Path=parkingLayout[0].IsAvailable,Converter={StaticResource BoolToVisConverter}, Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos1gridOcupied" Visibility="{Binding  Path=parkingLayout[0].IsOccupied,Converter={StaticResource BoolToVisConverter}, Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos1gridMaintenance" Visibility="{Binding  Path=parkingLayout[0].IsMaintenance,Converter={StaticResource BoolToVisConverter} , Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -218,10 +223,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos2">
-                                    <MyResource:gridBooked x:Name="pos2gridBooked" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos2gridAvailable" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos2gridOcupied" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos2gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos2gridBooked" Visibility="{Binding  parkingLayout[1].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos2gridAvailable" Visibility="{Binding  parkingLayout[1].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos2gridOcupied" Visibility="{Binding  parkingLayout[1].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos2gridMaintenance" Visibility="{Binding  parkingLayout[1].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -237,10 +242,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos3">
-                                    <MyResource:gridBooked x:Name="pos3gridBooked" Visibility="Visible" />
-                                    <MyResource1:gridAvailable x:Name="pos3gridAvailable" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos3gridOcupied" Visibility="Collapsed" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos3gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos3gridBooked" Visibility="{Binding  parkingLayout[2].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos3gridAvailable" Visibility="{Binding  parkingLayout[2].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos3gridOcupied" Visibility="{Binding  parkingLayout[2].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos3gridMaintenance" Visibility="{Binding  parkingLayout[2].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -256,10 +261,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos4">
-                                    <MyResource:gridBooked x:Name="pos4gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos4gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos4gridAvailable" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos4gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos4gridBooked" Visibility="{Binding  parkingLayout[3].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos4gridOcupied" Visibility="{Binding  parkingLayout[3].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos4gridAvailable" Visibility="{Binding  parkingLayout[3].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos4gridMaintenance" Visibility="{Binding  parkingLayout[3].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -275,10 +280,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos5">
-                                    <MyResource:gridBooked x:Name="pos5gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos5gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos5gridAvailable" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos5gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos5gridBooked" Visibility="{Binding  parkingLayout[4].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos5gridOcupied" Visibility="{Binding  parkingLayout[4].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos5gridAvailable" Visibility="{Binding  parkingLayout[4].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos5gridMaintenance" Visibility="{Binding  parkingLayout[4].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -294,10 +299,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos6">
-                                    <MyResource:gridBooked x:Name="pos6gridBooked" Visibility="Visible" />
-                                    <MyResource2:gridOccupied x:Name="pos6gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos6gridAvailable" Visibility="Collapsed" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos6gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos6gridBooked" Visibility="{Binding  parkingLayout[5].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos6gridOcupied" Visibility="{Binding  parkingLayout[5].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos6gridAvailable" Visibility="{Binding  parkingLayout[5].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos6gridMaintenance" Visibility="{Binding  parkingLayout[5].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -313,10 +318,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos7">
-                                    <MyResource:gridBooked x:Name="pos7gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos7gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos7gridAvailable" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos7gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos7gridBooked" Visibility="{Binding  parkingLayout[6].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos7gridOcupied" Visibility="{Binding  parkingLayout[6].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos7gridAvailable" Visibility="{Binding  parkingLayout[6].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos7gridMaintenance" Visibility="{Binding  parkingLayout[6].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -332,10 +337,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos8">
-                                    <MyResource:gridBooked x:Name="pos8gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos8gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos8gridAvailable" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos8gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos8gridBooked" Visibility="{Binding  parkingLayout[7].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos8gridOcupied" Visibility="{Binding  parkingLayout[7].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos8gridAvailable" Visibility="{Binding  parkingLayout[7].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos8gridMaintenance" Visibility="{Binding  parkingLayout[7].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -351,10 +356,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos9">
-                                    <MyResource:gridBooked x:Name="pos9gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos9gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos9gridAvailable" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos9gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos9gridBooked" Visibility="{Binding  parkingLayout[8].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos9gridOcupied" Visibility="{Binding  parkingLayout[8].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos9gridAvailable" Visibility="{Binding  parkingLayout[8].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos9gridMaintenance" Visibility="{Binding  parkingLayout[8].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -370,10 +375,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos10">
-                                    <MyResource:gridBooked x:Name="pos10gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos10gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos10gridAvailable" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos10gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos10gridBooked" Visibility="{Binding  parkingLayout[9].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos10gridOcupied" Visibility="{Binding  parkingLayout[9].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos10gridAvailable" Visibility="{Binding  parkingLayout[9].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos10gridMaintenance" Visibility="{Binding  parkingLayout[9].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -389,10 +394,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos11">
-                                    <MyResource:gridBooked x:Name="pos11gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos11gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos11gridAvailable" Visibility="Collapsed" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos11gridMaintenance" Visibility="Visible" />
+                                    <MyResource:gridBooked x:Name="pos11gridBooked" Visibility="{Binding  parkingLayout[10].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos11gridOcupied" Visibility="{Binding  parkingLayout[10].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos11gridAvailable" Visibility="{Binding  parkingLayout[10].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos11gridMaintenance" Visibility="{Binding  parkingLayout[10].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -408,10 +413,10 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Name="pos12">
-                                    <MyResource:gridBooked x:Name="pos12gridBooked" Visibility="Collapsed" />
-                                    <MyResource2:gridOccupied x:Name="pos12gridOcupied" Visibility="Collapsed" />
-                                    <MyResource1:gridAvailable x:Name="pos12gridAvailable" />
-                                    <grid_maintenance:gridMaintenance x:Name="pos12gridMaintenance" Visibility="Collapsed" />
+                                    <MyResource:gridBooked x:Name="pos12gridBooked" Visibility="{Binding  parkingLayout[11].IsBooked,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource2:gridOccupied x:Name="pos12gridOcupied" Visibility="{Binding  parkingLayout[11].IsOccupied,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <MyResource1:gridAvailable x:Name="pos12gridAvailable" Visibility="{Binding  parkingLayout[11].IsAvailable,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
+                                    <grid_maintenance:gridMaintenance x:Name="pos12gridMaintenance" Visibility="{Binding  parkingLayout[11].IsMaintenance,Converter={StaticResource BoolToVisConverter},Source={StaticResource MainVM}}" />
                                     <TextBlock
                                         Margin="10 0"
                                         HorizontalAlignment="Left"
@@ -426,8 +431,8 @@
                     <!--CAR COUNTER-->
                     <Grid
                         Grid.Row="0"
-                        Grid.Column="1"
-                        DataContext="{StaticResource PositionVM}">
+                        Grid.Column="1">
+
                         <Border
                             Margin="0 5 5 5"
                             Background="White"
@@ -453,11 +458,12 @@
                                     </TextBlock.Effect>-->
                                 </TextBlock>
                                 <UniformGrid
-                                    Margin="10"
+                                    
                                     Columns="2"
-                                    DataContext="{StaticResource PositionVM}"
                                     Rows="2">
-                                    <DockPanel Margin="5">
+                                    <!--DataContext="{StaticResource PositionVM}"-->
+                                    
+                                    <DockPanel Margin="0">
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
@@ -467,7 +473,7 @@
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             Margin="5"
-                                            Value="10"
+                                            Value="{Binding PositionStatus.Available}"
                                             From="0"
                                             FromColor="#FF5DB854"
                                             To="12"
@@ -481,7 +487,7 @@
                                             </lvc:Gauge.GaugeRenderTransform>
                                         </lvc:Gauge>
                                     </DockPanel>
-                                    <DockPanel Margin="5">
+                                    <DockPanel Margin="0">
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
@@ -491,7 +497,7 @@
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             Margin="5"
-                                            Value="2"
+                                            Value="{Binding PositionStatus.Booked}"
                                             From="0"
                                             FromColor="#FFFFB56C"
                                             To="12"
@@ -505,7 +511,7 @@
                                             </lvc:Gauge.GaugeRenderTransform>
                                         </lvc:Gauge>
                                     </DockPanel>
-                                    <DockPanel Margin="5">
+                                    <DockPanel Margin="0">
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
@@ -515,7 +521,7 @@
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             Margin="5"
-                                            Value="2"
+                                            Value="{Binding PositionStatus.Occupied}"
                                             From="0"
                                             FromColor="#FFFF7070"
                                             To="12"
@@ -529,7 +535,7 @@
                                             </lvc:Gauge.GaugeRenderTransform>
                                         </lvc:Gauge>
                                     </DockPanel>
-                                    <DockPanel Margin="5">
+                                    <DockPanel Margin="0">
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
@@ -539,7 +545,7 @@
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             Margin="5"
-                                            Value="10"
+                                            Value="{Binding PositionStatus.Maintenance}"
                                             FontSize="20"
                                             From="0"
                                             FromColor="#FF9E9E9E"
@@ -657,7 +663,7 @@
                                     <TextBlock
                                         FontSize="40"
                                         Foreground="#FF5D00FF"
-                                        Text="Danh sách khách hàng" />
+                                        Text="Danh sách chi tiết" />
                                     <!--<materialDesign:ColorZone
                                         Width="770"
                                         Margin="40 10 0 0"
@@ -745,13 +751,13 @@
                                         Background="White"
                                         CanUserAddRows="False"
                                         CanUserSortColumns="True"
-                                        DataContext="{StaticResource CustomerVM}"
+                                       
                                         FontSize="16"
                                         Foreground="#DD000000"
                                         GridLinesVisibility="Horizontal"
                                         HorizontalGridLinesBrush="#FF959595"
                                         IsReadOnly="True"
-                                        ItemsSource="{Binding currentCustomerList}"
+                                        ItemsSource="{Binding CustomerList.CurrentPossionInfoList,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         MinColumnWidth="30"
                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                                         SelectionMode="Extended"
@@ -768,7 +774,7 @@
                                                 FontSize="16"
                                                 Header="Tên khách hàng" />
                                             <DataGridTextColumn
-                                                Width="100"
+                                                Width="70"
                                                 Binding="{Binding PosID}"
                                                 FontSize="16"
                                                 Header="Vị trí" />
