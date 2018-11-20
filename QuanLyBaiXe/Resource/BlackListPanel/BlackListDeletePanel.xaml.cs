@@ -19,10 +19,13 @@ namespace QuanLyBaiXe.Resource.BlackListPanel
     /// </summary>
     public partial class BlackListDeletePanel : Window
     {
-        public BlackListDeletePanel()
+        public BlackListDeletePanel(long personID)
         {
             InitializeComponent();
-            this.DataContext = new BlackListDeletePanelViewModel();
+            var deleteVM = new BlackListDeletePanelViewModel();
+            deleteVM.PersonID = personID;
+            this.DataContext = deleteVM;
+
         }
     }
 }

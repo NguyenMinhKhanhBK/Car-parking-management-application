@@ -1,4 +1,5 @@
-﻿using QuanLyBaiXe.ViewModel;
+﻿using QuanLyBaiXe.Model;
+using QuanLyBaiXe.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,12 @@ namespace QuanLyBaiXe.Resource.BlackListPanel
         private string _posID;
         public string posID { get => _posID; set { _posID = value; OnPropertyChanged(); } }
 
+        private BlackListPerson _selectedPerson;
+        public BlackListPerson SelectedPerson { get => _selectedPerson; set { _selectedPerson = value; OnPropertyChanged(); } }
+
         public BlackListEditPanelViewModel()
         {
+            SelectedPerson = new BlackListPerson();
             MoveCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Window a = p as Window; a.DragMove(); });
             AcceptCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Accept(p as Window); });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Window a = p as Window; a.Close(); });
@@ -29,10 +34,7 @@ namespace QuanLyBaiXe.Resource.BlackListPanel
 
         void Accept(Window a)
         {
-            //int posid = int.Parse(posID);
-            // var b = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.BlockID == MainViewModel.currentBlockID && p.BuildingID == MainViewModel.currentBuildingID && p.ID == posid).FirstOrDefault();
-            // b.StatusID = 1;
-            // DataProvider.Ins.Data.SaveChanges();
+            EventSystem.Publish<BlackListPerson>(new BlackListPerson() { CommandType = 2, Name = SelectedPerson.Name, LicensePlate = SelectedPerson.LicensePlate, PhoneNumber = SelectedPerson.PhoneNumber,ID=SelectedPerson.ID });
             a.Close();
         }
 

@@ -24,9 +24,9 @@
 
     <Border Background="LightGray" CornerRadius="15">
         <StackPanel Margin="10 10 10 5">
-            <TextBox Margin="0 10" FontSize="20" materialDesign:HintAssist.Hint="Tên người dùng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-            <TextBox Margin="0 10" FontSize="20" materialDesign:HintAssist.Hint="Biển số xe" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-            <TextBox Margin="0 10" FontSize="20" materialDesign:HintAssist.Hint="Số điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox Text="{Binding SelectedPerson.Name}" Margin="0 10" FontSize="20" materialDesign:HintAssist.Hint="Tên người dùng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox Text="{Binding SelectedPerson.LicensePlate}" Margin="0 10" FontSize="20" materialDesign:HintAssist.Hint="Biển số xe" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <TextBox Text="{Binding SelectedPerson.PhoneNumber}" Margin="0 10" FontSize="20" materialDesign:HintAssist.Hint="Số điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
             <CheckBox
                 Margin="0 10"

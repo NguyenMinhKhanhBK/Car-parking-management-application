@@ -1,4 +1,5 @@
-﻿using QuanLyBaiXe.ViewModel;
+﻿using QuanLyBaiXe.Model;
+using QuanLyBaiXe.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,8 @@ namespace QuanLyBaiXe.Resource.BlackListPanel
         public ICommand CancelCommand { get; set; }
         #endregion
 
-        private string _posID;
-        public string posID { get => _posID; set { _posID = value; OnPropertyChanged(); } }
+        private long _personID;
+        public long PersonID { get => _personID; set { _personID = value; OnPropertyChanged(); } }
 
         public BlackListDeletePanelViewModel()
         {
@@ -29,10 +30,7 @@ namespace QuanLyBaiXe.Resource.BlackListPanel
 
         void Accept(Window a)
         {
-            //int posid = int.Parse(posID);
-            // var b = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.BlockID == MainViewModel.currentBlockID && p.BuildingID == MainViewModel.currentBuildingID && p.ID == posid).FirstOrDefault();
-            // b.StatusID = 1;
-            // DataProvider.Ins.Data.SaveChanges();
+            EventSystem.Publish<BlackListPerson>(new BlackListPerson() { CommandType = 3, ID = PersonID });
             a.Close();
         }
 

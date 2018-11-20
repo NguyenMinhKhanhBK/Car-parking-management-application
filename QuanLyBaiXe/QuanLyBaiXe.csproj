@@ -95,6 +95,8 @@
     <Compile Include="Model\BlackList.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BlackListModel.cs" />
+    <Compile Include="Model\BlackListPerson.cs" />
     <Compile Include="Model\Block.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

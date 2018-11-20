@@ -13,11 +13,20 @@ namespace QuanLyBaiXe.Resource.FeeEditPanel
 {
     public class FeeEditPanelViewModel : BaseViewModel
     {
+        #region PROPERTY
+        private string _posID;
+        public string posID { get => _posID; set { _posID = value; OnPropertyChanged(); } }
+
+        private int _feeType;
+        public int feeType { get => _feeType; set { _feeType = value; OnPropertyChanged(); } }
+
         private string _Fee;
         public string Fee { get=>_Fee; set { _Fee = value;OnPropertyChanged(); } }
 
         private int _session;
         public int session { get => _session; set { _session = value; OnPropertyChanged(); } }
+
+        #endregion PROPERTY
 
         #region COMMAND
         public ICommand MoveCommand { get; set; }
@@ -26,29 +35,26 @@ namespace QuanLyBaiXe.Resource.FeeEditPanel
         public ICommand CheckChangedCommand { get; set; }
         #endregion
 
-        private string _posID;
-        public string posID { get => _posID; set { _posID = value; OnPropertyChanged(); } }
+        
 
-        private int _feeType;
-        public int feeType { get=> _feeType; set { _feeType = value;OnPropertyChanged(); } }
+       
+
 
         public FeeEditPanelViewModel()
         {
-            session = -1;
+            
             MoveCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Window a = p as Window; a.DragMove(); });
             AcceptCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Accept(p as Window); });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Window a = p as Window; a.Close(); });
             CheckChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) => { CheckBox a = p as CheckBox; CheckFee(a); });
+            
+
         }
 
         void Accept(Window a)
         {
 
             EventSystem.Publish<ChangedFee>(new ChangedFee() { FeeType=feeType ,Session = session+1, Price = Convert.ToDouble(Fee) });
-            //int posid = int.Parse(posID);
-            // var b = DataProvider.Ins.Data.CarParkingLayouts.Where(p => p.BlockID == MainViewModel.currentBlockID && p.BuildingID == MainViewModel.currentBuildingID && p.ID == posid).FirstOrDefault();
-            // b.StatusID = 1;
-            // DataProvider.Ins.Data.SaveChanges();
             a.Close();
         }
 

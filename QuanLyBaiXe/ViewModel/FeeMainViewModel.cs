@@ -30,14 +30,24 @@ namespace QuanLyBaiXe.ViewModel
         private string _posID;
         public string posID { get => _posID; set { _posID = value; OnPropertyChanged(); } }
 
-        
+        private FeeModel _selectedNormalFee;
+        public FeeModel SelectedNormalFee { get => _selectedNormalFee; set { _selectedNormalFee = value;OnPropertyChanged(); } }
 
+        private FeeModel _selectedFestivalFee;
+        public FeeModel SelectedFestivalFee { get => _selectedFestivalFee; set { _selectedFestivalFee = value; OnPropertyChanged(); } }
+        private FeeModel _selectedEventFee;
+        public FeeModel SelectedEventFee { get => _selectedEventFee; set { _selectedEventFee = value; OnPropertyChanged(); } }
 
         public FeeMainViewModel()
         {
             NormalFeeCollection = new ObservableCollection<FeeModel>();
             FestivalFeeCollection = new ObservableCollection<FeeModel>();
             EventFeeCollection = new ObservableCollection<FeeModel>();
+            SelectedNormalFee = new FeeModel();
+            SelectedFestivalFee = new FeeModel();
+            SelectedEventFee = new FeeModel();
+
+
             EventSystem.Subscribe<ChangedFee>(EditFee);
 
             EditFeeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Button a = p as Button; OpenEditFeePanel(a); });
@@ -51,14 +61,52 @@ namespace QuanLyBaiXe.ViewModel
         void OpenEditFeePanel(Button a)
         {
             int feetype = 0;
+            string selectedSession="";
+            double selectedPrice = 0;
             if(a!=null && a.Name!=null)
             {
                 if (a.Name == "btnNormalFeeEdit") feetype = 1;
                 else if (a.Name == "btnFestivalFeeEdit") feetype = 2;
                 else if (a.Name == "btnEventFeeEdit") feetype = 3;
             }
+
+            switch(feetype)
+            {
+                case 1:
+                    {
+                        if (SelectedNormalFee != null)
+                        {
+                            selectedSession = SelectedNormalFee.Time;
+
+                            selectedPrice = SelectedNormalFee.Price;
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if (SelectedFestivalFee != null)
+                        {
+                            selectedSession = SelectedFestivalFee.Time;
+
+                            selectedPrice = SelectedFestivalFee.Price;
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        if (SelectedEventFee != null)
+                        {
+                            selectedSession = SelectedEventFee.Time;
+
+                            selectedPrice = SelectedEventFee.Price;
+                        }
+                        break;
+                    }
+            }
+            
+
             a.Opacity = 0.5;
-            FeeEditPanel panel = new FeeEditPanel(feetype);
+            FeeEditPanel panel = new FeeEditPanel(feetype,selectedSession,selectedPrice);
             var point = a.PointToScreen(Mouse.GetPosition(a));
             panel.Left = point.X - panel.Width;
             panel.Top = point.Y;

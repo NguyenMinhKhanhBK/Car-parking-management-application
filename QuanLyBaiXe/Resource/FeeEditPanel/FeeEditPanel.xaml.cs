@@ -19,12 +19,21 @@ namespace QuanLyBaiXe.Resource.FeeEditPanel
     /// </summary>
     public partial class FeeEditPanel : Window
     {
-        public FeeEditPanel(int _FeeType)
+        public FeeEditPanel(int _FeeType,string selectedSession, double selectedPrice)
         {
             InitializeComponent();
             var editVM = new FeeEditPanelViewModel();
             this.DataContext = editVM;
             editVM.feeType = _FeeType;
+
+            if (selectedSession == "Buổi sáng") editVM.session = 0;
+            else if (selectedSession == "Buổi chiều") editVM.session = 1;
+            else if (selectedSession == "Buổi tối") editVM.session = 2;
+            else editVM.session = -1;
+
+            if (selectedPrice != 0) editVM.Fee = selectedPrice.ToString();
+            else editVM.Fee = null;
+            
 
         }
     }

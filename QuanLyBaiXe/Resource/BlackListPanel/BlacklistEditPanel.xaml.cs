@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyBaiXe.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,16 @@ namespace QuanLyBaiXe.Resource.BlackListPanel
     /// </summary>
     public partial class BlacklistEditPanel : Window
     {
-        public BlacklistEditPanel()
+        public BlacklistEditPanel(BlackListPerson selectedPerson)
         {
             InitializeComponent();
-            this.DataContext = new BlackListEditPanelViewModel();
+            var VM = new BlackListEditPanelViewModel();
+            this.DataContext = VM;
+            VM.SelectedPerson.ID = selectedPerson.ID;
+            VM.SelectedPerson.Name = selectedPerson.Name;
+            VM.SelectedPerson.PhoneNumber = selectedPerson.PhoneNumber;
+            VM.SelectedPerson.LicensePlate = selectedPerson.LicensePlate;
+
         }
     }
 }

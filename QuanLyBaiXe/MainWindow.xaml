@@ -886,7 +886,7 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ NGÀY THƯỜNG" />
-                                        <ListView Name="listviewNormalFee" ItemsSource="{Binding NormalFeeCollection}" DataContext="{StaticResource FeeMainVM}">
+                                        <ListView Name="listviewNormalFee" ItemsSource="{Binding NormalFeeCollection}" DataContext="{StaticResource FeeMainVM}" SelectedItem="{Binding SelectedNormalFee}">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn Width="50" DisplayMemberBinding="{Binding STT}" Header="STT" />
@@ -947,7 +947,7 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ NGÀY LỄ, TẾT" />
-                                        <ListView ItemsSource="{Binding FestivalFeeCollection}" DataContext="{StaticResource FeeMainVM}">
+                                        <ListView SelectedItem="{Binding SelectedFestivalFee}" ItemsSource="{Binding FestivalFeeCollection}" DataContext="{StaticResource FeeMainVM}">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn Width="50" DisplayMemberBinding="{Binding STT}" Header="STT" />
@@ -1007,7 +1007,7 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ SỰ KIỆN" />
-                                        <ListView ItemsSource="{Binding EventFeeCollection}" DataContext="{StaticResource FeeMainVM}">
+                                        <ListView SelectedItem="{Binding SelectedEventFee}" ItemsSource="{Binding EventFeeCollection}" DataContext="{StaticResource FeeMainVM}">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn Width="50"  DisplayMemberBinding="{Binding STT}" Header="STT" />
@@ -1703,6 +1703,7 @@
                             Thêm
                         </Button>
                         <Button
+                            IsEnabled="{Binding IsEditButtonEnable}"
                             Width="150"
                             Margin="10"
                             Background="#FF7A00E0"
@@ -1716,6 +1717,7 @@
                             Chỉnh sửa
                         </Button>
                         <Button
+                            IsEnabled="{Binding IsEditButtonEnable}"
                             Width="150"
                             Margin="10"
                             Background="#FF7A00E0"
@@ -1740,15 +1742,27 @@
                                     FontSize="20"
                                     Foreground="Blue"
                                     Text="Danh sách chặn" />
-                                <ListView ItemsSource="{Binding Items1}">
+                                <ListView Name="listviewBlackList" ItemsSource="{Binding Blacklist,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DataContext="{StaticResource BlacklistMainVM}" >
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="ID" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding STT}" Header="ID" />
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Tên người dùng" />
-                                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Biển số xe" />
-                                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Số điện thoại" />
+                                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding LicensePlate}" Header="Biển số xe" />
+                                            <GridViewColumn Width="200" DisplayMemberBinding="{Binding PhoneNumber}" Header="Số điện thoại" />
                                         </GridView>
+                                        
                                     </ListView.View>
+
+                                   
+                                    
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding BlackListSelectedCommand}" CommandParameter="{Binding ElementName=listviewBlackList}" ></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+
+                                   
+                                    
                                 </ListView>
                                 <Separator />
                             </StackPanel>
