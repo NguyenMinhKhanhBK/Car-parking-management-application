@@ -8,6 +8,7 @@
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
     xmlns:gauges="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:grid_maintenance="clr-namespace:QuanLyBaiXe.Resource.Grid_Maintenance"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:QuanLyBaiXe"
     xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -15,12 +16,11 @@
     xmlns:MyResource="clr-namespace:QuanLyBaiXe.Resource.Grid_Booked"
     xmlns:MyResource1="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
     xmlns:MyResource2="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     Width="1920"
     Height="1081"
-    DataContext="{StaticResource MainVM}"
     mc:Ignorable="d"
     Background="#FFF0F0F0"
+    DataContext="{StaticResource MainVM}"
     Icon="Image/icon.png"
     Title="Phần mềm quản lý bãi xe"
     WindowStartupLocation="CenterScreen">
@@ -33,10 +33,7 @@
     </Window.Effect>
 
     <Window.Resources>
-      
-            <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
-     
-
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
         <Style x:Key="itemHeaderStyle" TargetType="Grid">
             <Setter Property="Width" Value="180" />
             <Setter Property="Height" Value="35" />
@@ -49,10 +46,10 @@
     <Grid>
         <TabControl
             Margin="0"
-            Name="mainTabControl"
             Background="#FF7A00E0"
             BorderThickness="1,0,1,1"
             Foreground="White"
+            Name="mainTabControl"
             Padding="1">
             <!--TabControl Style-->
             <TabControl.Resources>
@@ -124,10 +121,9 @@
             </TabControl.BorderBrush>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding MainTabControlSelectionChanged}" CommandParameter="{Binding ElementName=mainTabControl}" ></i:InvokeCommandAction>
+                    <i:InvokeCommandAction Command="{Binding MainTabControlSelectionChanged}" CommandParameter="{Binding ElementName=mainTabControl}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-
             <!--MAN HINH CHINH-->
             <TabItem
                 x:Name="TabControl"
@@ -174,7 +170,7 @@
                                 RenderingBias="Quality"
                                 ShadowDepth="5" />
                         </Border.Effect>
-                        <Grid  Grid.Row="0" Grid.Column="0">
+                        <Grid Grid.Row="0" Grid.Column="0">
                             <!--Name: So do bai xe-->
                             <TextBlock
                                 Margin="40,10"
@@ -437,10 +433,7 @@
                         </Grid>
                     </Border>
                     <!--CAR COUNTER-->
-                    <Grid
-                        Grid.Row="0"
-                        Grid.Column="1">
-
+                    <Grid Grid.Row="0" Grid.Column="1">
                         <Border
                             Margin="0 5 5 5"
                             Background="White"
@@ -465,12 +458,8 @@
                                         <DropShadowEffect Color="#FFC5C5C5" RenderingBias="Quality" BlurRadius="30" ShadowDepth="2"/>
                                     </TextBlock.Effect>-->
                                 </TextBlock>
-                                <UniformGrid
-                                    
-                                    Columns="2"
-                                    Rows="2">
+                                <UniformGrid Columns="2" Rows="2">
                                     <!--DataContext="{StaticResource PositionVM}"-->
-                                    
                                     <DockPanel Margin="0">
                                         <TextBlock
                                             HorizontalAlignment="Center"
@@ -759,7 +748,6 @@
                                         Background="White"
                                         CanUserAddRows="False"
                                         CanUserSortColumns="True"
-                                       
                                         FontSize="16"
                                         Foreground="#DD000000"
                                         GridLinesVisibility="Horizontal"
@@ -828,19 +816,15 @@
                         <TextBlock Style="{StaticResource mainTabControlTextBlock}" Text="Thiết lập" />
                     </Grid>
                 </TabItem.Header>
-
-                
-
-                <TabControl DataContext="{StaticResource FeeMainVM}"
+                <TabControl
                     Margin="0 5 5 5"
                     Background="White"
+                    DataContext="{StaticResource FeeMainVM}"
                     Name="FeeChildTabControl"
                     TabStripPlacement="Left">
                     <TabControl.BorderBrush>
                         <ImageBrush />
                     </TabControl.BorderBrush>
-
-                    
                     <!--Gia ve ngay thuong-->
                     <TabItem>
                         <TabItem.Header>
@@ -876,7 +860,7 @@
                                 </Button>
                             </StackPanel>
                             <!--Bang gia ve-->
-                            <Grid Grid.Column="0" >
+                            <Grid Grid.Column="0">
                                 <ScrollViewer>
                                     <!--Thu 2-->
                                     <StackPanel Margin="10 20 0 20">
@@ -886,15 +870,27 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ NGÀY THƯỜNG" />
-                                        <ListView Name="listviewNormalFee" ItemsSource="{Binding NormalFeeCollection}" DataContext="{StaticResource FeeMainVM}" SelectedItem="{Binding SelectedNormalFee}">
+                                        <ListView
+                                            DataContext="{StaticResource FeeMainVM}"
+                                            ItemsSource="{Binding NormalFeeCollection}"
+                                            Name="listviewNormalFee"
+                                            SelectedItem="{Binding SelectedNormalFee}">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding STT}" Header="STT" />
-                                                    <GridViewColumn Width="100"  DisplayMemberBinding="{Binding Time}" Header="Thời gian" />
-                                                    <GridViewColumn Width="200"  DisplayMemberBinding="{Binding Price}" Header="Giá vé (VNĐ)" />
+                                                    <GridViewColumn
+                                                        Width="50"
+                                                        DisplayMemberBinding="{Binding STT}"
+                                                        Header="STT" />
+                                                    <GridViewColumn
+                                                        Width="100"
+                                                        DisplayMemberBinding="{Binding Time}"
+                                                        Header="Thời gian" />
+                                                    <GridViewColumn
+                                                        Width="200"
+                                                        DisplayMemberBinding="{Binding Price}"
+                                                        Header="Giá vé (VNĐ)" />
                                                 </GridView>
                                             </ListView.View>
-
                                         </ListView>
                                         <Separator />
                                     </StackPanel>
@@ -947,12 +943,24 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ NGÀY LỄ, TẾT" />
-                                        <ListView SelectedItem="{Binding SelectedFestivalFee}" ItemsSource="{Binding FestivalFeeCollection}" DataContext="{StaticResource FeeMainVM}">
+                                        <ListView
+                                            DataContext="{StaticResource FeeMainVM}"
+                                            ItemsSource="{Binding FestivalFeeCollection}"
+                                            SelectedItem="{Binding SelectedFestivalFee}">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding STT}" Header="STT" />
-                                                    <GridViewColumn Width="100"  DisplayMemberBinding="{Binding Time}" Header="Thời gian" />
-                                                    <GridViewColumn Width="200"  DisplayMemberBinding="{Binding Price}" Header="Giá vé (VNĐ)" />
+                                                    <GridViewColumn
+                                                        Width="50"
+                                                        DisplayMemberBinding="{Binding STT}"
+                                                        Header="STT" />
+                                                    <GridViewColumn
+                                                        Width="100"
+                                                        DisplayMemberBinding="{Binding Time}"
+                                                        Header="Thời gian" />
+                                                    <GridViewColumn
+                                                        Width="200"
+                                                        DisplayMemberBinding="{Binding Price}"
+                                                        Header="Giá vé (VNĐ)" />
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
@@ -1007,15 +1015,26 @@
                                             FontSize="14"
                                             Foreground="Blue"
                                             Text="BẢNG GIÁ VÉ SỰ KIỆN" />
-                                        <ListView SelectedItem="{Binding SelectedEventFee}" ItemsSource="{Binding EventFeeCollection}" DataContext="{StaticResource FeeMainVM}">
+                                        <ListView
+                                            DataContext="{StaticResource FeeMainVM}"
+                                            ItemsSource="{Binding EventFeeCollection}"
+                                            SelectedItem="{Binding SelectedEventFee}">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn Width="50"  DisplayMemberBinding="{Binding STT}" Header="STT" />
-                                                    <GridViewColumn Width="100"  DisplayMemberBinding="{Binding Time}" Header="Thời gian" />
-                                                    <GridViewColumn Width="200"  DisplayMemberBinding="{Binding Price}" Header="Giá vé (VNĐ)" />
+                                                    <GridViewColumn
+                                                        Width="50"
+                                                        DisplayMemberBinding="{Binding STT}"
+                                                        Header="STT" />
+                                                    <GridViewColumn
+                                                        Width="100"
+                                                        DisplayMemberBinding="{Binding Time}"
+                                                        Header="Thời gian" />
+                                                    <GridViewColumn
+                                                        Width="200"
+                                                        DisplayMemberBinding="{Binding Price}"
+                                                        Header="Giá vé (VNĐ)" />
                                                 </GridView>
                                             </ListView.View>
-                                            
                                         </ListView>
                                         <Separator />
                                     </StackPanel>
@@ -1027,7 +1046,7 @@
             </TabItem>
             <!-- ************************************************************************************************-->
             <!--THONG KE-->
-            <TabItem Style="{StaticResource TabControlStyle}">
+            <TabItem DataContext="{StaticResource StatisticMainVM}" Style="{StaticResource TabControlStyle}">
                 <TabItem.Header>
                     <Grid VerticalAlignment="Center">
                         <materialDesign:PackIcon Kind="ChartFinance" Style="{StaticResource mainTabControlPackIcon}" />
@@ -1066,18 +1085,42 @@
                                         Height="70"
                                         HorizontalAlignment="Right"
                                         ClipToBounds="False"
-                                        FontSize="30"
+                                        FontSize="20"
                                         Style="{DynamicResource MaterialDesignToolBar}">
                                         <Label
                                             VerticalAlignment="Center"
                                             Content="Thời gian "
                                             Foreground="Black" />
+
+                                        
+
                                         <DatePicker
                                             Width="350"
                                             VerticalAlignment="Center"
                                             materialDesign:HintAssist.Hint="Chọn ngày"
-                                            Name="LocaleDatePicker" />
-                                        <Grid Width="1100" />
+                                            Name="LocaleDatePicker">
+
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectedDateChanged">
+                                                    <i:InvokeCommandAction Command="{Binding SelectedDateChangedCommand}" CommandParameter="{Binding ElementName=LocaleDatePicker}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+
+                                        </DatePicker>
+                                        <Button
+                                            IsEnabled="{Binding IsFilterButtonEnable}"
+                                            Width="150"
+                                            Margin="50 0"
+                                            Background="#FF7A00E0"
+                                            Command="{Binding FilterCommand}"
+                                            CommandParameter="{Binding ElementName=LocaleDatePicker}"
+                                            FontSize="20"
+                                            materialDesign:RippleAssist.Feedback="#DD000000"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                            Lọc
+                                        </Button>
+                                        <Grid Width="900" />
                                         <Button ToolTip="Export to PDF">
                                             <materialDesign:PackIcon Kind="Printer" />
                                         </Button>
@@ -1088,7 +1131,8 @@
                                 Grid.Row="1"
                                 Background="WhiteSmoke"
                                 Columns="3"
-                                Rows="1">
+                                Rows="1"
+                                Visibility="{Binding IsFiltered,Converter={StaticResource BoolToVisConverter}}">
                                 <!--Tong luot xe vao-->
                                 <Grid Margin="50 15 50 15">
                                     <Rectangle
@@ -1139,7 +1183,7 @@
                                         VerticalAlignment="Center"
                                         FontSize="80"
                                         Foreground="#FF787878"
-                                        Text="120" />
+                                        Text="{Binding SumIn}" />
                                     <StackPanel
                                         Height="60"
                                         Margin="40 0"
@@ -1207,7 +1251,7 @@
                                         VerticalAlignment="Center"
                                         FontSize="80"
                                         Foreground="#FF787878"
-                                        Text="110" />
+                                        Text="{Binding SumOut}" />
                                     <StackPanel
                                         Height="60"
                                         Margin="40 0"
@@ -1240,11 +1284,12 @@
                                         </Rectangle.Effect>
                                     </Rectangle>
                                     <TextBlock
-                                        Margin="30 10"
+                                        Margin="0,10,30,10"
                                         HorizontalAlignment="Right"
                                         FontSize="30"
+                                        
                                         Foreground="#FF767676"
-                                        Text="Số chỗ còn trống" />
+                                        Text="Thời gian trung bình"  />
                                     <Border
                                         Width="80"
                                         Height="130"
@@ -1270,12 +1315,19 @@
                                             Kind="Car" />
                                     </Border>
                                     <TextBlock
-                                        Margin="30 10"
+                                        Margin="30 10 70 10"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="80"
                                         Foreground="#FF787878"
-                                        Text="5" />
+                                        Text="{Binding AvgHour}" />
+                                    <TextBlock
+                                        Margin="10 30 10 0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        FontSize="40"
+                                        Foreground="#FF787878"
+                                        Text="giờ" />
                                     <StackPanel
                                         Height="60"
                                         Margin="40 0"
@@ -1290,12 +1342,16 @@
                                             Margin="5 0"
                                             FontSize="20"
                                             Foreground="#FF767676"
-                                            Text="Tính đến 24h cùng ngày" />
+                                            TextWrapping="WrapWithOverflow"
+                                            Text="Thời gian gửi trung bình trong ngày" />
                                     </StackPanel>
                                 </Grid>
                             </UniformGrid>
                             <!--Panel Tong Doanh Thu Va Tong Loi Nhuan-->
-                            <Grid Grid.Row="2" Background="#FFEAEAEA">
+                            <Grid
+                                Grid.Row="2"
+                                Background="WhiteSmoke"
+                                Visibility="{Binding IsFiltered,Converter={StaticResource BoolToVisConverter}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
@@ -1304,83 +1360,65 @@
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
-                                <Border
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="4"
-                                    Margin="50 20 50 20"
-                                    Background="White"
-                                    CornerRadius="10">
-                                    <Border.Effect>
-                                        <DropShadowEffect
-                                            Color="#FF9B9B9B"
-                                            BlurRadius="20"
-                                            RenderingBias="Quality"
-                                            ShadowDepth="2" />
-                                    </Border.Effect>
-                                    <DockPanel LastChildFill="True">
-                                        <TextBlock
-                                            Margin="40 10"
-                                            DockPanel.Dock="Top"
-                                            FontSize="50"
-                                            Foreground="#FF787878"
+                                <Grid Margin="5" Grid.ColumnSpan="4" Grid.Column="1">
+                                    <Rectangle
+                                            Fill="White"
+                                            RadiusX="10"
+                                            RadiusY="10">
+                                        <Rectangle.Effect>
+                                            <DropShadowEffect
+                                                    Color="#FFAAAAAA"
+                                                    BlurRadius="20"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                        </Rectangle.Effect>
+                                    </Rectangle>
+                                    <TextBlock
+                                            Margin="200 10"
+                                            HorizontalAlignment="Left"
+                                            FontSize="80"
+                                        Foreground="#FF767676"
                                             Text="Doanh thu" />
-                                        <!--<dxc:ChartControl
-                                            Margin="0 0 0 20"
-                                            BorderBrush="{x:Null}"
-                                            DockPanel.Dock="Bottom">
-                                            <dxc:ChartControl.Legends>
-                                                <dxc:Legend
-                                                    Width="82"
-                                                    Margin="0,0,0,12"
-                                                    Background="{x:Null}"
-                                                    BorderBrush="{x:Null}"
-                                                    FontSize="16"
-                                                    HorizontalPosition="Center"
-                                                    IndentFromDiagram="16"
-                                                    MarkerMode="Marker"
-                                                    VerticalPosition="Center">
-                                                    <dxc:Legend.Title>
-                                                        <dxc:LegendTitle
-                                                            Content="Tỉ lệ"
-                                                            FontSize="20"
-                                                            Foreground="#FF0A0A0A" />
-                                                    </dxc:Legend.Title>
-                                                </dxc:Legend>
-                                            </dxc:ChartControl.Legends>
-                                            <dxc:ChartControl.Titles>
-                                                <dxc:Title
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    Content="Tổng doanh thu trong ngày"
-                                                    Dock="Bottom"
-                                                    FontSize="24" />
-                                            </dxc:ChartControl.Titles>
-                                            <dxc:SimpleDiagram2D>
-                                                <dxc:PieSeries2D DisplayName="Doanh thu" LabelsVisibility="True">
-                                                    <dxc:PieSeries2D.Label>
-                                                        <dxc:SeriesLabel
-                                                            ConnectorThickness="2"
-                                                            dxc:PieSeries.LabelPosition="TwoColumns"
-                                                            FontSize="25"
-                                                            Foreground="#9FFFFFFF"
-                                                            Indent="5"
-                                                            ResolveOverlappingMode="JustifyAllAroundPoint"
-                                                            TextOrientation="Horizontal"
-                                                            TextPattern="{}{A} : {V}" />
-                                                    </dxc:PieSeries2D.Label>
-                                                    <dxc:SeriesPoint
-                                                        Value="2000000"
-                                                        Argument="Lợi nhuận"
-                                                        Brush="#FF8B00FF" />
-                                                    <dxc:SeriesPoint
-                                                        Value="500000"
-                                                        Argument="Chi phí"
-                                                        Brush="DarkOrange" />
-                                                </dxc:PieSeries2D>
-                                            </dxc:SimpleDiagram2D>
-                                        </dxc:ChartControl>-->
-                                    </DockPanel>
-                                </Border>
+                                    <Border
+                                            Width="100"
+                                            Height="170"
+                                            Margin="80 0 0 0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Background="#FF0080FF"
+                                            CornerRadius="0 0 6 6">
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                                                    Color="#FFB0B0B0"
+                                                    BlurRadius="10"
+                                                    RenderingBias="Quality"
+                                                    ShadowDepth="2" />
+                                        </Border.Effect>
+                                        <Image
+                                                Width="60"
+                                                Height="60"
+                                                Source="Image/dollarCircle.png" />
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock
+                                            Margin="30 70 0 10"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="130"
+                                            Foreground="#FF0080FF"
+                                            Text="{Binding Revenue}" />
+                                        <TextBlock
+                                            Margin="10 210 0 100"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="70"
+                                            Foreground="#FF0080FF"
+                                            Text="VNĐ" />
+                                    </StackPanel>
+                                    
+                                    
+                                    
+                                </Grid>
                             </Grid>
                         </Grid>
                     </TabItem>
@@ -1388,7 +1426,7 @@
                     <!--Thống kê theo tháng-->
                     <!--Thống kê theo quý-->
                     <!--Thống kê theo năm-->
-                    <TabItem>
+                    <TabItem DataContext="{StaticResource StatisticMainVM}">
                         <TabItem.Header>
                             <Grid Style="{StaticResource itemHeaderStyle}">
                                 <TextBlock
@@ -1413,26 +1451,53 @@
                                         VerticalAlignment="Center"
                                         Content="Băt đầu"
                                         Foreground="Black" />
-                                    <DatePicker
+                                    <DatePicker 
+                                       
                                         Width="350"
                                         VerticalAlignment="Center"
                                         materialDesign:HintAssist.Hint="Chọn ngày"
-                                        Name="BeginCustomPicker" />
+                                        Name="BeginCustomPicker">
+                                        
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectedDateChanged">
+                                                <i:InvokeCommandAction Command="{Binding CustomSelectedDateChangedCommand}" CommandParameter="{Binding ElementName=BeginCustomPicker}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        
+                                    </DatePicker>
                                     <Label
                                         Margin="50 0 10 0"
                                         VerticalAlignment="Center"
                                         Content="Kết thúc"
                                         Foreground="Black" />
                                     <DatePicker
+                                      
                                         Width="350"
                                         VerticalAlignment="Center"
                                         materialDesign:HintAssist.Hint="Chọn ngày"
-                                        Name="EndCustomPicker" />
-                                    <ComboBox Margin="40 0" materialDesign:HintAssist.Hint="Tuỳ chọn hiển thị">
+                                        Name="EndCustomPicker">
+                                        
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectedDateChanged">
+                                                <i:InvokeCommandAction Command="{Binding CustomSelectedDateChangedCommand}" CommandParameter="{Binding ElementName=EndCustomPicker}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        
+                                    </DatePicker>
+                                    <ComboBox Name="ComboBoxViewType" Margin="40 0" materialDesign:HintAssist.Hint="Tuỳ chọn hiển thị" SelectedIndex="{Binding SelectedViewType}">
                                         <ComboBoxItem>Theo ngày</ComboBoxItem>
                                         <ComboBoxItem>Theo tháng</ComboBoxItem>
+
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding CustomViewTypeCommand}" CommandParameter="{Binding ElementName=ComboBoxViewType}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+
                                     </ComboBox>
                                     <Button
+                                        IsEnabled="{Binding IsCustomFilterButtonEnabled}"
+                                        Command="{Binding CustomFilterCommand}"
                                         Width="150"
                                         Margin="30 0"
                                         Background="#FF7A00E0"
@@ -1447,7 +1512,7 @@
                                     </Button>
                                 </ToolBar>
                             </ToolBarTray>
-                            <Grid Margin="5">
+                            <Grid Margin="5" Visibility="{Binding IsStatisticEnable,Converter={StaticResource BoolToVisConverter}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1.5*" />
                                     <ColumnDefinition Width="2.5 *" />
@@ -1455,8 +1520,8 @@
                                 <!--Cột 0-->
                                 <Grid Grid.Column="0">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="1.3*" />
-                                        <RowDefinition Height="2*" />
+                                        <RowDefinition Height="1*" />
+                                        <RowDefinition Height="1*" />
                                     </Grid.RowDefinitions>
                                     <!--Doanh thu-->
                                     <Grid Margin="5">
@@ -1504,7 +1569,7 @@
                                             VerticalAlignment="Center"
                                             FontSize="120"
                                             Foreground="#FF0080FF"
-                                            Text="16.98 M" />
+                                            Text="{Binding CustomRevenue}" />
                                         <StackPanel
                                             Height="60"
                                             Margin="40 0"
@@ -1541,7 +1606,7 @@
                                             HorizontalAlignment="Left"
                                             FontSize="30"
                                             Foreground="Black"
-                                            Text="Tổng số xe" />
+                                            Text="Tổng lượt xe vào" />
                                         <Border
                                             Width="50"
                                             Height="80"
@@ -1565,46 +1630,39 @@
                                                 Foreground="White"
                                                 Kind="Car" />
                                         </Border>
+                                        
                                         <TextBlock
-                                            Margin="30 40 30 0"
+                                            Margin="30 10"
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Top"
-                                            FontSize="90"
+                                            VerticalAlignment="Center"
+                                            FontSize="120"
                                             Foreground="#FF0080FF"
-                                            Text="1250" />
-                                        <lvc:PieChart
-                                            FontSize="20"
-                                            Margin="0 160 0 30"
-                                            DisableAnimations="True"
-                                            DataTooltip="{x:Null}"
-                                            Hoverable="False"
-                                            LegendLocation="Bottom">
-                                            <lvc:PieChart.Series>
-                                                <lvc:PieSeries
-                                                    DataLabels="True"
-                                                    Title="Buổi sáng"
-                                                    Values="3" />
-                                                <lvc:PieSeries
-                                                    DataLabels="True"
-                                                    Title="Buổi chiều"
-                                                    Values="4" />
-                                                <lvc:PieSeries
-                                                    DataLabels="True"
-                                                    Title="Buổi tối"
-                                                    Values="6" />
-                                            </lvc:PieChart.Series>
-                                        </lvc:PieChart>
+                                            Text="{Binding CustomSumIn}" />
+                                        <StackPanel
+                                            Height="60"
+                                            Margin="40 0"
+                                            VerticalAlignment="Bottom"
+                                            Orientation="Horizontal">
+                                            <materialDesign:PackIcon
+                                                Width="40"
+                                                Height="40"
+                                                Foreground="#FF7A00E0"
+                                                Kind="Pen" />
+                                            <TextBlock
+                                                Margin="5 0"
+                                                FontSize="30"
+                                                Foreground="#FF767676"
+                                                Text="Đơn vị LƯỢT" />
+                                        </StackPanel>
                                     </Grid>
                                 </Grid>
-                                
                                 <!--Cột 1-->
                                 <Grid Grid.Column="1">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="1*"></RowDefinition>
-                                        <RowDefinition Height="1*"></RowDefinition>
+                                        <RowDefinition Height="1*" />
+                                        <RowDefinition Height="1*" />
                                     </Grid.RowDefinitions>
-
-                                    <Grid Margin="5" Grid.Row="0">
+                                    <Grid Grid.Row="0" Margin="5">
                                         <Rectangle
                                             Fill="White"
                                             RadiusX="10"
@@ -1617,18 +1675,16 @@
                                                     ShadowDepth="2" />
                                             </Rectangle.Effect>
                                         </Rectangle>
-
-                                        <lvc:CartesianChart  LegendLocation="Left">
+                                        <lvc:CartesianChart LegendLocation="Left">
                                             <lvc:CartesianChart.AxisX>
-                                                <lvc:Axis Title="Salesman" ></lvc:Axis>
+                                                <lvc:Axis Title="Salesman" />
                                             </lvc:CartesianChart.AxisX>
                                             <lvc:CartesianChart.AxisY>
-                                                <lvc:Axis Title="Sold Apps" ></lvc:Axis>
+                                                <lvc:Axis Title="Sold Apps" />
                                             </lvc:CartesianChart.AxisY>
                                         </lvc:CartesianChart>
                                     </Grid>
-
-                                    <Grid Margin="5" Grid.Row="1">
+                                    <Grid Grid.Row="1" Margin="5">
                                         <Rectangle
                                             Fill="White"
                                             RadiusX="10"
@@ -1641,20 +1697,16 @@
                                                     ShadowDepth="2" />
                                             </Rectangle.Effect>
                                         </Rectangle>
-
-                                        <lvc:CartesianChart  LegendLocation="Left">
+                                        <lvc:CartesianChart LegendLocation="Left">
                                             <lvc:CartesianChart.AxisX>
-                                                <lvc:Axis Title="Salesman" ></lvc:Axis>
+                                                <lvc:Axis Title="Salesman" />
                                             </lvc:CartesianChart.AxisX>
                                             <lvc:CartesianChart.AxisY>
-                                                <lvc:Axis Title="Sold Apps" ></lvc:Axis>
+                                                <lvc:Axis Title="Sold Apps" />
                                             </lvc:CartesianChart.AxisY>
                                         </lvc:CartesianChart>
                                     </Grid>
-
                                 </Grid>
-
-                                
                             </Grid>
                         </DockPanel>
                     </TabItem>
@@ -1703,13 +1755,13 @@
                             Thêm
                         </Button>
                         <Button
-                            IsEnabled="{Binding IsEditButtonEnable}"
                             Width="150"
                             Margin="10"
                             Background="#FF7A00E0"
                             Command="{Binding EditBlackListCommand}"
                             CommandParameter="{Binding ElementName=btnEditBlackList}"
                             FontSize="18"
+                            IsEnabled="{Binding IsEditButtonEnable}"
                             materialDesign:RippleAssist.Feedback="#DD000000"
                             Name="btnEditBlackList"
                             Style="{StaticResource MaterialDesignRaisedButton}"
@@ -1717,13 +1769,13 @@
                             Chỉnh sửa
                         </Button>
                         <Button
-                            IsEnabled="{Binding IsEditButtonEnable}"
                             Width="150"
                             Margin="10"
                             Background="#FF7A00E0"
                             Command="{Binding DeleteBlackListCommand}"
                             CommandParameter="{Binding ElementName=btnDeleteBlackList}"
                             FontSize="18"
+                            IsEnabled="{Binding IsEditButtonEnable}"
                             materialDesign:RippleAssist.Feedback="#DD000000"
                             Name="btnDeleteBlackList"
                             Style="{StaticResource MaterialDesignRaisedButton}"
@@ -1742,27 +1794,29 @@
                                     FontSize="20"
                                     Foreground="Blue"
                                     Text="Danh sách chặn" />
-                                <ListView Name="listviewBlackList" ItemsSource="{Binding Blacklist,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DataContext="{StaticResource BlacklistMainVM}" >
+                                <ListView
+                                    DataContext="{StaticResource BlacklistMainVM}"
+                                    ItemsSource="{Binding Blacklist,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    Name="listviewBlackList">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding STT}" Header="ID" />
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Tên người dùng" />
-                                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding LicensePlate}" Header="Biển số xe" />
-                                            <GridViewColumn Width="200" DisplayMemberBinding="{Binding PhoneNumber}" Header="Số điện thoại" />
+                                            <GridViewColumn
+                                                Width="100"
+                                                DisplayMemberBinding="{Binding LicensePlate}"
+                                                Header="Biển số xe" />
+                                            <GridViewColumn
+                                                Width="200"
+                                                DisplayMemberBinding="{Binding PhoneNumber}"
+                                                Header="Số điện thoại" />
                                         </GridView>
-                                        
                                     </ListView.View>
-
-                                   
-                                    
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding BlackListSelectedCommand}" CommandParameter="{Binding ElementName=listviewBlackList}" ></i:InvokeCommandAction>
+                                            <i:InvokeCommandAction Command="{Binding BlackListSelectedCommand}" CommandParameter="{Binding ElementName=listviewBlackList}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-
-                                   
-                                    
                                 </ListView>
                                 <Separator />
                             </StackPanel>

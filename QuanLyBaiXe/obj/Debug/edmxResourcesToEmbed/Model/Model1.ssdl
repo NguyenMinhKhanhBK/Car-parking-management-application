@@ -58,12 +58,12 @@
     <Property Name="BuildingID" Type="int" />
     <Property Name="BlockID" Type="int" />
     <Property Name="PositionID" Type="int" />
-    <Property Name="LoggedDate" Type="date" />
+    <Property Name="LoggedTime" Type="datetime" />
     <Property Name="UserName" Type="nvarchar(max)" />
     <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" />
     <Property Name="ArrivalTime" Type="datetime" />
     <Property Name="LeavingTime" Type="datetime" />
-    <Property Name="TotalServiceTime" Type="datetime" />
+    <Property Name="TotalServiceMinutes" Type="bigint" />
     <Property Name="Charge" Type="real" />
   </EntityType>
   <EntityType Name="Fee">

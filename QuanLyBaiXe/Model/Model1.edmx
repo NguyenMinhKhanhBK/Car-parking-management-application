@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarParkingLotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarParkingLotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BlackList">
           <Key>
             <PropertyRef Name="ID" />
@@ -63,12 +63,12 @@
           <Property Name="BuildingID" Type="int" />
           <Property Name="BlockID" Type="int" />
           <Property Name="PositionID" Type="int" />
-          <Property Name="LoggedDate" Type="date" />
+          <Property Name="LoggedTime" Type="datetime" />
           <Property Name="UserName" Type="nvarchar(max)" />
           <Property Name="LicensePlate" Type="nvarchar" MaxLength="50" />
           <Property Name="ArrivalTime" Type="datetime" />
           <Property Name="LeavingTime" Type="datetime" />
-          <Property Name="TotalServiceTime" Type="datetime" />
+          <Property Name="TotalServiceMinutes" Type="bigint" />
           <Property Name="Charge" Type="real" />
         </EntityType>
         <EntityType Name="Fee">
@@ -280,8 +280,7 @@
             <End Role="Fee" EntitySet="Fee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarParkingLotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -301,7 +300,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CarParkingLayouts" Relationship="Self.FK__CarParkin__Block__1FCDBCEB" FromRole="Block" ToRole="CarParkingLayout" />
-          <NavigationProperty Name="DataLoggings" Relationship="Self.FK__DataLoggi__Block__440B1D61" FromRole="Block" ToRole="DataLogging" />
+          <NavigationProperty Name="DataLoggings" Relationship="CarParkingLotModel.FK__DataLoggi__Block__440B1D61" FromRole="Block" ToRole="DataLogging" />
         </EntityType>
         <EntityType Name="Building">
           <Key>
@@ -325,7 +324,7 @@
           <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Building" Relationship="Self.FK__Building__ID__1DE57479" FromRole="BuildingInfo" ToRole="Building" />
           <NavigationProperty Name="CarParkingLayouts" Relationship="Self.FK__CarParkin__Build__1ED998B2" FromRole="BuildingInfo" ToRole="CarParkingLayout" />
-          <NavigationProperty Name="DataLoggings" Relationship="Self.FK__DataLoggi__Build__4316F928" FromRole="BuildingInfo" ToRole="DataLogging" />
+          <NavigationProperty Name="DataLoggings" Relationship="CarParkingLotModel.FK__DataLoggi__Build__4316F928" FromRole="BuildingInfo" ToRole="DataLogging" />
         </EntityType>
         <EntityType Name="CarParkingLayout">
           <Key>
@@ -344,24 +343,6 @@
           <NavigationProperty Name="BuildingInfo" Relationship="Self.FK__CarParkin__Build__1ED998B2" FromRole="CarParkingLayout" ToRole="BuildingInfo" />
           <NavigationProperty Name="PositionStatu" Relationship="Self.FK__CarParkin__Statu__20C1E124" FromRole="CarParkingLayout" ToRole="PositionStatus" />
           <NavigationProperty Name="User" Relationship="Self.FK__CarParkin__UserI__239E4DCF" FromRole="CarParkingLayout" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="DataLogging">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BuildingID" Type="Int32" />
-          <Property Name="BlockID" Type="Int32" />
-          <Property Name="PositionID" Type="Int32" />
-          <Property Name="LoggedDate" Type="DateTime" Precision="0" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LicensePlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ArrivalTime" Type="DateTime" Precision="3" />
-          <Property Name="LeavingTime" Type="DateTime" Precision="3" />
-          <Property Name="TotalServiceTime" Type="DateTime" Precision="3" />
-          <Property Name="Charge" Type="Single" />
-          <NavigationProperty Name="Block" Relationship="Self.FK__DataLoggi__Block__440B1D61" FromRole="DataLogging" ToRole="Block" />
-          <NavigationProperty Name="BuildingInfo" Relationship="Self.FK__DataLoggi__Build__4316F928" FromRole="DataLogging" ToRole="BuildingInfo" />
         </EntityType>
         <EntityType Name="Fee">
           <Key>
@@ -432,18 +413,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DataLoggi__Block__440B1D61">
-          <End Role="Block" Type="Self.Block" Multiplicity="0..1" />
-          <End Role="DataLogging" Type="Self.DataLogging" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Block">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DataLogging">
-              <PropertyRef Name="BlockID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Building__ID__1DE57479">
           <End Role="BuildingInfo" Type="Self.BuildingInfo" Multiplicity="1" />
           <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
@@ -464,18 +433,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="CarParkingLayout">
-              <PropertyRef Name="BuildingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DataLoggi__Build__4316F928">
-          <End Role="BuildingInfo" Type="Self.BuildingInfo" Multiplicity="0..1" />
-          <End Role="DataLogging" Type="Self.DataLogging" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BuildingInfo">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DataLogging">
               <PropertyRef Name="BuildingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -534,7 +491,6 @@
           <EntitySet Name="Buildings" EntityType="Self.Building" />
           <EntitySet Name="BuildingInfoes" EntityType="Self.BuildingInfo" />
           <EntitySet Name="CarParkingLayouts" EntityType="Self.CarParkingLayout" />
-          <EntitySet Name="DataLoggings" EntityType="Self.DataLogging" />
           <EntitySet Name="Fees" EntityType="Self.Fee" />
           <EntitySet Name="FeeSessions" EntityType="Self.FeeSession" />
           <EntitySet Name="FeeTypes" EntityType="Self.FeeType" />
@@ -545,10 +501,6 @@
             <End Role="Block" EntitySet="Blocks" />
             <End Role="CarParkingLayout" EntitySet="CarParkingLayouts" />
           </AssociationSet>
-          <AssociationSet Name="FK__DataLoggi__Block__440B1D61" Association="Self.FK__DataLoggi__Block__440B1D61">
-            <End Role="Block" EntitySet="Blocks" />
-            <End Role="DataLogging" EntitySet="DataLoggings" />
-          </AssociationSet>
           <AssociationSet Name="FK__Building__ID__1DE57479" Association="Self.FK__Building__ID__1DE57479">
             <End Role="BuildingInfo" EntitySet="BuildingInfoes" />
             <End Role="Building" EntitySet="Buildings" />
@@ -556,10 +508,6 @@
           <AssociationSet Name="FK__CarParkin__Build__1ED998B2" Association="Self.FK__CarParkin__Build__1ED998B2">
             <End Role="BuildingInfo" EntitySet="BuildingInfoes" />
             <End Role="CarParkingLayout" EntitySet="CarParkingLayouts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DataLoggi__Build__4316F928" Association="Self.FK__DataLoggi__Build__4316F928">
-            <End Role="BuildingInfo" EntitySet="BuildingInfoes" />
-            <End Role="DataLogging" EntitySet="DataLoggings" />
           </AssociationSet>
           <AssociationSet Name="FK__CarParkin__Statu__20C1E124" Association="Self.FK__CarParkin__Statu__20C1E124">
             <End Role="PositionStatus" EntitySet="PositionStatus" />
@@ -577,7 +525,58 @@
             <End Role="FeeSession" EntitySet="FeeSessions" />
             <End Role="Fee" EntitySet="Fees" />
           </AssociationSet>
+          <EntitySet Name="DataLoggings" EntityType="CarParkingLotModel.DataLogging" />
+          <AssociationSet Name="FK__DataLoggi__Block__440B1D61" Association="CarParkingLotModel.FK__DataLoggi__Block__440B1D61">
+            <End Role="Block" EntitySet="Blocks" />
+            <End Role="DataLogging" EntitySet="DataLoggings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DataLoggi__Build__4316F928" Association="CarParkingLotModel.FK__DataLoggi__Build__4316F928">
+            <End Role="BuildingInfo" EntitySet="BuildingInfoes" />
+            <End Role="DataLogging" EntitySet="DataLoggings" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DataLogging">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingID" Type="Int32" />
+          <Property Name="BlockID" Type="Int32" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="LoggedTime" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LicensePlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArrivalTime" Type="DateTime" Precision="3" />
+          <Property Name="LeavingTime" Type="DateTime" Precision="3" />
+          <Property Name="TotalServiceMinutes" Type="Int64" />
+          <Property Name="Charge" Type="Single" />
+          <NavigationProperty Name="Block" Relationship="CarParkingLotModel.FK__DataLoggi__Block__440B1D61" FromRole="DataLogging" ToRole="Block" />
+          <NavigationProperty Name="BuildingInfo" Relationship="CarParkingLotModel.FK__DataLoggi__Build__4316F928" FromRole="DataLogging" ToRole="BuildingInfo" />
+        </EntityType>
+        <Association Name="FK__DataLoggi__Block__440B1D61">
+          <End Type="CarParkingLotModel.Block" Role="Block" Multiplicity="0..1" />
+          <End Type="CarParkingLotModel.DataLogging" Role="DataLogging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Block">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DataLogging">
+              <PropertyRef Name="BlockID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DataLoggi__Build__4316F928">
+          <End Type="CarParkingLotModel.BuildingInfo" Role="BuildingInfo" Multiplicity="0..1" />
+          <End Type="CarParkingLotModel.DataLogging" Role="DataLogging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DataLogging">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -639,23 +638,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DataLoggings">
-            <EntityTypeMapping TypeName="CarParkingLotModel.DataLogging">
-              <MappingFragment StoreEntitySet="DataLogging">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
-                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
-                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
-                <ScalarProperty Name="LoggedDate" ColumnName="LoggedDate" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
-                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
-                <ScalarProperty Name="LeavingTime" ColumnName="LeavingTime" />
-                <ScalarProperty Name="TotalServiceTime" ColumnName="TotalServiceTime" />
-                <ScalarProperty Name="Charge" ColumnName="Charge" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Fees">
             <EntityTypeMapping TypeName="CarParkingLotModel.Fee">
               <MappingFragment StoreEntitySet="Fee">
@@ -710,6 +692,23 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataLoggings">
+            <EntityTypeMapping TypeName="CarParkingLotModel.DataLogging">
+              <MappingFragment StoreEntitySet="DataLogging">
+                <ScalarProperty Name="Charge" ColumnName="Charge" />
+                <ScalarProperty Name="TotalServiceMinutes" ColumnName="TotalServiceMinutes" />
+                <ScalarProperty Name="LeavingTime" ColumnName="LeavingTime" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoggedTime" ColumnName="LoggedTime" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="BlockID" ColumnName="BlockID" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

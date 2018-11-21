@@ -205,6 +205,14 @@
       <DependentUpon>OccupiedPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resource\Grid Occupied\OccupiedPanelViewModel.cs" />
+    <Compile Include="Resource\NotifyPanel\CannotFindPanel.xaml.cs">
+      <DependentUpon>CannotFindPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\NotifyPanel\CannotFindPanelViewModel.cs" />
+    <Compile Include="Resource\NotifyPanel\MissingParameterPanel.xaml.cs">
+      <DependentUpon>MissingParameterPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\NotifyPanel\MissingParameterPanelViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BlacklistMainViewModel.cs" />
     <Compile Include="ViewModel\CurrentCustomerViewModel.cs" />
@@ -212,6 +220,7 @@
     <Compile Include="ViewModel\EventSystem.cs" />
     <Compile Include="ViewModel\FeeMainViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsMainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -277,6 +286,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\MyResourceXAML.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\NotifyPanel\CannotFindPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\NotifyPanel\MissingParameterPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

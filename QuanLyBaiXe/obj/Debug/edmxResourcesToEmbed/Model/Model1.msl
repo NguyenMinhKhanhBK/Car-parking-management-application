@@ -56,23 +56,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DataLoggings">
-      <EntityTypeMapping TypeName="CarParkingLotModel.DataLogging">
-        <MappingFragment StoreEntitySet="DataLogging">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
-          <ScalarProperty Name="BlockID" ColumnName="BlockID" />
-          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
-          <ScalarProperty Name="LoggedDate" ColumnName="LoggedDate" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
-          <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
-          <ScalarProperty Name="LeavingTime" ColumnName="LeavingTime" />
-          <ScalarProperty Name="TotalServiceTime" ColumnName="TotalServiceTime" />
-          <ScalarProperty Name="Charge" ColumnName="Charge" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Fees">
       <EntityTypeMapping TypeName="CarParkingLotModel.Fee">
         <MappingFragment StoreEntitySet="Fee">
@@ -127,6 +110,23 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Balance" ColumnName="Balance" />
           <ScalarProperty Name="Score" ColumnName="Score" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DataLoggings">
+      <EntityTypeMapping TypeName="CarParkingLotModel.DataLogging">
+        <MappingFragment StoreEntitySet="DataLogging">
+          <ScalarProperty Name="Charge" ColumnName="Charge" />
+          <ScalarProperty Name="TotalServiceMinutes" ColumnName="TotalServiceMinutes" />
+          <ScalarProperty Name="LeavingTime" ColumnName="LeavingTime" />
+          <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+          <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoggedTime" ColumnName="LoggedTime" />
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+          <ScalarProperty Name="BlockID" ColumnName="BlockID" />
+          <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

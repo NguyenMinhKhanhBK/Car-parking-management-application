@@ -30,12 +30,12 @@ namespace QuanLyBaiXe.Model
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<BuildingInfo> BuildingInfoes { get; set; }
         public virtual DbSet<CarParkingLayout> CarParkingLayouts { get; set; }
-        public virtual DbSet<DataLogging> DataLoggings { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<FeeSession> FeeSessions { get; set; }
         public virtual DbSet<FeeType> FeeTypes { get; set; }
         public virtual DbSet<PositionStatu> PositionStatus { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<DataLogging> DataLoggings { get; set; }
     }
 }
