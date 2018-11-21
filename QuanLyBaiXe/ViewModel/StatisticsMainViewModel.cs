@@ -1,4 +1,6 @@
-﻿using QuanLyBaiXe.Model;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using QuanLyBaiXe.Model;
 using QuanLyBaiXe.Resource.NotifyPanel;
 using System;
 using System.Collections.Generic;
@@ -56,6 +58,9 @@ namespace QuanLyBaiXe.ViewModel
         private int _selectedViewType;
         public int SelectedViewType { get=> _selectedViewType; set { _selectedViewType = value;OnPropertyChanged(); } }
 
+        private string _selectedViewTypeName;
+        public string SelectedViewTypeName { get => _selectedViewTypeName; set { _selectedViewTypeName = value; OnPropertyChanged(); } }
+
         private DateTime _selectedBeginDate;
         public DateTime SelectedBeginDate { get => _selectedBeginDate; set { _selectedBeginDate = value; OnPropertyChanged(); } }
     
@@ -67,6 +72,17 @@ namespace QuanLyBaiXe.ViewModel
 
         private string _customSumIn;
         public string CustomSumIn { get => _customSumIn; set { _customSumIn = value; OnPropertyChanged(); } }
+
+        
+        public List<Revenues> RevenueList { get; set; }
+        public List<SumIns> SumInList { get; set; }
+
+        //CHART
+        public SeriesCollection RevenueSeriesCollection { get; set; }
+        public SeriesCollection SumInSeriesCollection { get; set; }
+        public List<string> RevenueLabels { get; set; }
+        public List<string> SumInLabels { get; set; }
+        public Func<decimal, string> Formatter { get; set; }
 
         //COMMAND
         public ICommand CustomSelectedDateChangedCommand { get; set; }
@@ -109,9 +125,16 @@ namespace QuanLyBaiXe.ViewModel
             IsEndPickerEnable = false;
             IsViewTypeChosen = false;
             IsCustomFilterButtonEnabled = false;
-            IsStatisticEnable = true;
+            IsStatisticEnable = false;
             SelectedViewType = -1;
-            
+            RevenueList = new List<Revenues>();
+            SumInList = new List<SumIns>();
+
+            RevenueSeriesCollection = new SeriesCollection();
+            SumInSeriesCollection = new SeriesCollection();
+            RevenueLabels = new List<string>();
+            SumInLabels = new List<string>();
+
             CustomSelectedDateChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatePicker a = p as DatePicker; CustomSelectedPicker(a); });
             CustomViewTypeCommand = new RelayCommand<object>((p) => { return true; }, (p) => 
             {
@@ -136,7 +159,7 @@ namespace QuanLyBaiXe.ViewModel
                using (CarParkingLotEntities data = new CarParkingLotEntities())
             {
                 var pickedDate = x.SelectedDate.Value;
-                var result = data.DataLoggings.Where(p => p.LoggedTime == pickedDate).ToList();
+                var result = data.DataLoggings.ToList();
                 if (result.Count == 0)
                 {
                     CannotFindPanel panel = new CannotFindPanel();
@@ -205,16 +228,228 @@ namespace QuanLyBaiXe.ViewModel
                 using (CarParkingLotEntities data = new CarParkingLotEntities())
                 {
 
-                    var result = data.DataLoggings.Where(p => p.LoggedTime >= SelectedBeginDate && p.LoggedTime <= SelectedEndDate).ToList();
-                    foreach (var item in result)
+                    //    var result = data.DataLoggings.Where(p => p.LoggedTime >= SelectedBeginDate && p.LoggedTime <= SelectedEndDate).ToList();
+                    var result = data.DataLoggings.ToList();
+
+                    //Daily 
+                    if (SelectedViewType == 0)
                     {
-                        if (item.ArrivalTime.Value >= SelectedBeginDate && item.ArrivalTime.Value <= SelectedEndDate) tempSumIn += 1;
-                        if (item.LeavingTime.Value >= SelectedBeginDate && item.LeavingTime.Value <= SelectedEndDate) tempRevenue +=(decimal) item.Charge;
+                        //Renew variable
+                        RevenueList = new List<Revenues>();
+                        SumInList = new List<SumIns>();
+                        var tempIn = new SumIns();
+                        var tempRevenues = new Revenues();
+                        foreach (var item in result)
+                        {
+                            if (DateTime.Parse(item.ArrivalTime.Value.ToShortDateString()) >= SelectedBeginDate && DateTime.Parse(item.ArrivalTime.Value.ToShortDateString()) <= SelectedEndDate)
+                            {
+                                if(tempIn.Time == null) //True if new variable
+                                {
+                                    tempIn.Time = item.ArrivalTime.Value.ToShortDateString();
+                                    tempIn.SumIn = 1;
+                                }
+                                else //old variable, needing to check if the date is changed
+                                {
+                                    if (tempIn.Time != item.ArrivalTime.Value.ToShortDateString()) //Pass old date
+                                    {
+                                        SumInList.Add(tempIn);
+                                        tempIn = new SumIns();
+                                        tempIn.Time = item.ArrivalTime.Value.ToShortDateString();
+                                        tempIn.SumIn = 1;
+                                    }
+                                    else //Old date not changed
+                                    {
+                                        tempIn.SumIn += 1;
+                                    }
+                                }
+                            }
+
+                            if (DateTime.Parse(item.LeavingTime.Value.ToShortDateString()) >= SelectedBeginDate && DateTime.Parse(item.LeavingTime.Value.ToShortDateString()) <= SelectedEndDate)
+                            {
+                                if (tempRevenues.Time == null) //True if new variable
+                                {
+                                    tempRevenues.Time = item.LeavingTime.Value.ToShortDateString();
+                                    tempRevenues.Revenue = (decimal) item.Charge;
+                                }
+                                else //old variable, needing to check if the date is changed
+                                {
+                                    if (tempRevenues.Time != item.LeavingTime.Value.ToShortDateString()) //Pass old date
+                                    {
+                                        if ( RevenueList.Where(p => p.Time == item.LeavingTime.Value.ToShortDateString()).Count() == 0) //Not old date
+                                        {
+                                            RevenueList.Add(tempRevenues);
+                                            tempRevenues = new Revenues();
+                                            tempRevenues.Time = item.LeavingTime.Value.ToShortDateString();
+                                            tempRevenues.Revenue = (decimal)item.Charge;
+                                        }
+                                        else //existing date
+                                        {
+                                            RevenueList.Where(p => p.Time == item.LeavingTime.Value.ToShortDateString()).FirstOrDefault().Revenue += (decimal)item.Charge;
+                                        }
+                                        
+                                    }
+                                    else //Old date not changed
+                                    {
+                                        tempRevenues.Revenue += (decimal)item.Charge;
+                                    }
+                                }
+                            }
+                            //if (item.LeavingTime.Value >= SelectedBeginDate && item.LeavingTime.Value <= SelectedEndDate) tempRevenue += (decimal)item.Charge;
+
+                        }
+
+                        if (SumInList.Where(p => p.Time == tempIn.Time).Count() == 0) //No duplicate
+                            SumInList.Add(tempIn);
+                        else SumInList.Where(p => p.Time == tempIn.Time).FirstOrDefault().SumIn += tempIn.SumIn;
+
+                        if (RevenueList.Where(p => p.Time == tempRevenues.Time).Count() == 0) //No duplicate
+                            RevenueList.Add(tempRevenues);
+                        else RevenueList.Where(p => p.Time == tempRevenues.Time).FirstOrDefault().Revenue += tempRevenues.Revenue;
+                        SelectedViewTypeName = "Ngày";
                     }
-                    CustomSumIn = tempSumIn.ToString("N0").Replace(",", ".");
-                    CustomRevenue = FormatNumber(Convert.ToInt64(tempRevenue));
-                   
+
+                    //Monthly
+                    else
+                    {
+                        //Renew variable
+                        RevenueList = new List<Revenues>();
+                        SumInList = new List<SumIns>();
+                        var tempIn = new SumIns();
+                        var tempRevenues = new Revenues();
+                        foreach (var item in result)
+                        {
+                            if (DateTime.Parse(item.ArrivalTime.Value.ToShortDateString()) >= SelectedBeginDate && DateTime.Parse(item.ArrivalTime.Value.ToShortDateString()) <= SelectedEndDate)
+                            {
+                                if (tempIn.Time == null) //True if new variable
+                                {
+                                    tempIn.Time = item.ArrivalTime.Value.ToString("MM/yyyy");
+                                    tempIn.SumIn = 1;
+                                }
+                                else //old variable, needing to check if the date is changed
+                                {
+                                    if (tempIn.Time != item.ArrivalTime.Value.ToString("MM/yyyy")) //Pass old date
+                                    {
+                                        SumInList.Add(tempIn);
+                                        tempIn = new SumIns();
+                                        tempIn.Time = item.ArrivalTime.Value.ToString("MM/yyyy");
+                                        tempIn.SumIn = 1;
+                                    }
+                                    else //Old date not changed
+                                    {
+                                        tempIn.SumIn += 1;
+                                    }
+                                }
+                            }
+
+                            if (DateTime.Parse(item.LeavingTime.Value.ToShortDateString()) >= SelectedBeginDate && DateTime.Parse(item.LeavingTime.Value.ToShortDateString()) <= SelectedEndDate)
+                            {
+                                if (tempRevenues.Time == null) //True if new variable
+                                {
+                                    tempRevenues.Time = item.LeavingTime.Value.ToString("MM/yyyy");
+                                    tempRevenues.Revenue = (decimal)item.Charge;
+                                }
+                                else //old variable, needing to check if the date is changed
+                                {
+                                    if (tempRevenues.Time != item.LeavingTime.Value.ToShortDateString()) //Pass old date
+                                    {
+                                        if (RevenueList.Where(p => p.Time == item.LeavingTime.Value.ToString("MM/yyyy")).Count() == 0) //Not old date
+                                        {
+                                            RevenueList.Add(tempRevenues);
+                                            tempRevenues = new Revenues();
+                                            tempRevenues.Time = item.LeavingTime.Value.ToString("MM/yyyy");
+                                            tempRevenues.Revenue = (decimal)item.Charge;
+                                        }
+                                        else //existing date
+                                        {
+                                            RevenueList.Where(p => p.Time == item.LeavingTime.Value.ToString("MM/yyyy")).FirstOrDefault().Revenue += (decimal)item.Charge;
+                                        }
+
+                                    }
+                                    else //Old date not changed
+                                    {
+                                        tempRevenues.Revenue += (decimal)item.Charge;
+                                    }
+                                }
+                            }
+                            //if (item.LeavingTime.Value >= SelectedBeginDate && item.LeavingTime.Value <= SelectedEndDate) tempRevenue += (decimal)item.Charge;
+
+                        }
+
+                        if (SumInList.Where(p => p.Time == tempIn.Time).Count() == 0) //No duplicate
+                            SumInList.Add(tempIn);
+                        else SumInList.Where(p => p.Time == tempIn.Time).FirstOrDefault().SumIn += tempIn.SumIn;
+
+                        if (RevenueList.Where(p => p.Time == tempRevenues.Time).Count() == 0) //No duplicate
+                            RevenueList.Add(tempRevenues);
+                        else RevenueList.Where(p => p.Time == tempRevenues.Time).FirstOrDefault().Revenue += tempRevenues.Revenue;
+                        SelectedViewTypeName = "Tháng";
+                    }
+
+                    int totalSumIn = 0;
+                    foreach (var item in SumInList)
+                    {
+                        totalSumIn += item.SumIn;
+                    }
+                    CustomSumIn = totalSumIn.ToString();
+
+                    decimal totalRevenue = 0;
+                    foreach (var item in RevenueList)
+                    {
+                        totalRevenue += item.Revenue;
+                    }
+
+                    CustomRevenue = FormatNumber(Convert.ToInt64(totalRevenue));
+
+                    //Prepare point for charts
                     
+                    
+                    var RevenueColumn = new ColumnSeries();
+                    var RevenueChartValue = new ChartValues<decimal>();
+                    var SumInColumn = new ColumnSeries();
+                    var SumInChartValues = new ChartValues<int>();
+                    RevenueLabels.Clear();
+                    SumInLabels.Clear();
+
+                    if (SelectedViewType==0)
+                    {
+                        foreach (var item in RevenueList)
+                        {
+                            RevenueChartValue.Add(item.Revenue / 1000000);
+                            RevenueLabels.Add(DateTime.Parse(item.Time).ToString("dd/MM/yyyy"));
+                        }
+                        foreach (var item in SumInList)
+                        {
+                            SumInChartValues.Add(item.SumIn);
+                            SumInLabels.Add(DateTime.Parse(item.Time).ToString("dd/MM/yyyy"));
+                        }
+
+                    }
+                    else
+                    {
+                        foreach (var item in RevenueList)
+                        {
+                            RevenueChartValue.Add(item.Revenue / 1000000);
+                            RevenueLabels.Add(item.Time);
+                        }
+                        foreach (var item in SumInList)
+                        {
+                            SumInChartValues.Add(item.SumIn);
+                            SumInLabels.Add(item.Time);
+                        }
+                    }
+
+                    
+
+                    RevenueColumn.Values = RevenueChartValue;
+                    RevenueSeriesCollection.Clear();
+                    RevenueSeriesCollection.Add(RevenueColumn);
+
+                    SumInColumn.Values = SumInChartValues;
+                    SumInSeriesCollection.Clear();
+                    SumInSeriesCollection.Add(SumInColumn);
+                      Formatter = value => value.ToString("N0");
+                    IsStatisticEnable = true;
+
                 }
 
 
@@ -241,4 +476,18 @@ namespace QuanLyBaiXe.ViewModel
         }
 
     }
+
+    public class Revenues
+    {
+        public string  Time { get; set; }
+        public decimal Revenue { get; set; }
+    }
+
+    public class SumIns
+    {
+        public string Time { get; set; }
+        public int SumIn { get; set; }
+    }
+
+    
 }

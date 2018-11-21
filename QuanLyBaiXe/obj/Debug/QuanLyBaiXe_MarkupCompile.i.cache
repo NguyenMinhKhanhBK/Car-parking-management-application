@@ -16,5 +16,5 @@ C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\App.xaml
 281063327599
 MainWindow.xaml;Resource\BlackListPanel\BlackListDeletePanel.xaml;Resource\BlackListPanel\BlacklistEditPanel.xaml;Resource\BlackListPanel\BlacklistPanel.xaml;Resource\FeeEditPanel\FeeEditPanel.xaml;Resource\FeeEditPanel\FeeMessageBox.xaml;Resource\Grid Available\AvailablePanel.xaml;Resource\Grid Available\gridAvailable.xaml;Resource\Grid Booked\BookedPanel.xaml;Resource\Grid Booked\gridBooked.xaml;Resource\Grid Maintenance\gridMaintenance.xaml;Resource\Grid Maintenance\MaintenancePanel.xaml;Resource\Grid Occupied\gridOccupied.xaml;Resource\Grid Occupied\OccupiedPanel.xaml;Resource\MyResourceXAML.xaml;Resource\NotifyPanel\CannotFindPanel.xaml;Resource\NotifyPanel\MissingParameterPanel.xaml;
 
-True
+False
 
