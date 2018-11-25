@@ -159,7 +159,7 @@ namespace QuanLyBaiXe.ViewModel
                using (CarParkingLotEntities data = new CarParkingLotEntities())
             {
                 var pickedDate = x.SelectedDate.Value;
-                var result = data.DataLoggings.ToList();
+                var result = data.DataLoggings.Where(p=>p.BuildingID == MainViewModel.currentBuildingID &&  p.BlockID == MainViewModel.currentBlockID).ToList();
                 if (result.Count == 0)
                 {
                     CannotFindPanel panel = new CannotFindPanel();
@@ -229,7 +229,7 @@ namespace QuanLyBaiXe.ViewModel
                 {
 
                     //    var result = data.DataLoggings.Where(p => p.LoggedTime >= SelectedBeginDate && p.LoggedTime <= SelectedEndDate).ToList();
-                    var result = data.DataLoggings.ToList();
+                    var result = data.DataLoggings.Where(p => p.BuildingID == MainViewModel.currentBuildingID && p.BlockID == MainViewModel.currentBlockID).ToList();
 
                     //Daily 
                     if (SelectedViewType == 0)
@@ -414,13 +414,21 @@ namespace QuanLyBaiXe.ViewModel
                     {
                         foreach (var item in RevenueList)
                         {
-                            RevenueChartValue.Add(item.Revenue / 1000000);
-                            RevenueLabels.Add(DateTime.Parse(item.Time).ToString("dd/MM/yyyy"));
+                            if(item.Time!=null)
+                            {
+                                RevenueChartValue.Add(item.Revenue / 1000000);
+                                RevenueLabels.Add(DateTime.Parse(item.Time).ToString("dd/MM/yyyy"));
+                            }
+                            
                         }
                         foreach (var item in SumInList)
                         {
-                            SumInChartValues.Add(item.SumIn);
-                            SumInLabels.Add(DateTime.Parse(item.Time).ToString("dd/MM/yyyy"));
+                            if(item.Time!=null)
+                            {
+                                SumInChartValues.Add(item.SumIn);
+                                SumInLabels.Add(DateTime.Parse(item.Time).ToString("dd/MM/yyyy"));
+                            }
+                            
                         }
 
                     }

@@ -1,4 +1,4 @@
-﻿using QuanLyBaiXe.Model;
+﻿using Microsoft.Maps.MapControl.WPF;
 using QuanLyBaiXe.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,25 +12,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyBaiXe
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BingMap.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BingMap : Window
     {
-        public MainWindow(int buildingID, int blockID)
+        public BingMap()
         {
-            MainViewModel.currentBlockID = blockID;
-            MainViewModel.currentBuildingID = buildingID;
             InitializeComponent();
+            Bingmap.Focus();
+            this.DataContext = new BingMapViewModel();
            
-            
         }
 
+       
         
     }
 }

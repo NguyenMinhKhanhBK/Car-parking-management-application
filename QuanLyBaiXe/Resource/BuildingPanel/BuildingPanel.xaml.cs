@@ -1,6 +1,4 @@
-﻿using QuanLyBaiXe.Model;
-using QuanLyBaiXe.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,25 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyBaiXe
+namespace QuanLyBaiXe.Resource.BuildingPanel
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BuildingPanel.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BuildingPanel : Window
     {
-        public MainWindow(int buildingID, int blockID)
+        public BuildingPanel(string station)
         {
-            MainViewModel.currentBlockID = blockID;
-            MainViewModel.currentBuildingID = buildingID;
             InitializeComponent();
-           
-            
+            var vm = new BuildingPanelViewModel();
+            vm.StationName = station;
+            this.DataContext = vm;
         }
-
-        
     }
 }

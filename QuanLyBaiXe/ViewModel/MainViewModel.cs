@@ -19,7 +19,9 @@ namespace QuanLyBaiXe.ViewModel
         private List<ParkingLayout> _parkingLayout;
         public List<ParkingLayout> parkingLayout { get => _parkingLayout; set { _parkingLayout = value; OnPropertyChanged(); } }
 
-        
+      static  public int currentBuildingID { get; set; }
+       static  public int currentBlockID { get; set; }
+
 
         //Timer to update data periodly
         DispatcherTimer Timer = new DispatcherTimer();
@@ -34,6 +36,9 @@ namespace QuanLyBaiXe.ViewModel
             CustomerList = new CurrentCustomerViewModel();
             parkingLayout = new List<ParkingLayout>();
             PositionStatus = new CurrentStatus();
+           
+            
+            
 
             CustomerList.CurrentPossionInfoList =  GetDataFromSQL();
             PositionStatus = GetCurrentPositionStatus(CustomerList.CurrentPossionInfoList);
@@ -91,7 +96,7 @@ namespace QuanLyBaiXe.ViewModel
             ObservableCollection<CurrentPositionInfo> tempCollection = new ObservableCollection<CurrentPositionInfo>();
             using (CarParkingLotEntities SQLData = new CarParkingLotEntities())
             {
-                var DataList = SQLData.CarParkingLayouts.Where(p => p.BuildingID == CurrentBlockPosition.BuildingID && p.BlockID == CurrentBlockPosition.BlockID).ToList();
+                var DataList = SQLData.CarParkingLayouts.Where(p => p.BuildingID == currentBuildingID && p.BlockID == currentBlockID).ToList();
                 int index = 1;
                 foreach (var item in DataList)
                 {
@@ -177,7 +182,7 @@ namespace QuanLyBaiXe.ViewModel
                 {
                     parkingLayout[msg.AvailableToMaintenancePosition - 1] = new ParkingLayout() { IsAvailable = false, IsBooked = false, IsMaintenance = true, IsOccupied = false };
                     OnPropertyChanged("parkingLayout");
-                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.AvailableToMaintenancePosition).FirstOrDefault();
+                    var temp = data.CarParkingLayouts.Where( p => p.BuildingID == currentBuildingID && p.BlockID == currentBlockID && p.PositionID == msg.AvailableToMaintenancePosition).FirstOrDefault();
                     if (temp.StatusID == 1) temp.StatusID = 4;
                     data.SaveChanges();
                 }
@@ -189,7 +194,7 @@ namespace QuanLyBaiXe.ViewModel
                 {
                     parkingLayout[msg.CancelBookedPosition - 1] = new ParkingLayout() { IsAvailable = true, IsBooked = false, IsMaintenance = false, IsOccupied = false };
                     OnPropertyChanged("parkingLayout");
-                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.CancelBookedPosition).FirstOrDefault();
+                    var temp = data.CarParkingLayouts.Where(p => p.BuildingID == currentBuildingID && p.BlockID == currentBlockID && p.PositionID == msg.CancelBookedPosition).FirstOrDefault();
                     if (temp.StatusID == 2) temp.StatusID = 1;
                     data.SaveChanges();
                 }
@@ -201,7 +206,7 @@ namespace QuanLyBaiXe.ViewModel
                 {
                     parkingLayout[msg.FinishMaintenancePosition - 1] = new ParkingLayout() { IsAvailable = true, IsBooked = false, IsMaintenance = false, IsOccupied = false };
                     OnPropertyChanged("parkingLayout");
-                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.FinishMaintenancePosition).FirstOrDefault();
+                    var temp = data.CarParkingLayouts.Where(p => p.BuildingID == currentBuildingID && p.BlockID == currentBlockID && p.PositionID == msg.FinishMaintenancePosition).FirstOrDefault();
                     if (temp.StatusID == 4) temp.StatusID = 1;
                     data.SaveChanges();
                     
@@ -214,7 +219,7 @@ namespace QuanLyBaiXe.ViewModel
                 {
                     parkingLayout[msg.OccupiedToAvailablePosition - 1] = new ParkingLayout() { IsAvailable = true, IsBooked = false, IsMaintenance = false, IsOccupied = false };
                     OnPropertyChanged("parkingLayout");
-                    var temp = data.CarParkingLayouts.Where(p => p.PositionID == msg.OccupiedToAvailablePosition).FirstOrDefault();
+                    var temp = data.CarParkingLayouts.Where(p => p.BuildingID == currentBuildingID && p.BlockID == currentBlockID && p.PositionID == msg.OccupiedToAvailablePosition).FirstOrDefault();
                     if (temp.StatusID == 3) temp.StatusID = 1;
                     data.SaveChanges();
 

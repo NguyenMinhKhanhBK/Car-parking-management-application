@@ -8,7 +8,7 @@ namespace QuanLyBaiXe.Model
 {
   public  class CurrentBlockPosition
     {
-        static public int BuildingID=1;
-        static public int BlockID=1;
+        static public int BuildingID { get; set; }
+        static public int BlockID { get; set; }
     }
 }

@@ -73,3 +73,9 @@ C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debu
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\NotifyPanel\CannotFindPanel.baml
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\NotifyPanel\MissingParameterPanel.g.cs
 C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\NotifyPanel\MissingParameterPanel.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\bin\Debug\Microsoft.Maps.MapControl.WPF.xml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\BingMap.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\BingMap.baml
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BuildingPanel\BuildingPanel.g.cs
+C:\Users\UX410\Documents\Visual Studio 2017\WPF\QuanLyBaiXe\QuanLyBaiXe\obj\Debug\Resource\BuildingPanel\BuildingPanel.baml
