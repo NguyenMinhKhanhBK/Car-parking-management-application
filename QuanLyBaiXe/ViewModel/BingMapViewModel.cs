@@ -85,6 +85,27 @@ namespace QuanLyBaiXe.ViewModel
         }
 
 
+     public   void PushpinLeftButtonClicked(object s, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            Pushpin a = s as Pushpin;
+            if (a!=null)
+            {
+                string Station = a.Tag.ToString();
+                BuildingPanel panel = new BuildingPanel(Station);
+
+                var point = a.PointToScreen(Mouse.GetPosition(a));
+                panel.Left = point.X - panel.Width;
+                panel.Top = point.Y;
+
+                a.Background = Brushes.Green;
+                panel.ShowDialog();
+
+                a.Background = (Brush)new BrushConverter().ConvertFrom("#FFE56910");
+            }
+        }
+
+
 
 
 

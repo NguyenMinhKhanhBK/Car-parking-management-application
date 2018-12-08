@@ -34,7 +34,7 @@ namespace QuanLyBaiXe.Resource.BuildingPanel
 
         public BuildingPanelViewModel()
         {
-
+            IsBlock1Selected = true;
             MoveCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Window a = p as Window; a.DragMove(); });
             AcceptCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Accept(p as Window); });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Window a = p as Window; EventSystem.Publish<BuildingPanelStatus>(new BuildingPanelStatus() { IsClosed = true }); ; a.Close(); });

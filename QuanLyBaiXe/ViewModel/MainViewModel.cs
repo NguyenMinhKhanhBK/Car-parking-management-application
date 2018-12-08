@@ -1,8 +1,11 @@
-﻿using QuanLyBaiXe.Model;
+﻿using Microsoft.Azure.Devices.Client;
+using Newtonsoft.Json;
+using QuanLyBaiXe.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -185,6 +188,26 @@ namespace QuanLyBaiXe.ViewModel
                     var temp = data.CarParkingLayouts.Where( p => p.BuildingID == currentBuildingID && p.BlockID == currentBlockID && p.PositionID == msg.AvailableToMaintenancePosition).FirstOrDefault();
                     if (temp.StatusID == 1) temp.StatusID = 4;
                     data.SaveChanges();
+
+                    var tempbuilding = data.Buildings.Where(p => p.ID == currentBuildingID).FirstOrDefault();
+                    var fp7status = tempbuilding.FP7Status;
+                    char[] fp7statusAsChars = fp7status.ToCharArray();
+                    fp7statusAsChars[((int)temp.BlockID - 1) * 12 + ((int)temp.PositionID - 1)] = '3';
+                    fp7status = new string(fp7statusAsChars);
+                    string s_connectionString = "HostName=mydemoiot.azure-devices.net;DeviceId=iotdevice;SharedAccessKey=+zQco11XpAnrjb/7wRQb6qfdoNMnvbrun5I3BezTrj4=";
+                    DeviceClient s_deviceClient;
+                    s_deviceClient = DeviceClient.CreateFromConnectionString(s_connectionString, Microsoft.Azure.Devices.Client.TransportType.Http1);
+                    var value = new
+                    {
+                        Maintain = "True",
+                        BuildingID = temp.BuildingID,
+                        FP7ID = temp.BlockID,
+                        FP7status = fp7status
+                    };
+                    var messageString = JsonConvert.SerializeObject(value);
+                    var message = new Microsoft.Azure.Devices.Client.Message(Encoding.ASCII.GetBytes(messageString));
+                    s_deviceClient.SendEventAsync(message).Wait();
+                    s_deviceClient.Dispose();
                 }
             }
 

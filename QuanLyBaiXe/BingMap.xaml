@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:QuanLyBaiXe"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -235,44 +236,74 @@
 
 
                 
-                <m:Pushpin  Tag="Trạm 1"  x:Name="CatLai" Location="10.767006,106.788253" Background="#FFE56910" >
-                    <i:Interaction.Triggers>
+                <m:Pushpin  Tag="Trạm 1"  x:Name="CatLai" Location="10.767006,106.788253" Background="#FFE56910" ToolTip="Trạm 1" >
+                    <!--<i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseRightButtonDown">
                             <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=CatLai}" />
                         </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </m:Pushpin>
 
-                <m:Pushpin Tag="Trạm 2"  x:Name="Paster" Location="10.778420,106.698640" Background="#FFE56910">
-                    <i:Interaction.Triggers>
+                <m:Pushpin Tag="Trạm 2"  x:Name="Paster" Location="10.778420,106.698640" Background="#FFE56910" ToolTip="Trạm 2">
+                    <!--<i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseRightButtonDown">
                             <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=Paster}" />
                         </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </m:Pushpin>
 
-                <m:Pushpin Tag="Trạm 3"  x:Name="NguyenTatThanh" Location="10.766660,106.706253" Background="#FFE56910" >
-                    <i:Interaction.Triggers>
+                <m:Pushpin Tag="Trạm 3"  x:Name="NguyenTatThanh" Location="10.766660,106.706253" Background="#FFE56910" ToolTip="Trạm 3">
+                    <!--<i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseRightButtonDown">
                             <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=NguyenTatThanh}" />
                         </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </m:Pushpin>
 
-                <m:Pushpin   Tag="Trạm 4"  x:Name="ChoLon" Location="10.745340,106.630420" >
-                    <i:Interaction.Triggers>
+                <m:Pushpin   Tag="Trạm 4"  x:Name="ChoLon" Location="10.745340,106.630420" ToolTip="Trạm 4" >
+                    <!--<i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseRightButtonDown">
                             <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=ChoLon}" />
                         </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                    
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </m:Pushpin>
 
-                <m:Pushpin Tag="Trạm 5" x:Name="NguyenHue" Location="10.776530,106.700981" Background="#FFE56910">
-                    <i:Interaction.Triggers>
+                <m:Pushpin Tag="Trạm 5" x:Name="NguyenHue" Location="10.776530,106.700981" Background="#FFE56910" ToolTip="Trạm 5">
+                    <!--<i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseRightButtonDown">
                             <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=NguyenHue}" />
                         </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
+
                 </m:Pushpin>
             </m:Map>
 
