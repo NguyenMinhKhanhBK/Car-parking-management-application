@@ -15,12 +15,16 @@ namespace QuanLyBaiXe.Resource.BuildingPanel
         #region PROPERTY
         private string _stationName;
         public string StationName { get => _stationName; set { _stationName = value; OnPropertyChanged(); } }
+        
 
         private bool _isBlock1Selected;
         public bool IsBlock1Selected { get => _isBlock1Selected; set { _isBlock1Selected = value; OnPropertyChanged(); } }
 
         private bool _isBlock2Selected;
         public bool IsBlock2Selected { get => _isBlock2Selected; set { _isBlock2Selected = value; OnPropertyChanged(); } }
+
+        private int _buildingID;
+        public int buildingID { get => _buildingID; set { _buildingID = value; OnPropertyChanged(); } }
 
         #endregion PROPERTY
 
@@ -46,20 +50,23 @@ namespace QuanLyBaiXe.Resource.BuildingPanel
         void Accept(Window a)
         {
             int _buildingID, _blockID, temp;
-            var strList = StationName.Split(' ').ToList();
 
-            if (int.TryParse(strList[1], out temp)) _buildingID = temp;
-            else _buildingID = 1;
+            _buildingID = buildingID;
 
             if (IsBlock1Selected) _blockID = 1;
             else _blockID = 2;
 
 
             a.Close();
+            
             MainWindow wd = new MainWindow(_buildingID,_blockID);
-            wd.Show();
+            
+            wd.ShowDialog();
+           
 
         }
+
+        
 
         void CheckFee(CheckBox a)
         {

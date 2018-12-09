@@ -81,11 +81,13 @@ namespace QuanLyBaiXe.ViewModel
         //Return TRUE if SQL data has changed, else return FALSE
         bool IsItemChanged()
         {
+            
             var temp = GetDataFromSQL();
             foreach (var item in temp)
             {
                 var a = CustomerList.CurrentPossionInfoList.Where(p => p.PosID == item.PosID).FirstOrDefault();
-                if (a.Status != item.Status) return true; 
+                if (a == null) return true;
+                else if (a.Status != item.Status) return true; 
             }
             return false;
         }

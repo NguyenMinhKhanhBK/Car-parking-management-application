@@ -24,7 +24,6 @@ namespace QuanLyBaiXe
         public BingMap()
         {
             InitializeComponent();
-            Bingmap.Focus();
             this.DataContext = new BingMapViewModel();
            
         }

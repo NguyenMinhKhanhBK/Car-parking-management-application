@@ -19,11 +19,12 @@ namespace QuanLyBaiXe.Resource.BuildingPanel
     /// </summary>
     public partial class BuildingPanel : Window
     {
-        public BuildingPanel(string station)
+        public BuildingPanel(string station,int building)
         {
             InitializeComponent();
             var vm = new BuildingPanelViewModel();
             vm.StationName = station;
+            vm.buildingID = building;
             this.DataContext = vm;
         }
     }

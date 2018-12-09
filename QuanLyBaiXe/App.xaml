@@ -13,11 +13,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                
-                
+
+
             </ResourceDictionary.MergedDictionaries>
-            
-            
+
+
             <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary700}"/>
             <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource Primary500}"/>
             <SolidColorBrush x:Key="AccentColorBrush2" Color="{DynamicResource Primary400}"/>
@@ -33,7 +33,35 @@
             <SolidColorBrush x:Key="RightArrowFill" Color="{DynamicResource Primary500}"/>
             <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary500Foreground}"/>
             <SolidColorBrush x:Key="IdealForegroundDisabledBrush" Color="{DynamicResource Primary500}" Opacity="0.4"/>
-            
+
+            <!--Tooltip -->
+            <Style x:Key="PushPinToolTip" TargetType="ToolTip">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border CornerRadius="5">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.5"/>
+                                </Border.Background>
+                                <ContentPresenter Margin="5">
+                                    <ContentPresenter.Content>
+                                        <StackPanel Margin="5" MaxWidth="350">
+                                            <TextBlock Text="{Binding stationName}" Margin="2" FontWeight="Bold" FontSize="16" Foreground="White"/>
+                                            <TextBlock Text="{Binding location}" Margin="2" Foreground="White" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding url}" Margin="2" Foreground="White" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </ContentPresenter.Content>
+                                </ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

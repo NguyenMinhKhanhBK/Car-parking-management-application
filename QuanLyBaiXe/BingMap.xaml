@@ -3,30 +3,35 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:QuanLyBaiXe"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:QuanLyBaiXe"
     xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="1920"
     Height="1080"
     mc:Ignorable="d"
+    Name="wdBingMap"
     Title="BingMap">
 
-    <Window.Resources>
-        
+    <Window.Resources />
 
-    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding BingMapLoaded}" CommandParameter="{Binding ElementName=mainGrid}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
-
-
-    <Grid>
+    <Grid Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Background="#FFE6E6E6">
+        <StackPanel
+            Grid.Column="0"
+            Background="#FFE6E6E6"
+            Name="BingMapList">
             <StackPanel
                 Margin="10"
                 VerticalAlignment="Center"
@@ -43,16 +48,17 @@
                     Foreground="#FF1700FF"
                     Text="Danh sách các trạm" />
             </StackPanel>
-
             <StackPanel materialDesign:RippleAssist.IsCentered="True" Orientation="Horizontal">
                 <materialDesign:ColorZone
-                            BorderThickness="1"
-                            Margin="20 10 0 10"
-                            Panel.ZIndex="1"
-                            CornerRadius="2"
-                            materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                            Mode="Standard"
-                            Padding="8 4 8 4" BorderBrush="#FF979797" Width="340">
+                    Width="340"
+                    Margin="20 10 0 10"
+                    Panel.ZIndex="1"
+                    BorderBrush="#FF979797"
+                    BorderThickness="1"
+                    CornerRadius="2"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    Mode="Standard"
+                    Padding="8 4 8 4">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -63,255 +69,43 @@
                             <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                         </Button>
                         <TextBox
-                                    Grid.Column="1"
-                                    MinWidth="200"
-                                    Margin="8 0 0 0"
-                                    VerticalAlignment="Center"
-                                    BorderThickness="0"
-                                    materialDesign:HintAssist.Hint="Tìm kiếm trạm xe"
-                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden" />
+                            Grid.Column="1"
+                            MinWidth="200"
+                            Margin="8 0 0 0"
+                            VerticalAlignment="Center"
+                            BorderThickness="0"
+                            materialDesign:HintAssist.Hint="Tìm kiếm trạm xe"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden" />
                     </Grid>
                 </materialDesign:ColorZone>
             </StackPanel>
-
-            <ListView Name="listviewStation" SelectedItem="{Binding selectedItem}">
-                <ListViewItem Tag="Trạm 1" Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40">
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 1: Trạm Nguyễn Huệ" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-                
-                <ListViewItem Tag="Trạm 2" Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40" >
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 2: Trạm Cát Lái" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-                
-                <ListViewItem Tag="Trạm 3" Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40" >
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 3: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-
-                <ListViewItem Tag="Trạm 4" Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40">
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 4: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-
-                <ListViewItem Tag="Trạm 5" Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40" >
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 5: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=Bingmap}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-
-                <!--<ListViewItem Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40">
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 6: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-
-                <ListViewItem Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40" >
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 7: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-
-                <ListViewItem Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40" >
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 8: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-
-                <ListViewItem Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40" >
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 9: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>
-
-                <ListViewItem Height="50">
-                    <StackPanel Orientation="Horizontal" Height="40" >
-                        <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                        <TextBlock Text="Quận 10: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                    </StackPanel>
-                </ListViewItem>-->
-
-            </ListView>
-
-            <!--<Button Height="45"  Margin="0 20 0 0" Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 1: Trạm Nguyễn Huệ" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45" Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 2: Trạm Cát Lái" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 2: Trạm Paster" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 4: Trạm Nguyễn Tất Thành" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 5: Trạm Chợ Lớn" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45" Margin="0 5"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 6: Trạm Miền Tây" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 7: Trạm Phú Mỹ Hưng" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 8: Trạm Phạm Hùng" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 9: Trạm CoopMart" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>
-
-            <Button Height="45"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <StackPanel Orientation="Horizontal" Height="40" Width="365">
-                    <materialDesign:PackIcon Kind="CityVariantOutline" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Black"/>
-                    <TextBlock Text="Quận 10: Trạm Bách Khoa" VerticalAlignment="Center" Foreground="Black" FontSize="20" FontFamily="Calibri Light"></TextBlock>
-                </StackPanel>
-            </Button>-->
-
         </StackPanel>
-        <Grid Grid.Column="1"  >
-            <m:Map BorderBrush="#FF979797"
-                  
-                   BorderThickness="1"
-            Grid.Column="1"
-            Center="10.762622,106.660172"
-            CredentialsProvider="NpUDtwXs2DMPzRGfTlQh~mruqYE6mAGHQV5IcMc2LJA~Anzr3pk0HmIGXm8zyikNlzY0zYGdnoMgiQdMkNUqVXXuuvv9vv88o8E_AzOlY9_7 "
-            Name="Bingmap"
-            ZoomLevel="12.5" Background="#FF956363">
-
-
+        
+        
+        
+        <Grid Grid.Column="1" Name="mapGrid">
+            <Button
+                Command="{Binding CenterCommand}"
+                Width="50"
+                Height="50"
+                Margin="0 0 10 70"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="White"
+                Panel.ZIndex="1000"
+                BorderBrush="LightGray"
+                materialDesign:RippleAssist.Feedback="#DD000000"
+                ToolTip="Về trung tâm"
+                Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                <materialDesign:PackIcon
+                    Width="25"
+                    Height="26"
+                    Margin="-5 0"
+                    Foreground="#FF1288FF"
+                    Kind="MyLocation" />
                 
-                <m:Pushpin  Tag="Trạm 1"  x:Name="CatLai" Location="10.767006,106.788253" Background="#FFE56910" ToolTip="Trạm 1" >
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseRightButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=CatLai}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
-
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </m:Pushpin>
-
-                <m:Pushpin Tag="Trạm 2"  x:Name="Paster" Location="10.778420,106.698640" Background="#FFE56910" ToolTip="Trạm 2">
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseRightButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=Paster}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
-
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </m:Pushpin>
-
-                <m:Pushpin Tag="Trạm 3"  x:Name="NguyenTatThanh" Location="10.766660,106.706253" Background="#FFE56910" ToolTip="Trạm 3">
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseRightButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=NguyenTatThanh}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
-
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </m:Pushpin>
-
-                <m:Pushpin   Tag="Trạm 4"  x:Name="ChoLon" Location="10.745340,106.630420" ToolTip="Trạm 4" >
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseRightButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=ChoLon}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
-                    
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </m:Pushpin>
-
-                <m:Pushpin Tag="Trạm 5" x:Name="NguyenHue" Location="10.776530,106.700981" Background="#FFE56910" ToolTip="Trạm 5">
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseRightButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ShowPanelCommand}" CommandParameter="{Binding ElementName=NguyenHue}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <ei:CallMethodAction MethodName="PushpinLeftButtonClicked" TargetObject="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-
-                </m:Pushpin>
-            </m:Map>
-
-            <Button Height="50" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 10 70" Background="White" BorderBrush="LightGray">
-                <materialDesign:PackIcon Margin="-5 0" Kind="MyLocation" Height="26" Width="25" Foreground="#FF1288FF"></materialDesign:PackIcon>
             </Button>
         </Grid>
-
     </Grid>
 
 </Window>
