@@ -9,8 +9,8 @@
     xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="1920"
-    Height="1080"
+    Height="{Binding SystemParameters.PrimaryScreenHeight}"
+    Width="{Binding SystemParameters.PrimaryScreenWidth}"
     mc:Ignorable="d"
     Name="wdBingMap"
     Title="BingMap">
@@ -44,7 +44,7 @@
                     Kind="AlphaPBox" />
                 <TextBlock
                     VerticalAlignment="Center"
-                    FontSize="28"
+                    FontSize="24"
                     Foreground="#FF1700FF"
                     Text="Danh sách các trạm" />
             </StackPanel>

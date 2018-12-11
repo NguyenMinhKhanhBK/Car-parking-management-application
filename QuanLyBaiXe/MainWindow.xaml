@@ -16,8 +16,8 @@
     xmlns:MyResource="clr-namespace:QuanLyBaiXe.Resource.Grid_Booked"
     xmlns:MyResource1="clr-namespace:QuanLyBaiXe.Resource.Grid_Available"
     xmlns:MyResource2="clr-namespace:QuanLyBaiXe.Resource.Grid_Occupied"
-    Width="1920"
-    Height="1081"
+    Height="{Binding SystemParameters.PrimaryScreenHeight}"
+    Width="{Binding SystemParameters.PrimaryScreenWidth}"
     mc:Ignorable="d"
     Background="#FFF0F0F0"
     DataContext="{StaticResource MainVM}"
@@ -433,7 +433,7 @@
                         </Grid>
                     </Border>
                     <!--CAR COUNTER-->
-                    <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
                         <Border
                             Margin="0 5 5 5"
                             Background="White"
@@ -458,13 +458,13 @@
                                         <DropShadowEffect Color="#FFC5C5C5" RenderingBias="Quality" BlurRadius="30" ShadowDepth="2"/>
                                     </TextBlock.Effect>-->
                                 </TextBlock>
-                                <UniformGrid Columns="2" Rows="2">
+                                <UniformGrid Columns="4" Rows="1" Margin="20">
                                     <!--DataContext="{StaticResource PositionVM}"-->
                                     <DockPanel Margin="0">
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
-                                            FontSize="14"
+                                            FontSize="18"
                                             Text="Còn trống" />
                                         <lvc:Gauge
                                             Grid.Row="0"
@@ -488,7 +488,7 @@
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
-                                            FontSize="14"
+                                            FontSize="18"
                                             Text="Đã đặt" />
                                         <lvc:Gauge
                                             Grid.Row="0"
@@ -512,7 +512,7 @@
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
-                                            FontSize="14"
+                                            FontSize="18"
                                             Text="Đang có xe" />
                                         <lvc:Gauge
                                             Grid.Row="0"
@@ -536,7 +536,7 @@
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             DockPanel.Dock="Bottom"
-                                            FontSize="14"
+                                            FontSize="18"
                                             Text="Đang bảo trì" />
                                         <lvc:Gauge
                                             Grid.Row="0"
@@ -562,7 +562,7 @@
                         </Border>
                     </Grid>
                     <!--ALARM-->
-                    <Grid Grid.Row="0" Grid.Column="2">
+                    <!--<Grid Grid.Row="0" Grid.Column="2">
                         <Border
                             Margin="5 5 10 5"
                             Background="White"
@@ -577,7 +577,7 @@
                                     ShadowDepth="5" />
                             </Border.Effect>
                             <Grid>
-                                <!--Title: Trang thai haot dong-->
+                                --><!--Title: Trang thai haot dong--><!--
                                 <TextBlock
                                     Margin="40,10"
                                     FontSize="40"
@@ -587,7 +587,7 @@
                                     Margin="10,80,10,20"
                                     Columns="3"
                                     Rows="1">
-                                    <!--Motor status-->
+                                    --><!--Motor status--><!--
                                     <Grid>
                                         <Image
                                             Height="70"
@@ -602,7 +602,7 @@
                                             Foreground="#FF01AB01"
                                             Text="Tốt" />
                                     </Grid>
-                                    <!--Sensor status-->
+                                    --><!--Sensor status--><!--
                                     <Grid>
                                         <Image
                                             Height="80"
@@ -617,7 +617,7 @@
                                             Foreground="#FF01AB01"
                                             Text="Tốt" />
                                     </Grid>
-                                    <!--Detector status-->
+                                    --><!--Detector status--><!--
                                     <Grid>
                                         <Image
                                             Height="70"
@@ -636,7 +636,7 @@
                                 </UniformGrid>
                             </Grid>
                         </Border>
-                    </Grid>
+                    </Grid>-->
                     <!--CURRENT CUSTOMERS LIST-->
                     <Grid
                         Grid.Row="1"
@@ -1072,18 +1072,18 @@
                                     Text="Thống kê theo ngày" />
                             </Grid>
                         </TabItem.Header>
-                        <Grid>
+                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*" />
                                 <RowDefinition Height="3*" />
                                 <RowDefinition Height="6*" />
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" VerticalAlignment="Center">
+                            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <!--<TextBlock Text="Thời gian" Foreground="Blue" FontSize="20" VerticalAlignment="Center" Margin="20"></TextBlock>-->
                                 <ToolBarTray>
                                     <ToolBar
                                         Height="70"
-                                        HorizontalAlignment="Right"
+                                        HorizontalAlignment="Stretch"
                                         ClipToBounds="False"
                                         FontSize="20"
                                         Style="{DynamicResource MaterialDesignToolBar}">
@@ -1120,233 +1120,237 @@
                                             ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                                             Lọc
                                         </Button>
-                                        <Grid Width="900" />
-                                        <Button ToolTip="Export to PDF">
-                                            <materialDesign:PackIcon Kind="Printer" />
-                                        </Button>
+                                        
                                     </ToolBar>
                                 </ToolBarTray>
                             </Grid>
-                            <UniformGrid
+
+                            <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <UniformGrid
                                 Grid.Row="1"
                                 Background="WhiteSmoke"
                                 Columns="3"
                                 Rows="1"
                                 Visibility="{Binding IsFiltered,Converter={StaticResource BoolToVisConverter}}">
-                                <!--Tong luot xe vao-->
-                                <Grid Margin="50 15 50 15">
-                                    <Rectangle
+                                    <!--Tong luot xe vao-->
+                                    <Grid Margin="20 5 10 5">
+                                        <Rectangle
                                         Fill="White"
                                         RadiusX="10"
                                         RadiusY="10">
-                                        <Rectangle.Effect>
-                                            <DropShadowEffect
+                                            <Rectangle.Effect>
+                                                <DropShadowEffect
                                                 Color="#FFAAAAAA"
                                                 BlurRadius="20"
                                                 RenderingBias="Quality"
                                                 ShadowDepth="2" />
-                                        </Rectangle.Effect>
-                                    </Rectangle>
-                                    <TextBlock
-                                        Margin="30 10"
+                                            </Rectangle.Effect>
+                                        </Rectangle>
+                                        <TextBlock
+                                        Margin="10 5"
                                         HorizontalAlignment="Right"
                                         FontSize="30"
                                         Foreground="#FF767676"
                                         Text="Tổng lượt xe vào" />
-                                    <Border
-                                        Width="80"
-                                        Height="130"
-                                        Margin="50 0 0 0"
+                                        <Border
+                                        MinWidth="60"
+                                        MinHeight="110"
+                                        Margin="30 0 0 0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Top"
                                         Background="Green"
                                         CornerRadius="0 0 6 6">
-                                        <Border.Effect>
-                                            <DropShadowEffect
+                                            <Border.Effect>
+                                                <DropShadowEffect
                                                 Color="#FFB0B0B0"
                                                 BlurRadius="10"
                                                 RenderingBias="Quality"
                                                 ShadowDepth="2" />
-                                        </Border.Effect>
-                                        <materialDesign:PackIcon
-                                            Width="60"
-                                            Height="60"
+                                            </Border.Effect>
+                                            <materialDesign:PackIcon
+                                            MinWidth="40"
+                                            MinHeight="40"
                                             Margin="0 0 0 10 "
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Bottom"
                                             Foreground="White"
                                             Kind="ArrowDownBoldCircleOutline" />
-                                    </Border>
-                                    <TextBlock
-                                        Margin="30 10"
+                                        </Border>
+                                        <TextBlock
+                                        Margin="10 5"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        FontSize="80"
+                                        FontSize="50"
                                         Foreground="#FF787878"
                                         Text="{Binding SumIn}" />
-                                    <StackPanel
+                                        <StackPanel
                                         Height="60"
-                                        Margin="40 0"
+                                        Margin="20 40 0 5"
                                         VerticalAlignment="Bottom"
                                         Orientation="Horizontal">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="25"
                                             Height="25"
                                             Foreground="Green"
                                             Kind="Pen" />
-                                        <TextBlock
-                                            Margin="5 0"
+                                            <TextBlock
+                                            Margin="5 0 0 5"
                                             FontSize="20"
                                             Foreground="#FF767676"
                                             Text="Tính đến 24h cùng ngày" />
-                                    </StackPanel>
-                                </Grid>
-                                <!--Tong luot xe ra-->
-                                <Grid Margin="50 15 50 15">
-                                    <Rectangle
+                                        </StackPanel>
+                                    </Grid>
+                                    <!--Tong luot xe ra-->
+                                    <Grid Margin="10 5 10 5">
+                                        <Rectangle
                                         Fill="White"
+                                            VerticalAlignment="Stretch"
+                                            HorizontalAlignment="Stretch"
                                         RadiusX="10"
                                         RadiusY="10">
-                                        <Rectangle.Effect>
-                                            <DropShadowEffect
+                                            <Rectangle.Effect>
+                                                <DropShadowEffect
                                                 Color="#FFAAAAAA"
                                                 BlurRadius="20"
                                                 RenderingBias="Quality"
                                                 ShadowDepth="2" />
-                                        </Rectangle.Effect>
-                                    </Rectangle>
-                                    <TextBlock
-                                        Margin="30 10"
+                                            </Rectangle.Effect>
+                                        </Rectangle>
+                                        <TextBlock
+                                        Margin="10 5"
                                         HorizontalAlignment="Right"
                                         FontSize="30"
                                         Foreground="#FF767676"
                                         Text="Tổng lượt xe ra" />
-                                    <Border
-                                        Width="80"
-                                        Height="130"
-                                        Margin="50 0 0 0"
+                                        <Border
+                                       MinWidth="60"
+                                        MinHeight="110"
+                                        Margin="30 0 0 0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Top"
                                         Background="Red"
                                         CornerRadius="0 0 6 6">
-                                        <Border.Effect>
-                                            <DropShadowEffect
+                                            <Border.Effect>
+                                                <DropShadowEffect
                                                 Color="#FFB0B0B0"
                                                 BlurRadius="10"
                                                 RenderingBias="Quality"
                                                 ShadowDepth="2" />
-                                        </Border.Effect>
-                                        <materialDesign:PackIcon
-                                            Width="60"
-                                            Height="60"
+                                            </Border.Effect>
+                                            <materialDesign:PackIcon
+                                             MinWidth="40"
+                                            MinHeight="40"
                                             Margin="0 0 0 10 "
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Bottom"
                                             Foreground="White"
                                             Kind="ArrowUpBoldCircleOutline" />
-                                    </Border>
-                                    <TextBlock
+                                        </Border>
+                                        <TextBlock
                                         Margin="30 10"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        FontSize="80"
+                                        FontSize="50"
                                         Foreground="#FF787878"
                                         Text="{Binding SumOut}" />
-                                    <StackPanel
+                                        <StackPanel
                                         Height="60"
-                                        Margin="40 0"
+                                        Margin="20 40 0 5"
                                         VerticalAlignment="Bottom"
                                         Orientation="Horizontal">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="25"
                                             Height="25"
                                             Foreground="Red"
                                             Kind="Pen" />
-                                        <TextBlock
+                                            <TextBlock
                                             Margin="5 0"
                                             FontSize="20"
                                             Foreground="#FF767676"
                                             Text="Tính đến 24h cùng ngày" />
-                                    </StackPanel>
-                                </Grid>
-                                <!--So cho con trong-->
-                                <Grid Margin="50 15 50 15">
-                                    <Rectangle
+                                        </StackPanel>
+                                    </Grid>
+                                    <!--Thoi gian gui trung binh-->
+                                    <Grid Margin="10 5 20 5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <Rectangle
                                         Fill="White"
                                         RadiusX="10"
                                         RadiusY="10">
-                                        <Rectangle.Effect>
-                                            <DropShadowEffect
+                                            <Rectangle.Effect>
+                                                <DropShadowEffect
                                                 Color="#FFAAAAAA"
                                                 BlurRadius="20"
                                                 RenderingBias="Quality"
                                                 ShadowDepth="2" />
-                                        </Rectangle.Effect>
-                                    </Rectangle>
-                                    <TextBlock
-                                        Margin="0,10,30,10"
+                                            </Rectangle.Effect>
+                                        </Rectangle>
+                                        <TextBlock
+                                        Margin="10 5"
                                         HorizontalAlignment="Right"
                                         FontSize="30"
                                         
                                         Foreground="#FF767676"
-                                        Text="Thời gian trung bình"  />
-                                    <Border
-                                        Width="80"
-                                        Height="130"
-                                        Margin="50 0 0 0"
+                                        Text="Thời gian gửi"  />
+                                        <Border
+                                       MinWidth="60"
+                                        MinHeight="110"
+                                        Margin="30 0 0 0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Top"
                                         Background="#FF673AB7"
                                         CornerRadius="0 0 6 6">
-                                        <Border.Effect>
-                                            <DropShadowEffect
+                                            <Border.Effect>
+                                                <DropShadowEffect
                                                 Color="#FFB0B0B0"
                                                 BlurRadius="10"
                                                 RenderingBias="Quality"
                                                 ShadowDepth="2" />
-                                        </Border.Effect>
-                                        <materialDesign:PackIcon
-                                            Width="60"
-                                            Height="60"
+                                            </Border.Effect>
+                                            <materialDesign:PackIcon
+                                            MinWidth="40"
+                                            MinHeight="40"
                                             Margin="0 0 0 10 "
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Bottom"
                                             Foreground="White"
                                             Kind="Car" />
-                                    </Border>
-                                    <TextBlock
-                                        Margin="30 10 70 10"
+                                        </Border>
+                                        <TextBlock
+                                        Margin="10 10 80 10"
+                                            TextWrapping="WrapWithOverflow"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        FontSize="80"
+                                        FontSize="50"
                                         Foreground="#FF787878"
                                         Text="{Binding AvgHour}" />
-                                    <TextBlock
+                                        <TextBlock
                                         Margin="10 30 10 0"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="40"
                                         Foreground="#FF787878"
                                         Text="giờ" />
-                                    <StackPanel
+                                        <StackPanel
                                         Height="60"
-                                        Margin="40 0"
+                                        Margin="20 40 0 5"
                                         VerticalAlignment="Bottom"
                                         Orientation="Horizontal">
-                                        <materialDesign:PackIcon
+                                            <materialDesign:PackIcon
                                             Width="25"
                                             Height="25"
                                             Foreground="#FF673AB7"
                                             Kind="Pen" />
-                                        <TextBlock
+                                            <TextBlock
                                             Margin="5 0"
                                             FontSize="20"
                                             Foreground="#FF767676"
                                             TextWrapping="WrapWithOverflow"
-                                            Text="Thời gian gửi trung bình trong ngày" />
-                                    </StackPanel>
-                                </Grid>
-                            </UniformGrid>
+                                            Text="Trung bình trong ngày" />
+                                        </StackPanel>
+                                    </Grid>
+                                </UniformGrid>
+                            </Grid>
+                            
                             <!--Panel Tong Doanh Thu Va Tong Loi Nhuan-->
                             <Grid
                                 Grid.Row="2"
@@ -1360,7 +1364,7 @@
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
-                                <Grid Margin="5" Grid.ColumnSpan="4" Grid.Column="1">
+                                <Grid Margin="5" Grid.ColumnSpan="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <Rectangle
                                             Fill="White"
                                             RadiusX="10"
@@ -1374,19 +1378,19 @@
                                         </Rectangle.Effect>
                                     </Rectangle>
                                     <TextBlock
-                                            Margin="200 10"
-                                            HorizontalAlignment="Left"
+                                            Margin="0 10 10 0"
+                                            HorizontalAlignment="Right"
                                             FontSize="80"
                                         Foreground="#FF767676"
                                             Text="Doanh thu" />
                                     <Border
-                                            Width="100"
-                                            Height="170"
-                                            Margin="80 0 0 0"
+                                           MinWidth="60"
+                                        MinHeight="110"
+                                        Margin="30 0 0 0"
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Top"
                                             Background="#FF0080FF"
-                                            CornerRadius="0 0 6 6">
+                                            CornerRadius="0 0 6 6" Height="82" Width="46">
                                         <Border.Effect>
                                             <DropShadowEffect
                                                     Color="#FFB0B0B0"
@@ -1395,8 +1399,8 @@
                                                     ShadowDepth="2" />
                                         </Border.Effect>
                                         <Image
-                                                Width="60"
-                                                Height="60"
+                                                MaxWidth="40"
+                                               MaxHeight="40"
                                                 Source="Image/dollarCircle.png" />
                                     </Border>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -1440,9 +1444,8 @@
                         <DockPanel>
                             <ToolBarTray DockPanel.Dock="Top">
                                 <ToolBar
-                                    Width="1700"
-                                    Height="70"
-                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch"
                                     ClipToBounds="False"
                                     FontSize="20"
                                     Style="{DynamicResource MaterialDesignToolBar}">
@@ -1453,7 +1456,7 @@
                                         Foreground="Black" />
                                     <DatePicker 
                                        
-                                        Width="350"
+                                        MinWidth="150"
                                         VerticalAlignment="Center"
                                         materialDesign:HintAssist.Hint="Chọn ngày"
                                         Name="BeginCustomPicker">
@@ -1472,7 +1475,7 @@
                                         Foreground="Black" />
                                     <DatePicker
                                       
-                                        Width="350"
+                                        MinWidth="150"
                                         VerticalAlignment="Center"
                                         materialDesign:HintAssist.Hint="Chọn ngày"
                                         Name="EndCustomPicker">
@@ -1507,9 +1510,7 @@
                                         ToolTip="Resource name: MaterialDesignRaisedAccentButton">
                                         Lọc
                                     </Button>
-                                    <Button Margin="220 0 0 0" ToolTip="Export to PDF">
-                                        <materialDesign:PackIcon Kind="Printer" />
-                                    </Button>
+                                    
                                 </ToolBar>
                             </ToolBarTray>
                             <Grid Margin="5" Visibility="{Binding IsStatisticEnable,Converter={StaticResource BoolToVisConverter}}">

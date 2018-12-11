@@ -100,7 +100,7 @@ namespace QuanLyBaiXe.ViewModel
         {
             #region DAILY STATISTICS
             IsFiltered = false;
-            IsFilterButtonEnable = false;
+            IsFilterButtonEnable = true;
             FilterCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DatePicker a = p as DatePicker; Filter(a);   });
             SelectedDateChangedCommand = new RelayCommand<object>
                 (
